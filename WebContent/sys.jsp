@@ -12,7 +12,12 @@
 </head>
 <body>
 <div class="container">
+<<<<<<< HEAD
 영섭킹 여기는 이동욱 수정줄 무슨 ,, ㅡㅡ
+=======
+영섭킹 여기는 이동욱 수정줄
+영섭킹카
+>>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
 </div>
 </body>
 </html>
