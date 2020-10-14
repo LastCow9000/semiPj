@@ -9,8 +9,9 @@ public class HandlerMapping {
 	}
 	public Controller create(String command) {
 		Controller controller=null;
-		if(command.contentEquals(""))
-			controller=new XXController();
+		/*
+		 * if(command.contentEquals("")) controller=new XXController();
+		 */
 		return controller;
 	}
 }
