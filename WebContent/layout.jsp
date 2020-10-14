@@ -72,7 +72,7 @@
     <button type="button" class="btn btn-danger">Search</button>
   </form>
 </div>
-<!-- 본문이 되는 부분 홈화면에서는 두개의 테이블만 sm5 두개하고 sm2로 right.jsp 넣어야한다. -->
+<%-- 핳게시물 --%>
 <div class="container">    
   <div class="row">
     <div class="col-sm-5">
@@ -87,6 +87,8 @@
         <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
       </div>
     </div>
+
+<!-- 본문이 되는 부분 홈화면에서는 두개의 테이블만 sm5 두개하고 sm2로 right.jsp 넣어야한다. -->
     <div class="container-fluid">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
@@ -126,6 +128,8 @@
      
   </div>
 </div><br><br>
+
+
 
 <footer class="container-fluid text-center">
   <p>역사 속의 인물이 되어, 즐기는 컨셉적 커뮤니티</p>  
