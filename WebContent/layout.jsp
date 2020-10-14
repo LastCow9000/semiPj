@@ -13,7 +13,7 @@
   <style>
     /* Remove the navbar's default rounded borders and increase the bottom margin */ 
     .navbar {
-      margin-bottom: 50px;
+      margin-bottom: 25px;
       border-radius: 0;
     }
     
@@ -35,6 +35,7 @@
 </head>
 <body>
 
+<!-- 
 <div class="jumbotron">
   <div class="text-center">
     <a href=#><font size="10px">고조선 시대</font></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
@@ -43,7 +44,23 @@
     <a href=#><font size="10px">조선 시대</font></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </div>
 </div>
-
+ -->
+ 
+ <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">HOH</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">고조선</a></li>
+      <li><a href="#">삼국</a></li>
+      <li><a href="#">고려</a></li>
+      <li><a href="#">조선</a></li>
+    </ul>
+  </div>
+</nav>
+ 
+ <!-- 나중에 필요한 부분에서 가져가서 쓰세요 추후에 지울것임 -->
 <div class="sch col-sm-6 col-sm-offset-6">
 <form class="form-inline">
 	<select style="width:80px; height:30px;">
@@ -55,7 +72,7 @@
     <button type="button" class="btn btn-danger">Search</button>
   </form>
 </div>
-
+<!-- 본문이 되는 부분 홈화면에서는 두개의 테이블만 sm5 두개하고 sm2로 right.jsp 넣어야한다. -->
 <div class="container">    
   <div class="row">
     <div class="col-sm-5">
@@ -90,6 +107,7 @@
   </div>
 </div><br>
 
+<!-- 홈화면에서 아래에 있는 두개의 핫게시물 공간 -->
 <div class="container">    
   <div class="row">
     <div class="col-sm-5">
