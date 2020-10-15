@@ -13,13 +13,13 @@
 </head>
 <body>
 <div class="container">
-<c:forEach var="gojosunList" items="${requestScope.gojosunlist}">
+<c:forEach var="gojosunlist" items="${requestScope.gojosunlist}">
 	
 	<div class="container">    
   <div class="row">
     <div class="col-sm-10">
       <div class="panel panel-primary">
-        <div class="panel-heading">고려 시대 게시물~!</div>
+        <div class="panel-heading">고조선 시대 게시물~!</div>
            <table class="table hoh">
            <thead>
               <tr>

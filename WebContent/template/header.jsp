@@ -20,9 +20,9 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="${pageContext.request.contextPath}/front?command=gojosunlist&agename=고조선시대">고조선</a></li>
-      <li><a href="#">삼국</a></li>
-      <li><a href="#">고려</a></li>
-      <li><a href="#">조선</a></li>
+      <li><a href="${pageContext.request.contextPath}/front?command=threekingdom&agename=삼국시대">삼국</a></li>
+      <li><a href="${pageContext.request.contextPath}/front?command=goryeo&agename=고려시대">삼국">고려</a></li>
+      <li><a href="${pageContext.request.contextPath}/front?command=josun&agename=조선시대">조선</a></li>
     </ul>
   </div>
 </nav>

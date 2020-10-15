@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,39 @@
 </head>
 <body>
 <div class="container">
-
+<c:forEach var="goryeolist" items="${requestScope.goryeolist}">
+	
+	<div class="container">    
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="panel panel-primary">
+        <div class="panel-heading">고려 시대 게시물~!</div>
+           <table class="table hoh">
+           <thead>
+              <tr>
+                 <th>번호</th>
+                 <th>제목</th>
+                 <th>작성자</th>
+              </tr>
+           </thead>
+           <tbody>
+           		<tr>
+           			<td>${goryeolist.postNo}</td>
+           			<td>${goryeolist.title}</td>
+           			<td>${goryeolist.memberVO.nickName}</td>
+           			<td>${goryeolist.likeCount}</td>
+           			<td>${goryeolist.viewCount}</td>
+           			<td>${goryeolist.regDate}</td>
+           			           			
+           		</tr>      
+           </tbody>
+           </table>
+      </div>
+    </div>
+  </div>
+</div>
+	
+</c:forEach>
 </div>
 </body>
 </html>
