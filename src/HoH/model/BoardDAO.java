@@ -32,43 +32,30 @@ public class BoardDAO {
 			con.close();
 	}
 	
-	public ArrayList<PostVO> getListByAge(String ageName) throws SQLException {
-		ArrayList<PostVO> list = new ArrayList<PostVO>();
-		Connection con =null;
-		PreparedStatement pstmt =null;
-		ResultSet rs = null;
+	//핳게시물 받아오기
+	public ArrayList<PostVO> getListByLike() throws SQLException{
+		ArrayList<PostVO> list=new ArrayList<PostVO>();
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
 		try {
-			con = getConnection();
-			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT  B.RNUM , B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE ");
-			sql.append("FROM ( ");
-			sql.append("SELECT ROW_NUMBER() OVER(ORDER BY POST_NO DESC) AS RNUM ,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE ");
-			sql.append("FROM BOARD B, MEMBER M ");
-			sql.append("WHERE B.ID=M.ID AND M.AGENAME=? ");
-			sql.append(") B , MEMBER M ");
-			sql.append("WHERE B.NICKNAME=M.NICKNAME");
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, ageName);
+			con=dataSource.getConnection();
+			String sql="SELECT b.title, m.nickName, m.ageName FROM board b, member m WHERE b.id=m.id ORDER BY like_count, view_count DESC";
+			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				PostVO pvo=new PostVO();
 				MemberVO mvo=new MemberVO();
-				pvo.setPostNo(rs.getString(1));
-				pvo.setTitle(rs.getString(2));
-				mvo.setNickName(rs.getString(3));
+				pvo.setTitle(rs.getString(1));
+				mvo.setNickName(rs.getString(2));
 				pvo.setMemberVO(mvo);
-				pvo.setLikeCount(rs.getInt(4));
-				pvo.setViewCount(rs.getInt(5));
-				pvo.setRegDate(rs.getString(6));
 				list.add(pvo);
 			}
-			
-		} finally {
+		}finally {
 			closeAll(rs, pstmt, con);
 		}
-		return list;
+		return list; 
 	}
-	
 }
 
 
