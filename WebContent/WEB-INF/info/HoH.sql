@@ -188,3 +188,5 @@ INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '4', '
 INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '16', 'reply9');
 INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '11', 'reply9');
 INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '6', 'reply9');
+
+
