@@ -12,7 +12,13 @@
 </head>
 <body>
 <div class="container">
-
+<form action="front" method="post">
+<input type="hidden" name="command" value="updatemember">
+아이디 <input type="text" name="id" value="${sessionScope.memberVO.id}" readonly="readonly"><br>
+패스워드 <input type="text" name="password" value="${sessionScope.memberVO.password}" required="required"><br>
+이름 <input type="text" name="name" value="${sessionScope.memberVO.nickName}" required="required"><br>
+<input type="submit" value="수정하기">
+</form>
 </div>
 </body>
 </html>

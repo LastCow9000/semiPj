@@ -93,7 +93,32 @@ public class MemberDAO {
 			closeAll(rs, pstmt, con);
 		}
 	}
-}
+	
+	//아이디 중복 확인
+	// 아이디가 중복이면 : true / 중복아니면 : false
+	public boolean checkId(String id) throws SQLException {
+		boolean flag = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(*) FROM member WHERE id=?";
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs =pstmt.executeQuery();
+
+			if (rs.next() && rs.getInt(1) > 0) {
+				flag = true;
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		
+		return flag;
+	}
+}//class
 
 
 
