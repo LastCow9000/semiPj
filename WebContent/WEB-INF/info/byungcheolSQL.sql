@@ -82,3 +82,12 @@ select * from member m, board b, reply r, scrap_post sp where m.id = b.id and b.
 
 -- 게시글 상세보기
 select * from member m, board b where m.id = b.id;
+
+-- 시대 별 전체 글 개수 
+SELECT COUNT(*)
+FROM   BOARD b, MEMBER m
+WHERE  b.id = m.id AND m.ageName='조선시대';
+
+SELECT B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE, m.ageName, b.post_no, b.id, b.content
+FROM BOARD B, MEMBER M 
+WHERE B.ID=M.ID AND M.AGENAME='조선시대';

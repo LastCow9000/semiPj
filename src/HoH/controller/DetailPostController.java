@@ -15,25 +15,24 @@ public class DetailPostController implements Controller {
 			HttpServletResponse response) throws Exception {
 		
 		//로그인 유무 확인
-		//HttpSession session = request.getSession(false);
-		//if(session == null || session.getAttribute("memberVO") == null) {
-		//	return "redirect:index.jsp";
-		//}
-		
+//		HttpSession session = request.getSession(false);
+//		if(session == null || session.getAttribute("memberVO") == null) {
+//			return "redirect:index.jsp";
+//		}
+//		
 		//list에서 제목을 통해 postNo 받아옴
-		//String postNo = request.getParameter("postNo");
+		String postNo = request.getParameter("postNo");
 		
 		//BoardDAO와 연결해서 PostVO 객체 만들기
-		PostVO postVO = BoardDAO.getInstance().postDetailByNo("2");
+		PostVO postVO = BoardDAO.getInstance().postDetailByNo(postNo);
 		
 		//PostVO 객체 보내주기
 		request.setAttribute("postVO", postVO);
 		
 		//url 보내주기
-		//request.setAttribute("url", "/board/postDetail.jsp");
+		request.setAttribute("url", "/board/postDetail.jsp");
 		
-		return "/board/postDetail.jsp";
-		//return "/template/layout.jsp";
+		return "/template/layout.jsp";
 	}
 
 }

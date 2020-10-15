@@ -28,10 +28,10 @@
               </tr>
            </thead>
            <tbody>
-<c:forEach var="josunlist" items="${requestScope.josunlist}">
+				<c:forEach var="josunlist" items="${requestScope.josunlist}">
            		<tr>
            			<td>${josunlist.postNo}</td>
-           			<td>${josunlist.title}</td>
+           			<td><a href="#">${josunlist.title}</a></td>
            			<td>${josunlist.memberVO.nickName}</td>
            			<td>${josunlist.likeCount}</td>
            			<td>${josunlist.viewCount}</td>
