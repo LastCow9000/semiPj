@@ -13,7 +13,6 @@
 </head>
 <body>
 <div class="container">
-<c:forEach var="threekingdomlist" items="${requestScope.threekingdomlist}">
 	
 	<div class="container">    
   <div class="row">
@@ -29,6 +28,7 @@
               </tr>
            </thead>
            <tbody>
+<c:forEach var="threekingdomlist" items="${requestScope.threekingdomlist}">
            		<tr>
            			<td>${threekingdomlist.postNo}</td>
            			<td>${threekingdomlist.title}</td>
@@ -38,6 +38,7 @@
            			<td>${threekingdomlist.regDate}</td>
            			           			
            		</tr>      
+</c:forEach>
            </tbody>
            </table>
       </div>
@@ -45,7 +46,6 @@
   </div>
 </div>
 	
-</c:forEach>
 </div>
 </body>
 </html>

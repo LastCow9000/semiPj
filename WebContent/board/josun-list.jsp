@@ -13,7 +13,6 @@
 </head>
 <body>
 <div class="container">
-<c:forEach var="josunlist" items="${requestScope.josunlist}">
 	
 	<div class="container">    
   <div class="row">
@@ -29,6 +28,7 @@
               </tr>
            </thead>
            <tbody>
+<c:forEach var="josunlist" items="${requestScope.josunlist}">
            		<tr>
            			<td>${josunlist.postNo}</td>
            			<td>${josunlist.title}</td>
@@ -38,6 +38,7 @@
            			<td>${josunlist.regDate}</td>
            			           			
            		</tr>      
+           		</c:forEach>
            </tbody>
            </table>
       </div>
@@ -45,7 +46,7 @@
   </div>
 </div>
 	
-</c:forEach>
+
 </div>
 </body>
 </html>

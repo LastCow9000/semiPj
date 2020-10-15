@@ -13,7 +13,6 @@
 </head>
 <body>
 <div class="container">
-<c:forEach var="goryeolist" items="${requestScope.goryeolist}">
 	
 	<div class="container">    
   <div class="row">
@@ -29,6 +28,7 @@
               </tr>
            </thead>
            <tbody>
+<c:forEach var="goryeolist" items="${requestScope.goryeolist}">
            		<tr>
            			<td>${goryeolist.postNo}</td>
            			<td>${goryeolist.title}</td>
@@ -38,6 +38,7 @@
            			<td>${goryeolist.regDate}</td>
            			           			
            		</tr>      
+</c:forEach>
            </tbody>
            </table>
       </div>
@@ -45,7 +46,6 @@
   </div>
 </div>
 	
-</c:forEach>
 </div>
 </body>
 </html>
