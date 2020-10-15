@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,39 @@
 </head>
 <body>
 <div class="container">
+	
+	<div class="container">    
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="panel panel-primary">
+        <div class="panel-heading">조선시대 게시물~!</div>
+           <table class="table hoh">
+           <thead>
+              <tr>
+                 <th>번호</th>
+                 <th>제목</th>
+                 <th>작성자</th>
+              </tr>
+           </thead>
+           <tbody>
+<c:forEach var="josunlist" items="${requestScope.josunlist}">
+           		<tr>
+           			<td>${josunlist.postNo}</td>
+           			<td>${josunlist.title}</td>
+           			<td>${josunlist.memberVO.nickName}</td>
+           			<td>${josunlist.likeCount}</td>
+           			<td>${josunlist.viewCount}</td>
+           			<td>${josunlist.regDate}</td>
+           			           			
+           		</tr>      
+           		</c:forEach>
+           </tbody>
+           </table>
+      </div>
+    </div>
+  </div>
+</div>
+	
 
 </div>
 </body>
