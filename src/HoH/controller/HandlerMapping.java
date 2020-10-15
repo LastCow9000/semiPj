@@ -25,13 +25,20 @@ public class HandlerMapping {
 			controller=new WritePostController();
 		else if(command.contentEquals("deletepost")) 
 			controller=new DeletePostController();
-		//detailpost : 시대 별 게시물 상세정보 보기
 		else if(command.contentEquals("detailpost")) 
 			controller=new DetailPostController();
 		else if(command.contentEquals("updatepost")) 
 			controller=new UpdatePostController();
 		else if(command.contentEquals("updateform")) 
 			controller=new UpdateFormController();
+		else if(command.contentEquals("gojosunlist")) 
+			controller=new GojosunListController();
+		else if(command.contentEquals("threekingdom")) 
+			controller=new ThreekingdomListController();
+		else if(command.contentEquals("goryeo")) 
+			controller=new GoryeoListController();
+		else if(command.contentEquals("josun")) 
+			controller=new JosunListController();
 		return controller;
 	}
 }
