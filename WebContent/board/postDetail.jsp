@@ -39,7 +39,7 @@
   
   
    <tr align="left">
-      <td colspan="3">글번호 ${requestScope.postVO.postNo}</td>
+      <td colspan="3">글번호 ${requestScope.rnum}</td>
    </tr>
    
    <tr>

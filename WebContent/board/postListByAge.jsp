@@ -34,7 +34,7 @@
 <c:forEach var="list" items="${requestScope.list}">
            		<tr>
            			<td>${list.rnum}</td>
-           			<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title}</a></td>
+           			<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${list.rnum}">${list.title}</a></td>
            			<td>${list.memberVO.nickName}</td>
            			<td>${list.likeCount}</td>
            			<td>${list.viewCount}</td>

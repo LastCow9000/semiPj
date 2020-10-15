@@ -21,12 +21,15 @@ public class DetailPostController implements Controller {
 		
 		//list에서 제목을 통해 postNo 받아옴
 		String postNo = request.getParameter("postNo");
+		String rnum = request.getParameter("rnum");
 		
 		//BoardDAO와 연결해서 PostVO 객체 만들기
 		PostVO postVO = BoardDAO.getInstance().postDetailByNo(postNo);
 		
 		//PostVO 객체 보내주기
 		request.setAttribute("postVO", postVO);
+		//rnum 변수 보내주기
+		request.setAttribute("rnum", rnum);
 		
 		//url 보내주기
 		request.setAttribute("url", "/board/postDetail.jsp");
