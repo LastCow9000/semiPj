@@ -12,7 +12,8 @@
 </head>
 <body>
 <div class="container">
-송영섭 송대리 지금까지 고생했어용가리~
-</div>
+<jsp:forward page="front">
+	<jsp:param value="detailpost" name="command"/>
+</jsp:forward></div>
 </body>
 </html>

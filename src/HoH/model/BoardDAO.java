@@ -31,6 +31,49 @@ public class BoardDAO {
 			con.close();
 	}
 	
+	/**
+	 * 기능 : 시대 별 게시글 상세보기 기능
+	 * postDetailByNo(String postNo) : PostVO
+	 * @throws SQLException 
+	 */
+	public PostVO postDetailByNo(String postNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PostVO postVO = null;
+		
+		try {
+			con = dataSource.getConnection();
+			StringBuilder sql = new StringBuilder();
+			// 제목, 
+			//select m.id, m.nickname, b.title,b.regdate,b.content,b.view_count, b.like_count 
+			//from member m, board b where m.id = b.id and b.post_no='2';
+			sql.append("select m.id, m.nickname, b.title,b.regDate,b.content,b.view_count, b.like_count ");
+			sql.append("from member m, board b where m.id = b.id and b.post_no=? ");
+			pstmt= con.prepareStatement(sql.toString());
+			pstmt.setString(1, postNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				MemberVO memberVO = new MemberVO();
+				memberVO.setId(rs.getString("id"));
+				memberVO.setNickName(rs.getString("nickname"));
+				postVO = new PostVO();
+				postVO.setTitle(rs.getString("title"));
+				postVO.setContent(rs.getString("content"));
+				postVO.setRegDate(rs.getString("regDate"));
+				postVO.setViewCount(rs.getInt("view_count"));
+				postVO.setLikeCount(rs.getInt("like_count"));
+				postVO.setMemberVO(memberVO);
+			}
+			
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		
+		return postVO;
+		
+	}//postDetailByNo method
+	
 }
 
 

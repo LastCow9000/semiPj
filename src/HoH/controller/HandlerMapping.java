@@ -25,6 +25,7 @@ public class HandlerMapping {
 			controller=new WritePostController();
 		else if(command.contentEquals("deletepost")) 
 			controller=new DeletePostController();
+		//detailpost : 시대 별 게시물 상세정보 보기
 		else if(command.contentEquals("detailpost")) 
 			controller=new DetailPostController();
 		else if(command.contentEquals("updatepost")) 
