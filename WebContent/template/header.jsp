@@ -18,7 +18,7 @@
       <a class="navbar-brand" href="#">HOH</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">고조선</a></li>
+      <li><a href="${pageContext.request.contextPath}front?command=list">고조선</a></li>
       <li><a href="#">삼국</a></li>
       <li><a href="#">고려</a></li>
       <li><a href="#">조선</a></li>

@@ -33,7 +33,7 @@
     <input type="email" class="form-control" size="20">
     <button type="button" class="btn btn-danger">Search</button>
   </form>
-</div>
+</div>n
 
 <%-- 메인화면 --%>
 <div class="container">    
