@@ -20,7 +20,7 @@ CREATE TABLE board(
    post_no number primary key,
    id varchar2(100) not null,
    title varchar2(100) not null,
-   hit_count number default 0,
+   view_count number default 0,
    content clob not null,
    like_count number default 0,
    regdate date not null,
@@ -54,11 +54,11 @@ INSERT INTO member(id, nickname, password, ageName) VALUES('milk', '훌륭한정
 INSERT INTO member(id, nickname, password, ageName) VALUES('dance_machine', '노래도잘해', 'dance_machine', '삼국시대');
 INSERT INTO member(id, nickname, password, ageName) VALUES('rider', '세히찡', 'rider', '조선시대');
 
-insert into board(post_no,id,title,content,regdate) values(board_seq.nextval,'donguk','하이','안녕하세요',sysdate);
-insert into board(post_no,id,title,content,regdate) values(board_seq.nextval,'lastcow','안녕','ㅈㄱㄴ',sysdate);
-insert into board(post_no,id,title,content,regdate) values(board_seq.nextval,'milk','봉주르','프랑스',sysdate);
-insert into board(post_no,id,title,content,regdate) values(board_seq.nextval,'dance_machine','구텐탁','독일',sysdate);
-insert into board(post_no,id,title,content,regdate) values(board_seq.nextval,'rider','부아앙~','오토바이',sysdate);
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'donguk','하이','안녕하세요',sysdate, 20);
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'lastcow','안녕','ㅈㄱㄴ',sysdate, 55);
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'milk','봉주르','프랑스',sysdate, 1);
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'dance_machine','구텐탁','독일',sysdate, 9);
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'rider','부아앙~','오토바이',sysdate, 105);
 
 INSERT INTO member(id, nickname, password, ageName) VALUES('ggok', '꾹이', 'donguk', '조선시대');
 INSERT INTO member(id, nickname, password, ageName) VALUES('yoeongsub', '잘생긴송영섭', 'lastcow', '고조선시대');
@@ -75,3 +75,28 @@ INSERT INTO scrap_post VALUES('1', 'yewool');
 INSERT INTO scrap_post VALUES('3', 'socold');
 INSERT INTO scrap_post VALUES('3', 'yomi');
 select * from member m, board b, reply r, scrap_post sp where m.id = b.id and b.id=sp.id and r.post_no=b.post_no;
+
+ALTER TABLE board 
+RENAME COLUMN hit_count TO view_count;
+
+
+DROP SEQUENCE board_seq;
+
+CREATE SEQUENCE board_seq nocache;
+
+DELETE FROM board WHERE post_no=1;
+DELETE FROM board WHERE post_no=2;
+DELETE FROM board WHERE post_no=3;
+DELETE FROM board WHERE post_no=4;
+DELETE FROM board WHERE post_no=5;
+
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'donguk','하이','안녕하세요',sysdate, 20);
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'lastcow','안녕','ㅈㄱㄴ',sysdate, 55);
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'milk','봉주르','프랑스',sysdate, 1);
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'dance_machine','구텐탁','독일',sysdate, 9);
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'rider','부아앙~','오토바이',sysdate, 105);
+
+SELECT * FROM board;
+
+SELECT b.title, m.nickName, m.ageName FROM board b, member m WHERE b.id=m.id ORDER BY like_count, view_count DESC;
+
