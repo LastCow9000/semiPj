@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,9 +43,16 @@
 <div class="container">    
   <div class="row">
     <div class="col-sm-10">
+<<<<<<< HEAD
 			<c:import url="/template/home.jsp"></c:import>
+=======
+			<c:import url="${url}"></c:import>
+>>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
   </div>
+<<<<<<< HEAD
   
+=======
+>>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
 <div class="container-fluid">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
