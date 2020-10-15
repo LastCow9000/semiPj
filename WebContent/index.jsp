@@ -14,6 +14,6 @@
 <div class="container">
 <jsp:forward page="front">
 	<jsp:param value="home" name="command"/>
-</jsp:forward></div>
+</jsp:forward></div> 
 </body>
 </html>
