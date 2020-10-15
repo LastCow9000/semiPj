@@ -59,7 +59,7 @@ public class BoardDAO {
 	   }
 	
 	//시대별글 리스트불러오기
-	public ArrayList<PostVO> getListByAge(String ageName) throws SQLException {
+	public ArrayList<PostVO> getListByAge(String ageName,PagingBean pb) throws SQLException {
 		ArrayList<PostVO> list = new ArrayList<PostVO>();
 		Connection con =null;
 		PreparedStatement pstmt =null;
@@ -74,9 +74,11 @@ public class BoardDAO {
 			sql.append("FROM BOARD B, MEMBER M ");
 			sql.append("WHERE B.ID=M.ID AND M.AGENAME=? ");
 			sql.append(") B , MEMBER M ");
-			sql.append("WHERE B.NICKNAME=M.NICKNAME order by rnum  desc");
+			sql.append("WHERE B.NICKNAME=M.NICKNAME and rnum between ? and ? order by rnum desc");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, ageName);
+			pstmt.setInt(2, pb.getStartRowNumber());
+			pstmt.setInt(3, pb.getEndRowNumber());
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				PostVO pvo=new PostVO();
@@ -141,6 +143,25 @@ public class BoardDAO {
 		
 	}//postDetailByNo method
 	
+	public int getTotalPostCount(String ageName) throws SQLException {
+		int totalCount=0;
+		Connection con=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		try {
+			con = getConnection();
+			String sql="SELECT COUNT(*)FROM BOARD B,MEMBER M WHERE M.ID=B.ID AND M.AGENAME=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,ageName);
+			rs= pstmt.executeQuery();
+			if(rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return totalCount;
+	}
 	
 	
 	

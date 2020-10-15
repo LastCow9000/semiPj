@@ -31,19 +31,26 @@
               </tr>
            </thead>
            <tbody>
-<c:forEach var="list" items="${requestScope.list}">
+<c:forEach var="listvo" items="${requestScope.listvo}">
            		<tr>
-           			<td>${list.rnum}</td>
-           			<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${list.rnum}">${list.title}</a></td>
-           			<td>${list.memberVO.nickName}</td>
-           			<td>${list.likeCount}</td>
-           			<td>${list.viewCount}</td>
-           			<td>${list.regDate}</td>
+           			<td>${listvo.rnum}</td>
+           			<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${listvo.postNo}&rnum=${list.rnum}">${list.title}</a></td>
+           			<td>${listvo.memberVO.nickName}</td>
+           			<td>${listvo.likeCount}</td>
+           			<td>${listvo.viewCount}</td>
+           			<td>${listvo.regDate}</td>
            			           			
            		</tr>      
            		</c:forEach>
            </tbody>
            </table>
+           <c:set var="pb" value="${requestScope.listvo.pagingBean }"> </c:set>
+           <div class="pagingArea">
+           <ui>
+           </div>
+           
+           
+           
       </div>
     </div>
   </div>
