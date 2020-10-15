@@ -16,30 +16,30 @@ public class getPostListByAgeController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String ageName = request.getParameter("agename");
 		int totalPostCount = BoardDAO.getInstance().getTotalPostCount(ageName);
-		PagingBean pagingBean = null;
 		String pageNo = request.getParameter("pageNo");
-		ArrayList<PostVO > list = new ArrayList<PostVO>();
+		PagingBean pagingBean = null;
+		ArrayList<PostVO> list = new ArrayList<PostVO>();
 		if(pageNo==null) {
 			pagingBean = new PagingBean(totalPostCount);
 		} else {
 			pagingBean = new PagingBean(totalPostCount,Integer.parseInt(pageNo));
 		}
-		ListVO vo=new ListVO(list, pagingBean);
+		ListVO lvo=new ListVO(list, pagingBean);
 		if(ageName.contentEquals("고조선시대")) {
 			list = BoardDAO.getInstance().getListByAge(ageName,pagingBean);
-			vo.setList(list);
+			lvo.setList(list);
 		} else if(ageName.contentEquals("삼국시대")) {
 			list = BoardDAO.getInstance().getListByAge(ageName,pagingBean);
-			vo.setList(list);
+			lvo.setList(list);
 		} else if(ageName.contentEquals("고려시대")) {
 			list = BoardDAO.getInstance().getListByAge(ageName , pagingBean);
-			vo.setList(list);
+			lvo.setList(list);
 		} else if(ageName.contentEquals("조선시대")) {
 			list = BoardDAO.getInstance().getListByAge(ageName, pagingBean);
-			vo.setList(list);
+			lvo.setList(list);
 		}
 		
-		request.setAttribute("listvo", vo);
+		request.setAttribute("listvo", lvo);
 		request.setAttribute("ageName", ageName);
 		request.setAttribute("url", "/board/postListByAge.jsp");
 		return "/template/layout.jsp";

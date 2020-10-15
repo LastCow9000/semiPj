@@ -67,7 +67,7 @@ public class PagingBean {
 	public int getStartOfPageGroup() {
 		return pageCountPerPageGroup*(getNowPageGroup()-1)+1;
 	}
-	public int getEndPageOfPageGroup() {
+	public int getEndOfPageGroup() {
 		int num =getNowPageGroup()*pageCountPerPageGroup;
 		if(num>getTotalPage()) {
 			num=getTotalPage();

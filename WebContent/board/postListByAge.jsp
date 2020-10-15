@@ -31,24 +31,46 @@
               </tr>
            </thead>
            <tbody>
-<c:forEach var="listvo" items="${requestScope.listvo}">
+<c:forEach var="list" items="${requestScope.listvo.list}">
            		<tr>
-           			<td>${listvo.rnum}</td>
-           			<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${listvo.postNo}&rnum=${list.rnum}">${list.title}</a></td>
-           			<td>${listvo.memberVO.nickName}</td>
-           			<td>${listvo.likeCount}</td>
-           			<td>${listvo.viewCount}</td>
-           			<td>${listvo.regDate}</td>
+           			<td>${list.rnum}</td>
+           			<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${list.rnum}">${list.title}</a></td>
+           			<td>${list.memberVO.nickName}</td>
+           			<td>${list.likeCount}</td>
+           			<td>${list.viewCount}</td>
+           			<td>${list.regDate}</td>
            			           			
            		</tr>      
            		</c:forEach>
            </tbody>
            </table>
-           <c:set var="pb" value="${requestScope.listvo.pagingBean }"> </c:set>
-           <div class="pagingArea">
-           <ui>
-           </div>
            
+           <%-- 페이징 처리 --%>
+           <c:set var="pb" value="${requestScope.listvo.pagingBean}"/>
+           <div class="pagingArea">
+          <ul class="pagination">
+           <c:if test="${pb.previousPageGroup}">
+           	<li>
+           		<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
+           	</li>
+           </c:if>
+           <c:forEach var="i" begin="${pb.startOfPageGroup}" end="${pb.endOfPageGroup}">
+           <c:choose>
+				<c:when test="${pb.nowPage!=i}">
+				<li><a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a></li>
+				</c:when>           	
+				<c:otherwise>
+					<li><a href="#" class="active">${i}</a></li>
+				</c:otherwise>
+           </c:choose>
+           </c:forEach>
+           <c:if test="${pb.nextPageGroup}">
+           		<li>
+           			<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
+           		</li>
+           </c:if>
+           </ul>
+           </div>
            
            
       </div>
