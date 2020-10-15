@@ -18,27 +18,30 @@
   <div class="row">
     <div class="col-sm-10">
       <div class="panel panel-primary">
-        <div class="panel-heading">삼국시대 게시물~!</div>
+        <div class="panel-heading">${requestScope.ageName} 게시물~!</div>
            <table class="table hoh">
            <thead>
               <tr>
                  <th>번호</th>
                  <th>제목</th>
                  <th>작성자</th>
+                 <th>좋아요</th>
+                 <th>조회수</th>
+                 <th>게시일</th>
               </tr>
            </thead>
            <tbody>
-<c:forEach var="threekingdomlist" items="${requestScope.threekingdomlist}">
+<c:forEach var="list" items="${requestScope.list}">
            		<tr>
-           			<td>${threekingdomlist.postNo}</td>
-           			<td>${threekingdomlist.title}</td>
-           			<td>${threekingdomlist.memberVO.nickName}</td>
-           			<td>${threekingdomlist.likeCount}</td>
-           			<td>${threekingdomlist.viewCount}</td>
-           			<td>${threekingdomlist.regDate}</td>
+           			<td>${list.rnum}</td>
+           			<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title}</a></td>
+           			<td>${list.memberVO.nickName}</td>
+           			<td>${list.likeCount}</td>
+           			<td>${list.viewCount}</td>
+           			<td>${list.regDate}</td>
            			           			
            		</tr>      
-</c:forEach>
+           		</c:forEach>
            </tbody>
            </table>
       </div>
@@ -46,6 +49,7 @@
   </div>
 </div>
 	
+
 </div>
 </body>
 </html>

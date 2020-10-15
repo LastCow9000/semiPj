@@ -2,7 +2,6 @@ package HoH.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import HoH.model.BoardDAO;
 import HoH.model.PostVO;
@@ -19,7 +18,7 @@ public class DetailPostController implements Controller {
 //		if(session == null || session.getAttribute("memberVO") == null) {
 //			return "redirect:index.jsp";
 //		}
-//		
+		
 		//list에서 제목을 통해 postNo 받아옴
 		String postNo = request.getParameter("postNo");
 		

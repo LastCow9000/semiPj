@@ -67,27 +67,28 @@ public class BoardDAO {
 		try {
 			con = getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT B.TITLE,M.NICKNAME,B.LIKE_COUNT, ");
-			sql.append("B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE, ");
-			sql.append("m.ageName, b.post_no, b.id, b.content ");
+
+			sql.append("SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE ");
+			sql.append("FROM ( ");
+			sql.append("SELECT ROW_NUMBER() OVER(ORDER BY POST_NO DESC) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE ");
 			sql.append("FROM BOARD B, MEMBER M ");
 			sql.append("WHERE B.ID=M.ID AND M.AGENAME=? ");
+			sql.append(") B , MEMBER M ");
+			sql.append("WHERE B.NICKNAME=M.NICKNAME order by rnum  desc");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, ageName);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				PostVO pvo=new PostVO();
 				MemberVO mvo=new MemberVO();
-				mvo.setAgeName(rs.getString(6));
-				mvo.setNickName(rs.getString(2));
-				mvo.setId(rs.getString(8));
+				pvo.setRnum(rs.getString(1));
+				pvo.setPostNo(rs.getString(2));
+				pvo.setTitle(rs.getString(3));
+				mvo.setNickName(rs.getString(4));
 				pvo.setMemberVO(mvo);
-				pvo.setPostNo(rs.getString(7));
-				pvo.setTitle(rs.getString(1));
-				pvo.setContent(rs.getString(9));
-				pvo.setLikeCount(rs.getInt(3));
-				pvo.setViewCount(rs.getInt(4));
-				pvo.setRegDate(rs.getString(5));
+				pvo.setLikeCount(rs.getInt(5));
+				pvo.setViewCount(rs.getInt(6));
+				pvo.setRegDate(rs.getString(7));
 				list.add(pvo);
 			}
 			

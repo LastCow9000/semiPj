@@ -2,6 +2,7 @@ package HoH.model;
 
 public class PostVO {
 	private String postNo;
+	private String rnum;
 	private String title;
 	private String content;
 	private int viewCount;
@@ -16,6 +17,13 @@ public class PostVO {
 	}
 	public void setPostNo(String postNo) {
 		this.postNo = postNo;
+	}
+	
+	public String getRnum() {
+		return rnum;
+	}
+	public void setRnum(String rnum) {
+		this.rnum = rnum;
 	}
 	public String getTitle() {
 		return title;
@@ -53,15 +61,11 @@ public class PostVO {
 	public void setMemberVO(MemberVO memberVO) {
 		this.memberVO = memberVO;
 	}
-	@Override
-	public String toString() {
-		return "[postNo=" + postNo + ", title=" + title + ", content=" + content + ", viewCount=" + viewCount
-				+ ", likeCount=" + likeCount + ", regDate=" + regDate + ", memberVO=" + memberVO + "]";
-	}
-	public PostVO(String postNo, String title, String content, int viewCount, int likeCount, String regDate,
-			MemberVO memberVO) {
+	public PostVO(String postNo, String rnum, String title, String content, int viewCount, int likeCount,
+			String regDate, MemberVO memberVO) {
 		super();
 		this.postNo = postNo;
+		this.rnum = rnum;
 		this.title = title;
 		this.content = content;
 		this.viewCount = viewCount;
@@ -69,6 +73,14 @@ public class PostVO {
 		this.regDate = regDate;
 		this.memberVO = memberVO;
 	}
+	@Override
+	public String toString() {
+		return "PostVO [postNo=" + postNo + ", rnum=" + rnum + ", title=" + title + ", content=" + content
+				+ ", viewCount=" + viewCount + ", likeCount=" + likeCount + ", regDate=" + regDate + ", memberVO="
+				+ memberVO + "]";
+	}
+	
+	
 	
 	
 }

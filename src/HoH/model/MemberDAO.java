@@ -58,20 +58,26 @@ public class MemberDAO {
 	}
 	
 	//회원가입
-	public void registerMember(MemberVO memberVO) throws SQLException {
-		Connection con=null;
-		ResultSet rs = null;
-		PreparedStatement pstmt = null;
-		try {
-			String sql = "";
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.executeUpdate();
-		}finally {
-			closeAll(rs, pstmt, con);
-		}
-	}
+	   public void registerMember(MemberVO memberVO) throws SQLException {
+	      Connection con=null;
+	      ResultSet rs = null;
+	      PreparedStatement pstmt = null;
+	      try {
+	         StringBuilder sql = new StringBuilder();
+	         sql.append("insert into member(id,password,nickname,agename) ");
+	         sql.append("values(?,?,?,?) ");
+	         con = dataSource.getConnection();
+	         pstmt = con.prepareStatement(sql.toString());
+	         pstmt.setString(1, memberVO.getId());
+	         pstmt.setString(2, memberVO.getPassword());
+	         pstmt.setString(3, memberVO.getNickName());
+	         pstmt.setString(4, memberVO.getAgeName());
+	         pstmt.executeUpdate();
+	      }finally {
+	         closeAll(rs, pstmt, con);
+	      }
+	   }
+	   
 	//회원정보수정
 	public void update(MemberVO memberVO) throws SQLException {
 		Connection con=null;

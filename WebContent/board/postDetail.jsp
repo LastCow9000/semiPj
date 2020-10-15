@@ -20,7 +20,7 @@
 	
 	<c:if test="${requestScope.postVO.memberVO.id == sessionScope.memberVO.id}">
       <tr align="right">
-         <td colspan="6" class="btnArea">
+         <td colspan="3" class="btnArea">
             <form name="deleteForm"
                action="${pageContext.request.contextPath}/front" method="post">
                <input type="hidden" name="command" value="DeletePost"> <input
@@ -39,28 +39,32 @@
   
   
    <tr align="left">
-      <td colspan="6">글번호 ${requestScope.postVO.postNo}</td>
+      <td colspan="3">글번호 ${requestScope.postVO.postNo}</td>
    </tr>
    
    <tr>
-      <td colspan="4">제목 ${requestScope.postVO.title}</td>
-      <td colspan="2" align="right">작성일 ${requestScope.postVO.regDate }</td>
+      <td colspan="1">제목 ${requestScope.postVO.title}</td>
+      <td colspan="1" align="right">작성일 ${requestScope.postVO.regDate }</td>
    </tr>
    
    <tr>
-      <td colspan="4" align="left">작성자 ${requestScope.postVO.memberVO.nickName }</td>
+      <td colspan="1" align="left">작성자 ${requestScope.postVO.memberVO.nickName }</td>
       <td colspan="1" align="right">조회수 ${requestScope.postVO.viewCount }</td>
       <td colspan="1" align="right">좋아요수 ${requestScope.postVO.likeCount }</td>
      
    </tr>
    
    <tr>
-      <td colspan="6"><pre> 본문 내용${requestScope.postVO.content}</pre></td>
+   		<td colspan="3">본문 내용</td>
+   </tr>
+   
+   <tr>
+      <td colspan="3"><pre> ${requestScope.postVO.content}</pre></td>
    </tr>
    
    	<%-- 좋아요 / 스크랩 버튼 부분 --%>
    <tr align="center">
-      <td colspan="6" class="btnArea">
+      <td colspan="3" class="btnArea">
          <form name="deleteForm"
             action="${pageContext.request.contextPath}/front" method="post">
             <input type="hidden" name="command" value="DeletePost"> <input
@@ -77,7 +81,7 @@
    </tr>
    
    <tr>
-      <td colspan="6">댓글 폼 부분</td>
+      <td colspan="3">댓글 폼 부분</td>
    </tr>
    
 </table>

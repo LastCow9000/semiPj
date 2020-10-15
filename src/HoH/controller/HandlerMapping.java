@@ -31,14 +31,8 @@ public class HandlerMapping {
 			controller=new UpdatePostController();
 		else if(command.contentEquals("updateform")) 
 			controller=new UpdateFormController();
-		else if(command.contentEquals("gojosunlist")) 
-			controller=new GojosunListController();
-		else if(command.contentEquals("threekingdom")) 
-			controller=new ThreekingdomListController();
-		else if(command.contentEquals("goryeo")) 
-			controller=new GoryeoListController();
-		else if(command.contentEquals("josun")) 
-			controller=new JosunListController();
+		else if(command.contentEquals("agelist")) 
+			controller=new getPostListByAgeController();
 		return controller;
 	}
 }
