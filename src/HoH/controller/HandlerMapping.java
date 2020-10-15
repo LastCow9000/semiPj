@@ -31,6 +31,8 @@ public class HandlerMapping {
 			controller=new UpdatePostController();
 		else if(command.contentEquals("updateform")) 
 			controller=new UpdateFormController();
+		else if(command.contentEquals("agelist")) 
+			controller=new getPostListByAgeController();
 		return controller;
 	}
 }

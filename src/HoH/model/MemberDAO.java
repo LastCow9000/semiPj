@@ -31,36 +31,53 @@ public class MemberDAO {
 	
 	//로그인 
 	public MemberVO login(String id,String password) throws SQLException{
-		
+		MemberVO memberVO = null;
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try{
-			String sql = "";
+			String sql = "SELECT id, password, ageName, nickName "
+					+ "FROM member "
+					+ "WHERE id=? AND password=?";
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
-			
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				memberVO = new MemberVO();
+				memberVO.setId(rs.getString(1));
+				memberVO.setPassword(rs.getString(2));
+				memberVO.setAgeName(rs.getString(3));
+				memberVO.setNickName(rs.getString(4));
+			}
 		}finally{
 			closeAll(rs, pstmt,con);
 		}
-		return null;
+		return memberVO;
 	}
 	
 	//회원가입
-	public void registerMember(MemberVO memberVO) throws SQLException {
-		Connection con=null;
-		ResultSet rs = null;
-		PreparedStatement pstmt = null;
-		try {
-			String sql = "";
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.executeUpdate();
-		}finally {
-			closeAll(rs, pstmt, con);
-		}
-	}
+	   public void registerMember(MemberVO memberVO) throws SQLException {
+	      Connection con=null;
+	      ResultSet rs = null;
+	      PreparedStatement pstmt = null;
+	      try {
+	         StringBuilder sql = new StringBuilder();
+	         sql.append("insert into member(id,password,nickname,agename) ");
+	         sql.append("values(?,?,?,?) ");
+	         con = dataSource.getConnection();
+	         pstmt = con.prepareStatement(sql.toString());
+	         pstmt.setString(1, memberVO.getId());
+	         pstmt.setString(2, memberVO.getPassword());
+	         pstmt.setString(3, memberVO.getNickName());
+	         pstmt.setString(4, memberVO.getAgeName());
+	         pstmt.executeUpdate();
+	      }finally {
+	         closeAll(rs, pstmt, con);
+	      }
+	   }
+	   
 	//회원정보수정
 	public void update(MemberVO memberVO) throws SQLException {
 		Connection con=null;
