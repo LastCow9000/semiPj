@@ -65,3 +65,13 @@ INSERT INTO member(id, nickname, password, ageName) VALUES('yoeongsub', '잘생�
 INSERT INTO member(id, nickname, password, ageName) VALUES('yewool', '스텔라', 'milk', '고려시대');
 INSERT INTO member(id, nickname, password, ageName) VALUES('socold', '추워', 'dance_machine', '삼국시대');
 INSERT INTO member(id, nickname, password, ageName) VALUES('yomi', '요미세히', 'yomi', '조선시대');
+
+INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '1', 'yomi1');
+INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '2', 'yomi2');
+INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '3', 'yomi3');
+
+INSERT INTO scrap_post VALUES('1', 'donguk');
+INSERT INTO scrap_post VALUES('1', 'yewool');
+INSERT INTO scrap_post VALUES('3', 'socold');
+INSERT INTO scrap_post VALUES('3', 'yomi');
+select * from member m, board b, reply r, scrap_post sp where m.id = b.id and b.id=sp.id and r.post_no=b.post_no;

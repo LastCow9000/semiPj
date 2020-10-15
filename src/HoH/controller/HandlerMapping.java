@@ -9,9 +9,28 @@ public class HandlerMapping {
 	}
 	public Controller create(String command) {
 		Controller controller=null;
-		/*
-		 * if(command.contentEquals("")) controller=new XXController();
-		 */
+		if(command.contentEquals("home")) 
+			controller=new HomeController();
+		else if(command.contentEquals("login")) 
+			controller=new LoginController();
+		else if(command.contentEquals("logout")) 
+			controller=new LogoutController();
+		else if(command.contentEquals("register")) 
+			controller=new RegisterController();
+		else if(command.contentEquals("getdetailmember")) 
+			controller=new GetDetailMemberController();
+		else if(command.contentEquals("updatemember")) 
+			controller=new UpdateMemberController();
+		else if(command.contentEquals("writepost")) 
+			controller=new WritePostController();
+		else if(command.contentEquals("deletepost")) 
+			controller=new DeletePostController();
+		else if(command.contentEquals("detailpost")) 
+			controller=new DetailPostController();
+		else if(command.contentEquals("updatepost")) 
+			controller=new UpdatePostController();
+		else if(command.contentEquals("updateform")) 
+			controller=new UpdateFormController();
 		return controller;
 	}
 }
