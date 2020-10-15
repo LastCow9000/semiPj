@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- 
 <div class="jumbotron">
@@ -18,10 +19,10 @@
       <a class="navbar-brand" href="#">HOH</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">고조선</a></li>
-      <li><a href="#">삼국</a></li>
-      <li><a href="#">고려</a></li>
-      <li><a href="#">조선</a></li>
+      <li><a href="${pageContext.request.contextPath}/front?command=agelist&agename=고조선시대">고조선</a></li>
+      <li><a href="${pageContext.request.contextPath}/front?command=agelist&agename=삼국시대">삼국</a></li>
+      <li><a href="${pageContext.request.contextPath}/front?command=agelist&agename=고려시대">고려</a></li>
+      <li><a href="${pageContext.request.contextPath}/front?command=agelist&agename=조선시대">조선</a></li>
     </ul>
   </div>
 </nav>

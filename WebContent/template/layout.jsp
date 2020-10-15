@@ -25,11 +25,11 @@
 <%-- 검색기능 메인화면에서는 감추고 테마별 게시판은 등장 --%>
 <div class="sch col-sm-6 col-sm-offset-6">
 <form class="form-inline">
-	<select style="width:80px; height:30px;">
-		<option value="">---</option>
-		<option value="제목">제목</option>
-		<option value="작성자">작성자</option>
-	</select>
+   <select style="width:80px; height:30px;">
+      <option value="">---</option>
+      <option value="제목">제목</option>
+      <option value="작성자">작성자</option>
+   </select>
     <input type="email" class="form-control" size="20">
     <button type="button" class="btn btn-danger">Search</button>
   </form>
@@ -39,13 +39,13 @@
 <div class="container">    
   <div class="row">
     <div class="col-sm-10">
-			<c:import url="${url}"></c:import>
+         <c:import url="${url}"></c:import>
   </div>
 <div class="container-fluid">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
-    	<%-- 로그인 사이드 --%>
-			<c:import url="/template/right.jsp"></c:import>
+       <%-- 로그인 사이드 --%>
+         <c:import url="/template/right.jsp"></c:import>
     </div>
    </div>
 </div>
