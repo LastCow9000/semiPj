@@ -133,7 +133,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT COUNT(*) FROM member WHERE nickName=?";
+			String sql = "SELECT COUNT(*) FROM member WHERE nickname=?";
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, nickname);
@@ -142,6 +142,7 @@ public class MemberDAO {
 			if (rs.next() && rs.getInt(1) > 0) {
 				flag = true;
 			}
+			
 		}finally {
 			closeAll(rs, pstmt, con);
 		}

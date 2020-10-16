@@ -30,11 +30,11 @@
 		// 1. 아이디 길이 체크
 		$("#memberId").keyup(function() {
 			checkId="";
-			var idValue= $(this).val();
+			var idValue= $(this).val().trim();
 			// 아이디 길이 체크
 			if(idValue.length<4||idValue.length>10){
 				$("#idCheckResult").html("아이디는 4~10자 이내로 작성해주세요").css("color","violet");
-			return;
+				return;
 			}
 			// 아이디 중복 체크
 			$.ajax({
@@ -58,14 +58,17 @@
 		
 		
 		// 2. 닉네임 길이 체크
-		 $("#nickChecked").keyup(function() {
+		 $("#memberNick").keyup(function() {
+			 
 			checkNick="";
-			var nickValue= $(this).val();
+			var nickValue= $(this).val().trim();
+			
 			// 닉네임 길이 체크
-			if(nickValue.length<4||nickValue.length>8){
-				$("#nickCheckResult").html("닉네임은 4~8자 이내로 작성해주세요").css("color","violet");
-			return;
+			if(nickValue.length<2||nickValue.length>7){
+				$("#nickCheckResult").html("닉네임은 2~7자 이내로 작성해주세요").css("color","violet");
+				return;
 			}
+			
 			// 닉네임 중복 체크
 			$.ajax({
 				type : "get",
@@ -73,10 +76,12 @@
 				data : "command=nickCheckedResult&nickname="+nickValue,
 				success : function(result) {
 					// 닉네임이 사용가능하면 = 중복이 아니면
+					
 					if (result == "ok"){
 						$("#nickCheckResult").html("사용가능한 닉네임입니다.").css(
 								"color", "blue");
 						checkNick = nickValue; 
+						//alert($(this).text());
 					} else { // 닉네임 사용불가하면 = 중복이면
 						$("#nickCheckResult").html("중복된 닉네임입니다.").css(
 								"color", "red");
@@ -96,6 +101,7 @@
 				return false;
 			}
 		});
+		
 		// 닉네임 중복확인해서 사용가능 상태일때만 가입되도록 한다.
 		 $("#registerForm").submit(function() {
 			if(checkNick==""){
@@ -103,8 +109,6 @@
 				return false;
 			}
 		});
-		
-		
 		
 		
 	
@@ -147,7 +151,7 @@
 	패스워드 확인 <input type="password" name="password" id="passwordChecked" required="required">
 	<span id="passwordCheckResult"></span><br>
 	
-	닉네임 <input type="text" name="nickname" id="nickChecked" required="required">
+	닉네임 <input type="text" name="nickname" id="memberNick" required="required">
 	<span id="nickCheckResult"></span><br>
 	
 	시대 <input type="checkbox" name="checkbox1" value="고조선시대" onclick="oneCheckbox(this)">고조선시대

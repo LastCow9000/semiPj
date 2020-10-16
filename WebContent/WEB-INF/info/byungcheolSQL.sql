@@ -93,7 +93,7 @@ FROM BOARD B, MEMBER M
 WHERE B.ID=M.ID AND M.AGENAME='조선시대';
 
 
-SELECT COUNT(*) FROM member WHERE nickName='파프리카청춘이다';
+SELECT COUNT(*) FROM member WHERE nickName='노래도잘해';
 
 
 
@@ -102,7 +102,31 @@ SELECT COUNT(*) FROM member WHERE nickName='파프리카청춘이다';
 update member set nickName='파프리카파프이다', password='11111'
 WHERE id='java'
 
+-- 게시글 받아오기
+SELECT b.title, m.nickName, m.ageName 
+FROM board b, member m 
+WHERE b.id=m.id 
+ORDER BY like_count, view_count DESC
 
+
+SELECT b.*, m.name
+FROM   ( SELECT row_number() over(ORDER BY no DESC) AS rnum, no, title, hits, 
+			TO_CHAR(time_posted, 'YYYY-MM-DD') AS time_posted, id 
+			FROM   board) b, BOARD_MEMBER m 
+WHERE  b.id = m.id AND rnum BETWEEN ? AND ?	 
+
+   post_no number primary key,
+   id varchar2(100) not null,
+   title varchar2(100) not null,
+   view_count number default 0,
+   content clob not null,
+   like_count number default 0,
+   regdate date not null,
+
+
+SELECT row_number() over(ORDER BY post_no DESC) AS rnum, post_no, id, title, view_count, content, like_count, 
+		TO_CHAR(regdate, 'YYYY-MM-DD') AS regdate
+FROM   board
 
 
 
