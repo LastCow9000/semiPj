@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
-	alert("로그인 실패!!!!!!!!!!!!!!!!");
+	alert("ID 와 비밀번호는 확인해봤니??");
 	location.href="${pageContext.request.contextPath}/front?command=home";
 </script>
+

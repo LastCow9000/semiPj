@@ -30,7 +30,7 @@
 		// 1. 아이디 길이 체크
 		$("#memberId").keyup(function() {
 			checkId="";
-			var idValue= $(this).val();
+			var idValue= $(this).val().trim();
 			// 아이디 길이 체크
 			if(idValue.length<4||idValue.length>10){
 				$("#idCheckResult").html("아이디는 4~10자 이내로 작성해주세요").css("color","violet");
@@ -60,7 +60,7 @@
 		// 2. 닉네임 길이 체크
 		 $("#nickChecked").keyup(function() {
 			checkNick="";
-			var nickValue= $(this).val();
+			var nickValue= $(this).val().trim();
 			// 닉네임 길이 체크
 			if(nickValue.length<4||nickValue.length>8){
 				$("#nickCheckResult").html("닉네임은 4~8자 이내로 작성해주세요").css("color","violet");
@@ -92,7 +92,7 @@
 		// 아이디 중복확인해서 사용가능 상태일때만 가입되도록 한다.
 		$("#registerForm").submit(function() {
 			if(checkId==""){
-				alert("아이디 중복확인하세요!");
+				alert("아이디를 확인해주세요!");
 				return false;
 			}
 		});
