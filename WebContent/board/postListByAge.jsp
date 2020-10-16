@@ -35,6 +35,8 @@
 								</tr>
 							</thead>
 							<tbody>
+							
+							<!-- 페이징 시대별 글 역순으로 목록 띄우기 -->
 				<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
 							<c:forEach items="${requestScope.listvo.list }" var="list" varStatus="status">
 							<tr>
@@ -50,21 +52,6 @@
 							</tr>
 							</c:forEach>
 					
-								<%-- <c:forEach var="list" items="${requestScope.listvo.list}">
-
-									<tr>
-										<td>${list.rnum}</td>
-										<td><a 
-													href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${list.rnum}">${list.title}</a></td>
-										<td>${list.memberVO.nickName}</td>
-										<td>${list.likeCount}</td>
-										<td>${list.viewCount}</td>
-										<td>${list.regDate}</td>
-										
-									</tr>
-						
-
-								</c:forEach> --%>
 							</tbody>
 						</table>
 					</div>
