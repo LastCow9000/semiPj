@@ -44,7 +44,7 @@ public class BoardDAO {
 	      ResultSet rs=null;
 	      try {
 	         con=dataSource.getConnection();
-	         String sql="SELECT b.title, m.nickName, m.ageName FROM board b, member m WHERE b.id=m.id ORDER BY like_count, view_count DESC";
+	         String sql="SELECT b.title, m.nickName, m.ageName FROM board b, member m WHERE b.id=m.id ORDER BY like_count DESC, view_count DESC";
 	         pstmt=con.prepareStatement(sql);
 	         rs=pstmt.executeQuery();
 	         while(rs.next()) {
@@ -74,11 +74,11 @@ public class BoardDAO {
 			sql.append("SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE ");
 			sql.append("FROM ( ");
 			sql.append(
-					"SELECT ROW_NUMBER() OVER(ORDER BY POST_NO DESC) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE ");
+					"SELECT ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE ");
 			sql.append("FROM BOARD B, MEMBER M ");
 			sql.append("WHERE B.ID=M.ID AND M.AGENAME=? ");
 			sql.append(") B , MEMBER M ");
-			sql.append("WHERE B.NICKNAME=M.NICKNAME and rnum between ? and ? order by rnum desc");
+			sql.append("WHERE B.NICKNAME=M.NICKNAME and rnum between ? and ? order by rnum asc");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, ageName);
 			pstmt.setInt(2, pb.getStartRowNumber());
