@@ -91,3 +91,19 @@ WHERE  b.id = m.id AND m.ageName='조선시대';
 SELECT B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE, m.ageName, b.post_no, b.id, b.content
 FROM BOARD B, MEMBER M 
 WHERE B.ID=M.ID AND M.AGENAME='조선시대';
+
+
+SELECT COUNT(*) FROM member WHERE nickName='파프리카청춘이다';
+
+
+
+
+
+update member set nickName='파프리카파프이다', password='11111'
+WHERE id='java'
+
+
+
+
+
+

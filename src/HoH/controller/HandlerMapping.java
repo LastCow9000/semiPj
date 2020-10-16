@@ -15,10 +15,14 @@ public class HandlerMapping {
 			controller=new LoginController();
 		else if(command.contentEquals("logout")) 
 			controller=new LogoutController();
+		else if(command.contentEquals("registerForm")) 
+			controller=new registerFormController();
 		else if(command.contentEquals("register")) 
 			controller=new RegisterController();
 		else if(command.contentEquals("getdetailmember")) 
 			controller=new GetDetailMemberController();
+		else if(command.contentEquals("updatememberForm")) 
+			controller=new UpdateMemberFormController();
 		else if(command.contentEquals("updatemember")) 
 			controller=new UpdateMemberController();
 		else if(command.contentEquals("writepostform")) 
@@ -35,6 +39,11 @@ public class HandlerMapping {
 			controller=new UpdateFormController();
 		else if(command.contentEquals("agelist")) 
 			controller=new getPostListByAgeController();
+		else if(command.contentEquals("idCheckResult")) 
+			controller=new IdCheckResultController();
+		else if(command.contentEquals("nickCheckedResult")) 
+			controller=new NickCheckResultController();
+		
 		return controller;
 	}
 }

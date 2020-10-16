@@ -36,35 +36,34 @@ public class BoardDAO {
 		if (con != null)
 			con.close();
 	}
-
-	// 핳게시물 받아오기
-	public ArrayList<PostVO> getListByLike() throws SQLException {
-		ArrayList<PostVO> list = new ArrayList<PostVO>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			con = dataSource.getConnection();
-			String sql = "SELECT b.title, m.nickName, m.ageName FROM board b, member m WHERE b.id=m.id ORDER BY like_count, view_count DESC";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				PostVO pvo = new PostVO();
-				MemberVO mvo = new MemberVO();
-				pvo.setTitle(rs.getString(1));
-				mvo.setNickName(rs.getString(2));
-				mvo.setAgeName(rs.getString(3));
-				pvo.setMemberVO(mvo);
-				list.add(pvo);
-			}
-		} finally {
-			closeAll(rs, pstmt, con);
-		}
-		return list;
-	}
-
-	// 시대별글 리스트불러오기
-	public ArrayList<PostVO> getListByAge(String ageName) throws SQLException {
+	//핳게시물 받아오기
+	   public ArrayList<PostVO> getListByLike() throws SQLException{
+	      ArrayList<PostVO> list=new ArrayList<PostVO>();
+	      Connection con=null;
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      try {
+	         con=dataSource.getConnection();
+	         String sql="SELECT b.title, m.nickName, m.ageName FROM board b, member m WHERE b.id=m.id ORDER BY like_count, view_count DESC";
+	         pstmt=con.prepareStatement(sql);
+	         rs=pstmt.executeQuery();
+	         while(rs.next()) {
+	            PostVO pvo=new PostVO();
+	            MemberVO mvo=new MemberVO();
+	            pvo.setTitle(rs.getString(1));
+	            mvo.setNickName(rs.getString(2));
+	            mvo.setAgeName(rs.getString(3));
+	            pvo.setMemberVO(mvo);
+	            list.add(pvo);
+	         }
+	      }finally {
+	         closeAll(rs, pstmt, con);
+	      }
+	      return list; 
+	   }
+	
+	//시대별글 리스트불러오기
+	public ArrayList<PostVO> getListByAge(String ageName,PagingBean pb) throws SQLException {
 		ArrayList<PostVO> list = new ArrayList<PostVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -72,7 +71,6 @@ public class BoardDAO {
 		try {
 			con = getConnection();
 			StringBuilder sql = new StringBuilder();
-
 			sql.append("SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE ");
 			sql.append("FROM ( ");
 			sql.append(
@@ -80,13 +78,15 @@ public class BoardDAO {
 			sql.append("FROM BOARD B, MEMBER M ");
 			sql.append("WHERE B.ID=M.ID AND M.AGENAME=? ");
 			sql.append(") B , MEMBER M ");
-			sql.append("WHERE B.NICKNAME=M.NICKNAME order by rnum  desc");
+			sql.append("WHERE B.NICKNAME=M.NICKNAME and rnum between ? and ? order by rnum desc");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, ageName);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				PostVO pvo = new PostVO();
-				MemberVO mvo = new MemberVO();
+			pstmt.setInt(2, pb.getStartRowNumber());
+			pstmt.setInt(3, pb.getEndRowNumber());
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				PostVO pvo=new PostVO();
+				MemberVO mvo=new MemberVO();
 				pvo.setRnum(rs.getString(1));
 				pvo.setPostNo(rs.getString(2));
 				pvo.setTitle(rs.getString(3));
@@ -114,7 +114,6 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		PostVO postVO = null;
-
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
@@ -149,12 +148,12 @@ public class BoardDAO {
 
 	}// postDetailByNo method
 
+	//게시물 쓰기
 	public int writePost(PostVO vo) throws SQLException {
 		int latestPostNo = 0;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 		try {
 			con = dataSource.getConnection();
 			String sql = "INSERT INTO board(post_no, id, title, content, regdate) VALUES (board_seq.nextval, ?, ?, ?, sysdate)";
@@ -176,6 +175,44 @@ public class BoardDAO {
 
 		return latestPostNo;
 	}
+	
+	//페이징용 시대별 게시글 총 갯수		
+	public int getTotalPostCount(String ageName) throws SQLException {
+		int totalCount=0;
+		Connection con=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		try {
+			con = getConnection();
+			String sql="SELECT COUNT(*)FROM BOARD B,MEMBER M WHERE M.ID=B.ID AND M.AGENAME=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,ageName);
+			rs= pstmt.executeQuery();
+			if(rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return totalCount;
+	}
+	
+	//조회수 증가
+	public void updateview_count(String postNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			String sql="update board set view_count=view_count+1 where post_no=? ";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, postNo);
+			pstmt.executeUpdate();
+			} finally {
+			closeAll(pstmt, con);
+		}
+		
+	}
+	
 	//게시물 삭제
 	public void deletePost(String postNo) throws SQLException {
 		Connection con=null;
@@ -206,5 +243,4 @@ public class BoardDAO {
 			closeAll(pstmt, con);
 		}
 	}
-
 }// class

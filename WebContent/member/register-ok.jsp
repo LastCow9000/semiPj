@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
-	alert("ID 와 비밀번호는 확인해봤니??");
+	alert("${requestScope.nickName}님 회원가입 완료되었습니다!");
 	location.href="${pageContext.request.contextPath}/front?command=home";
 </script>
-
