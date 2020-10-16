@@ -24,6 +24,10 @@ public class PagingBean {
 	public int getNowPage() {
 		return nowPage;
 	}
+	//페이지당 게시물 갯수 받아오는 메서드
+	public int getPostCountPerPage() {
+		return postCountPerPage;
+	}
 	//
 	public int getStartRowNumber() {
 		return (nowPage-1)*postCountPerPage+1;
