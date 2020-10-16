@@ -30,7 +30,6 @@ public class DetailPostController implements Controller {
 		request.setAttribute("postVO", postVO);
 		//rnum 변수 보내주기
 		request.setAttribute("rnum", rnum);
-		
 		//url 보내주기
 		request.setAttribute("url", "/board/postDetail.jsp");
 		

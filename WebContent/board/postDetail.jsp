@@ -13,6 +13,8 @@
 </head>
 <body>
 <div class="container">
+			<div class="row">
+				<div class="col-sm-10">
 <table class="table">
 	
 	<%-- 버튼 부분
@@ -21,18 +23,16 @@
 	<c:if test="${requestScope.postVO.memberVO.id == sessionScope.memberVO.id}">
       <tr align="right">
          <td colspan="3" class="btnArea">
-            <form name="deleteForm"
-               action="${pageContext.request.contextPath}/front" method="post">
-               <input type="hidden" name="command" value="DeletePost"> <input
-                  type="hidden" name="no" value="${requestScope.postVO.postNo}">
+            <form name="deleteForm" action="${pageContext.request.contextPath}/front" method="post">
+               <input type="hidden" name="command" value="deletepost"> 
+               <input type="hidden" name="no" value="${requestScope.postVO.postNo}">
+	            <input type="submit" class="btn" value="삭제">
             </form>            
-            <form name="updateForm"
-               action="${pageContext.request.contextPath}/front" method="post">
-               <input type="hidden" name="command" value="UpdatePostForm"> <input
-                  type="hidden" name="no" value="${requestScope.postVO.postNo}">
+            <form name="updateForm" action="${pageContext.request.contextPath}/front" method="post">
+               <input type="hidden" name="command" value="updateform"> 
+               <input type="hidden" name="no" value="${requestScope.postVO.postNo}">
+	            <input type="submit" class="btn" value="수정">
             </form>
-            <button type="button" class="btn" onclick="deletePost()">삭제</button>
-            <button type="button" class="btn" onclick="updatePost()">수정</button>
          </td>
       </tr>
 	</c:if>
@@ -67,16 +67,16 @@
       <td colspan="3" class="btnArea">
          <form name="deleteForm"
             action="${pageContext.request.contextPath}/front" method="post">
-            <input type="hidden" name="command" value="DeletePost"> <input
+            <input type="hidden" name="command" value="조하조하요~"> <input
                type="hidden" name="no" value="${requestScope.postVO.postNo}">
          </form>            
          <form name="updateForm"
             action="${pageContext.request.contextPath}/front" method="post">
-            <input type="hidden" name="command" value="UpdatePostForm"> <input
+            <input type="hidden" name="command" value="스크랩해버릴테얌!"> <input
                type="hidden" name="no" value="${requestScope.postVO.postNo}">
          </form>
-         <button type="button" class="btn" onclick="deletePost()">좋아요</button>
-         <button type="button" class="btn" onclick="updatePost()">스크랩</button>
+         <button type="button" class="btn" onclick="위에 폼 히든주고 왜 서브밋이없쪄?">좋아요</button>
+         <button type="button" class="btn" onclick="히히히 똥이다">스크랩</button>
       </td>
    </tr>
    
@@ -86,6 +86,8 @@
    
 </table>
 
+</div>
+</div>
 </div>
 </body>
 </html>

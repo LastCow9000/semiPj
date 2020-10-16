@@ -132,6 +132,7 @@ public class BoardDAO {
 				memberVO.setId(rs.getString("id"));
 				memberVO.setNickName(rs.getString("nickname"));
 				postVO = new PostVO();
+				postVO.setPostNo(postNo);
 				postVO.setTitle(rs.getString("title"));
 				postVO.setContent(rs.getString("content"));
 				postVO.setRegDate(rs.getString("regDate"));
@@ -174,6 +175,36 @@ public class BoardDAO {
 		}
 
 		return latestPostNo;
+	}
+	
+	public void deletePost(String postNo) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="DELETE FROM board WHERE post_No=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, postNo);
+			pstmt.executeUpdate();
+		}finally {
+			closeAll(pstmt, con);
+		}
+	}
+	
+	public void updatePost(PostVO postVO) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="UPDATE board set title=?, content=? WHERE post_No=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, postVO.getTitle());
+			pstmt.setString(2, postVO.getContent());
+			pstmt.setString(3, postVO.getPostNo());
+			pstmt.executeUpdate();
+		}finally {
+			closeAll(pstmt, con);
+		}
 	}
 
 }// class

@@ -54,10 +54,10 @@
 		</div>
 
 	</div>
-	<%--<c:if test="${sessionScope.memberVO!=null}"> --%>
+	<c:if test="${sessionScope.memberVO.ageName == requestScope.ageName}">
 		<div class="col-sm-offset-1">
-			<input type="button" id="write" value="글 작성" class="btn btn-primary" onclick="location.href='board/write.jsp'">
+			<input type="button" id="write" value="글 작성" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/front?command=writepostform'">
 		</div>
-	<%--</c:if> --%>
+	</c:if>
 </body>
 </html>
