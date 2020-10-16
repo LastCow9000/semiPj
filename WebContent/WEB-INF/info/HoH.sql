@@ -188,3 +188,14 @@ INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '4', '
 INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '16', 'reply9');
 INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '11', 'reply9');
 INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '6', 'reply9');
+
+SELECT  b.*, m.*
+FROM  ( SELECT row_number() over(ORDER BY post_no DESC) AS rnum, post_no, id, title, view_count, content, like_count, TO_CHAR(regdate, 'YYYY-MM-DD') AS regdate
+FROM   board) b, member m
+WHERE  b.id = m.id AND m.agename='조선시대' AND rnum BETWEEN 1 AND 5
+
+SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE 
+FROM (
+SELECT ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE
+FROM BOARD B, MEMBER M WHERE B.ID=M.ID AND M.AGENAME=?) B, MEMBER M 
+WHERE B.NICKNAME=M.NICKNAME and rnum between ? and ? order by rnum asc

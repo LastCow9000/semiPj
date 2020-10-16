@@ -41,6 +41,7 @@ public class getPostListByAgeController implements Controller {
 		
 		request.setAttribute("listvo", lvo);
 		request.setAttribute("ageName", ageName);
+		request.setAttribute("totalPostCount", totalPostCount);
 		request.setAttribute("url", "/board/postListByAge.jsp");
 		return "/template/layout.jsp";
 	}
