@@ -23,8 +23,11 @@
 	$(document).ready(function() {
 		
 		var checkId="";
-		var checkPass="";
+		var checkNick="";
 
+		/* 길이 체크 공간 */
+		
+		// 1. 아이디 길이 체크
 		$("#memberId").keyup(function() {
 			checkId="";
 			var idValue= $(this).val();
@@ -51,6 +54,41 @@
 				}
 			});
 		});//keyup
+		
+		
+		
+		// 2. 닉네임 길이 체크
+		 $("#nickChecked").keyup(function() {
+			checkNick="";
+			var nickValue= $(this).val();
+			// 닉네임 길이 체크
+			if(nickValue.length<4||nickValue.length>8){
+				$("#nickCheckResult").html("닉네임은 4~8자 이내로 작성해주세요").css("color","violet");
+			return;
+			}
+			// 닉네임 중복 체크
+			$.ajax({
+				type : "get",
+				url : "front",
+				data : "command=nickCheckedResult&nickname="+nickValue,
+				success : function(result) {
+					// 닉네임이 사용가능하면 = 중복이 아니면
+					if (result == "ok"){
+						$("#nickCheckResult").html("사용가능한 닉네임입니다.").css(
+								"color", "blue");
+						checkNick = nickValue; 
+					} else { // 닉네임 사용불가하면 = 중복이면
+						$("#nickCheckResult").html("중복된 닉네임입니다.").css(
+								"color", "red");
+					}
+				}
+			});
+		});//keyup
+		
+		
+		
+		/* 중복 확인 공간 */
+		
 		// 아이디 중복확인해서 사용가능 상태일때만 가입되도록 한다.
 		$("#registerForm").submit(function() {
 			if(checkId==""){
@@ -58,18 +96,29 @@
 				return false;
 			}
 		});
+		// 닉네임 중복확인해서 사용가능 상태일때만 가입되도록 한다.
+		 $("#registerForm").submit(function() {
+			if(checkNick==""){
+				alert("닉네임 중복확인하세요!");
+				return false;
+			}
+		});
+		
+		
+		
+		
+	
 		// 비밀번호 길이 체크
 		$("#passwordC").keyup(function() {
-			checkPass="";
 			var passValue=$(this).val();
 			//$("#passwordResult").html($(this).val());
 			if(passValue.length<4||passValue.length>12){
-			$("#passwordResult").html("비밀번호는 4~12자 이내로 작성해주세요").css("color","violet");
-			return;
-			}else{
+				$("#passwordResult").html("비밀번호는 4~12자 이내로 작성해주세요").css("color","violet");
+				return;
+			} else {
 				$("#passwordResult").html("적합한 비밀번호입니다.").css("color","blue");
 			}
-		})
+		});
 		
 		
 		$("#passwordChecked").keyup(function() {
@@ -80,14 +129,14 @@
 			}else{
 				$("#passwordCheckResult").html("비밀번호가 불일치합니다.").css("color","red");
 			}
-		}) 
-	});
+		});
+	});//ready
 	
 </script>
 </head>
 <body>
 <div class="row">
-<div class="col-sm-8 col-sm-offset-2">
+<div class="col-sm-9 col-sm-offset-1">
 <form action="${pageContext.request.contextPath}/front" method="Post" id="registerForm">
 <input type="hidden" name="command" value="register">
 	아이디 <input type="text" name="id" id="memberId" required="required">
@@ -98,7 +147,8 @@
 	패스워드 확인 <input type="password" name="password" id="passwordChecked" required="required">
 	<span id="passwordCheckResult"></span><br>
 	
-	닉네임 <input type="text" name="nickname" required="required"><br> 
+	닉네임 <input type="text" name="nickname" id="nickChecked" required="required">
+	<span id="nickCheckResult"></span><br>
 	
 	시대 <input type="checkbox" name="checkbox1" value="고조선시대" onclick="oneCheckbox(this)">고조선시대
 	<input type="checkbox" name="checkbox1" value="삼국시대" onclick="oneCheckbox(this)">삼국시대

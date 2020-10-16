@@ -22,7 +22,8 @@
 	<c:otherwise>
 	<p align="center">
 	${sessionScope.memberVO.ageName } <br>
-	${sessionScope.memberVO.nickName }님 로그인 중<br>
+	${sessionScope.memberVO.nickName }님 <br>
+	로그인 중<br>
 	</p>
 	
 	<p>

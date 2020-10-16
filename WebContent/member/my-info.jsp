@@ -13,7 +13,7 @@
 <body>
 <div class="container">
   <div class="row">
-	    <div class="col-sm-6">
+	    <div class="col-sm-4">
 	
 	<table class="table hoh">
 		<tr align="center">
@@ -30,7 +30,7 @@
 		</tr>
 		
 		<tr>
-			<td colspan="2">
+			<td colspan="2" align="center">
 				<input type="button" value="회원정보 수정하기"
 				onclick="location.href='${pageContext.request.contextPath}/front?command=updatememberForm'">
 			</td>

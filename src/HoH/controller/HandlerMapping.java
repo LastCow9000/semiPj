@@ -9,6 +9,7 @@ public class HandlerMapping {
 	}
 	public Controller create(String command) {
 		Controller controller=null;
+		System.out.println(command);
 		if(command.contentEquals("home")) 
 			controller=new HomeController();
 		else if(command.contentEquals("login")) 
@@ -39,6 +40,9 @@ public class HandlerMapping {
 			controller=new getPostListByAgeController();
 		else if(command.contentEquals("idCheckResult")) 
 			controller=new IdCheckResultController();
+		else if(command.contentEquals("nickCheckedResult")) 
+			controller=new NickCheckResultController();
+		
 		return controller;
 	}
 }
