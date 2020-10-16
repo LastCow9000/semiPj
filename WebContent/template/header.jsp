@@ -16,7 +16,7 @@
  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="front?command=home">HOH</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/front?command=home">HOH</a>
     </div>
     <ul class="nav navbar-nav">
       <li><a href="${pageContext.request.contextPath}/front?command=agelist&agename=고조선시대">고조선</a></li>

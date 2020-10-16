@@ -13,7 +13,12 @@
 </head>
 <body>
 <div class="container">
-<table class="table">
+	<div class="container">
+
+			<div class="row">
+				<div class="col-sm-9">
+					<div class="panel panel-primary">
+						<table class="table hoh">
 	
 	<%-- 버튼 부분
 		: 본인의 아이디와 일치할 경우 '수정' '삭제' 버튼 보임 --%>
@@ -86,6 +91,10 @@
    
 </table>
 
+</div>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>
