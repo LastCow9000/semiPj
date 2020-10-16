@@ -16,7 +16,6 @@
 </head>
 <body>
 	<div class="container">
-
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-10">
@@ -34,26 +33,54 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="list" items="${requestScope.list}">
+								<c:forEach var="list" items="${requestScope.listvo.list}">
 									<tr>
 										<td>${list.rnum}</td>
-										<td><a
-											href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${list.rnum}">${list.title}</a></td>
+										<td><a 
+													href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${list.rnum}">${list.title}</a></td>
 										<td>${list.memberVO.nickName}</td>
 										<td>${list.likeCount}</td>
 										<td>${list.viewCount}</td>
 										<td>${list.regDate}</td>
-
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
+					<c:if test="${sessionScope.memberVO.ageName == requestScope.ageName}">
+					<div align="right">
+						<button type="submit" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/front?command=writepostform'">글쓰기</button>
+					</div>
+					</c:if>
+					<%-- 페이징 처리 --%>
+					<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
+					<div class="pagingArea">
+						<div class="pagination">
+							<c:if test="${pb.previousPageGroup}">
+								<a
+									href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
+							</c:if>
+							<c:forEach var="i" begin="${pb.startOfPageGroup}"
+								end="${pb.endOfPageGroup}">
+								<c:choose>
+									<c:when test="${pb.nowPage!=i}">
+										<a
+											href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#" class="active">${i}</a>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<c:if test="${pb.nextPageGroup}">
+								<a
+									href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
+							</c:if>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-
-
 	</div>
 </body>
 </html>

@@ -23,6 +23,9 @@ public class DetailPostController implements Controller {
 		String postNo = request.getParameter("postNo");
 		String rnum = request.getParameter("rnum");
 		
+		// PostVO 객체 만들기 전에 조회수 증가하는 dao다녀옴
+		BoardDAO.getInstance().updateview_count(postNo);
+		
 		//BoardDAO와 연결해서 PostVO 객체 만들기
 		PostVO postVO = BoardDAO.getInstance().postDetailByNo(postNo);
 		

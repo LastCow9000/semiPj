@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	
 	<!--  로그인 오른쪽에 고정되는 화면 -->
 	<c:choose>
 	<c:when test="${sessionScope.memberVO==null }">
@@ -21,9 +22,9 @@
 	
 	<c:otherwise>
 	<p align="center">
-	${sessionScope.memberVO.ageName } <br>
-	${sessionScope.memberVO.nickName }님 <br>
-	로그인 중<br>
+		${sessionScope.memberVO.ageName } <br>
+		${sessionScope.memberVO.nickName }님 <br>
+		로그인 중
 	</p>
 	
 	<p>
@@ -42,9 +43,6 @@
 		<a href="#">스크랩</a>
 	</p>
 	
-	
 	</c:otherwise>
 	</c:choose>
-	
-	
 	

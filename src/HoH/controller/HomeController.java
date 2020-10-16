@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import HoH.model.BoardDAO;
 import HoH.model.PostVO;
-
+//홈화면 핳게시물 받아오는 기능
 public class HomeController implements Controller {
 
    @Override
    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
       String url = null;
-      ArrayList<PostVO> list = BoardDAO.getInstance().getListByLike();
+      ArrayList<PostVO> list = BoardDAO.getInstance().getListByLike(); //전체 게시물을 받아와서 각 시대별로 나눔
       ArrayList<PostVO> gojosunList = new ArrayList<PostVO>();
       ArrayList<PostVO> threeKingdomList = new ArrayList<PostVO>();
       ArrayList<PostVO> goryeoList = new ArrayList<PostVO>();
@@ -29,7 +29,7 @@ public class HomeController implements Controller {
             josunList.add(list.get(i));
 
       }
-      request.setAttribute("gojosunList", gojosunList);
+      request.setAttribute("gojosunList", gojosunList); // 각 시대별 리스트 설정
       request.setAttribute("threeKingdomList", threeKingdomList);
       request.setAttribute("goryeoList", goryeoList);
       request.setAttribute("josunList", josunList);

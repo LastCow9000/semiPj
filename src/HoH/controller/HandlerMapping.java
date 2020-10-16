@@ -25,6 +25,8 @@ public class HandlerMapping {
 			controller=new UpdateMemberFormController();
 		else if(command.contentEquals("updatemember")) 
 			controller=new UpdateMemberController();
+		else if(command.contentEquals("writepostform")) 
+			controller=new WritePostFormController();
 		else if(command.contentEquals("writepost")) 
 			controller=new WritePostController();
 		else if(command.contentEquals("deletepost")) 
