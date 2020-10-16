@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import HoH.model.BoardDAO;
 import HoH.model.PostVO;
-
+// 시대별 게시물 받아오는 기능
 public class getPostListByAgeController implements Controller {
 
 	@Override

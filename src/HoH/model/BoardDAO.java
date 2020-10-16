@@ -176,7 +176,7 @@ public class BoardDAO {
 
 		return latestPostNo;
 	}
-	
+	//게시물 삭제
 	public void deletePost(String postNo) throws SQLException {
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -190,7 +190,7 @@ public class BoardDAO {
 			closeAll(pstmt, con);
 		}
 	}
-	
+	//게시물 수정
 	public void updatePost(PostVO postVO) throws SQLException {
 		Connection con=null;
 		PreparedStatement pstmt=null;
