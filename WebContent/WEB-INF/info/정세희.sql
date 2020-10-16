@@ -12,3 +12,30 @@ FROM (
 WHERE B.NICKNAME=M.NICKNAME and rnum between 1 and 8 order by rnum desc;
 
 SELECT COUNT(*)FROM BOARD B,MEMBER M WHERE M.ID=B.ID AND M.AGENAME='고조선시대'
+
+
+
+select m.id, m.nickname, b.title,b.regDate,b.content,b.view_count, b.like_count
+from member m, board b where m.id = b.id and b.post_no=3 
+
+update board set view_count=view_count+1 where post_no=3
+
+
+
+
+
+
+insert into board values(board_seq.nextval,'donguk','페이징페이징','64','내용11','40',sysdate);
+insert into board values(board_seq.nextval,'donguk','페이징페이징','64','내용11','40',sysdate);
+insert into board values(board_seq.nextval,'donguk','페이징페이징','64','내용11','40',sysdate);
+insert into board values(board_seq.nextval,'donguk','페이징페이징','64','내용11','40',sysdate);
+insert into board values(board_seq.nextval,'donguk','페이징페이징','64','내용11','40',sysdate);
+insert into board values(board_seq.nextval,'donguk','페이징페이징','64','내용11','40',sysdate);
+insert into board values(board_seq.nextval,'donguk','페이징페이징','64','내용11','40',sysdate);
+insert into board values(board_seq.nextval,'donguk','페이징페이징','64','내용11','40',sysdate);
+
+
+
+
+
+

@@ -162,6 +162,22 @@ public class BoardDAO {
 		}
 		return totalCount;
 	}
+	public void updateview_count(String postNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			String sql="update board set view_count=view_count+1 where post_no=? ";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, postNo);
+			pstmt.executeUpdate();
+			
+			
+		} finally {
+			closeAll(pstmt, con);
+		}
+		
+	}
 	
 	
 	

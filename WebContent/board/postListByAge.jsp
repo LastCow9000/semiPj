@@ -44,41 +44,39 @@
            		</c:forEach>
            </tbody>
            </table>
-           
+           </div>
            <%-- 페이징 처리 --%>
+           
+           
            <c:set var="pb" value="${requestScope.listvo.pagingBean}"/>
-           <div class="pagingArea">
-          <ul class="pagination">
+            <div class="pagingArea"> 
+ 		
+          <div class="pagination">
            <c:if test="${pb.previousPageGroup}">
-           	<li>
            		<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
-           	</li>
            </c:if>
            <c:forEach var="i" begin="${pb.startOfPageGroup}" end="${pb.endOfPageGroup}">
            <c:choose>
 				<c:when test="${pb.nowPage!=i}">
-				<li><a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a></li>
+				<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
 				</c:when>           	
 				<c:otherwise>
-					<li><a href="#" class="active">${i}</a></li>
+					<a href="#" class="active">${i}</a>
 				</c:otherwise>
            </c:choose>
            </c:forEach>
            <c:if test="${pb.nextPageGroup}">
-           		<li>
            			<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
-           		</li>
            </c:if>
-           </ul>
            </div>
-           
-           
+           </div>
       </div>
     </div>
   </div>
-</div>
-	
+<!--   //페이지 area -->
+</div> 
 
-</div>
+
+
 </body>
 </html>
