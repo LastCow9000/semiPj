@@ -15,8 +15,10 @@ public class UpdateFormController implements Controller {
 		if (session != null && session.getAttribute("memberVO") != null) { //로그인 체크
 			url = "/template/layout.jsp";
 			String postNo = request.getParameter("no");
+			String rnum = request.getParameter("rnum");
 			PostVO postVO = BoardDAO.getInstance().postDetailByNo(postNo); // 게시물 정보를 받아와서 수정폼에 다시 넘겨주기 위해 호출
 			request.setAttribute("postVO", postVO);
+			request.setAttribute("rnum", rnum);
 			request.setAttribute("url", "/board/update.jsp");
 		}
 		return url;
