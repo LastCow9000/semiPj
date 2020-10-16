@@ -30,20 +30,41 @@
 									<th>좋아요</th>
 									<th>조회수</th>
 									<th>게시일</th>
+									<th>
+							</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="list" items="${requestScope.listvo.list}">
-									<tr>
-										<td>${list.rnum}</td>
-										<td><a 
-													href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${list.rnum}">${list.title}</a></td>
+				<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
+							<c:forEach items="${requestScope.listvo.list }" var="list" varStatus="status">
+							<tr>
+								<td>
+									${requestScope.totalPostCount-((pb.nowPage-1)*pb.postCountPerPage+status.index)}
+								</td>
+								<td><a 
+													href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${requestScope.totalPostCount-((pb.nowPage-1)*8+status.index)}">${list.title}</a></td>
 										<td>${list.memberVO.nickName}</td>
 										<td>${list.likeCount}</td>
 										<td>${list.viewCount}</td>
 										<td>${list.regDate}</td>
-									</tr>
-								</c:forEach>
+							</tr>
+							</c:forEach>
+					
+							<%-- <c:forEach var="list" items="${requestScope.listvo.list}">
+
+								<tr>
+									<td>${list.rnum}</td>
+									<td><a 
+												href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${list.rnum}">${list.title}</a></td>
+									<td>${list.memberVO.nickName}</td>
+									<td>${list.likeCount}</td>
+									<td>${list.viewCount}</td>
+									<td>${list.regDate}</td>
+									
+								</tr>
+					
+
+							</c:forEach> --%>
 							</tbody>
 						</table>
 					</div>

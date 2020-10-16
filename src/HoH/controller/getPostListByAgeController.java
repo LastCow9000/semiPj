@@ -14,16 +14,25 @@ public class getPostListByAgeController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//전체 글에서
+		
+		//1. 각 시대별 글
 		String ageName = request.getParameter("agename");
+		
+		//2. totalPostCount : 해당 시대에 맞는 전체 페이지 개수
 		int totalPostCount = BoardDAO.getInstance().getTotalPostCount(ageName);
+		
+		//3. 
 		String pageNo = request.getParameter("pageNo");
 		PagingBean pagingBean = null;
+		
 		ArrayList<PostVO> list = new ArrayList<PostVO>();
 		if(pageNo==null) {
 			pagingBean = new PagingBean(totalPostCount);
 		} else {
 			pagingBean = new PagingBean(totalPostCount,Integer.parseInt(pageNo));
 		}
+		
 		ListVO lvo=new ListVO(list, pagingBean);
 		if(ageName.contentEquals("고조선시대")) {
 			list = BoardDAO.getInstance().getListByAge(ageName,pagingBean);
@@ -42,6 +51,7 @@ public class getPostListByAgeController implements Controller {
 		request.setAttribute("listvo", lvo);
 		request.setAttribute("ageName", ageName);
 		request.setAttribute("url", "/board/postListByAge.jsp");
+		
 		return "/template/layout.jsp";
 	}
 
