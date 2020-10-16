@@ -14,25 +14,14 @@
     }
     }
     /*게시글 상단바부분 CSS */
-     
-	 .panel-primary>.panel-heading {
+     .panel-primary>.panel-heading{
      border-color: #000000;
      background-color: #7c8383;
     	font-family :"돋음";
     	text-align: center;
-    } 
- /*    .panel-heading{
-       border-color: #000000;
-     background-color: #7c8383;
-    	font-family :"돋음";
-    	text-align: center;
-    }
-  
-    .panel-primary {
-     border-color: #000000;
-    } */
-    
-    /*게시글 상단바 폰트 CSS */
+     }
+
+   
     
     
    
