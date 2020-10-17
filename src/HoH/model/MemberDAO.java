@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.sql.DataSource;
 
 
@@ -148,6 +150,35 @@ public class MemberDAO {
 		
 		return flag;
 	}
+	
+	//역대 핳게시글
+	public ArrayList<MemberVO> ranking() throws SQLException{
+	      ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+	     
+	      Connection con=null;
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      try{
+	    	  StringBuilder sql = new StringBuilder();
+	          sql.append("select id,nickname,point ");
+	          sql.append("from member ");
+	          sql.append("order by point desc ");
+	          //sql.append(" ");
+	         con = dataSource.getConnection();
+	         pstmt = con.prepareStatement(sql.toString());
+	         rs = pstmt.executeQuery();
+	         while (rs.next()) {
+	        	 MemberVO memberVO = new MemberVO();
+	            memberVO.setId(rs.getString(1));
+	            memberVO.setNickName(rs.getString(2));
+	            memberVO.setPoint(rs.getInt(3));
+	            list.add(memberVO);
+	         }
+	      }finally{
+	         closeAll(rs, pstmt,con);
+	      }
+	      return list;
+	   }
 }//class
 
 

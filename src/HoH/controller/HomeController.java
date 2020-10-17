@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import HoH.model.BoardDAO;
+import HoH.model.MemberDAO;
+import HoH.model.MemberVO;
 import HoH.model.PostVO;
 //홈화면 핳게시물 받아오는 기능
 public class HomeController implements Controller {
@@ -29,11 +31,16 @@ public class HomeController implements Controller {
             josunList.add(list.get(i));
 
       }
+      //랭킹 받아오기
+      ArrayList<MemberVO> rankList = MemberDAO.getInstance().ranking();
       request.setAttribute("gojosunList", gojosunList); // 각 시대별 리스트 설정
       request.setAttribute("threeKingdomList", threeKingdomList);
       request.setAttribute("goryeoList", goryeoList);
       request.setAttribute("josunList", josunList);
-
+      
+      request.setAttribute("rankList", rankList);//랭킹리스트 전달.
+      
+      
       request.setAttribute("url", "/template/home.jsp");
       url = "/template/layout.jsp";
       return url;
