@@ -38,28 +38,7 @@ function search() {
    }
 }
 </script>
-function search() {
-		var agename = "${requestScope.ageName}"
-		var option = $("#searchText option:selected").val();
-		var word = $('#text').val();
-	if(${requestScope.ageName==null}) { 
-		location.href="${pageContext.request.contextPath}/front?command=ageSearch&option="+option+"&word="+word;
-	} else {
-		location.href="${pageContext.request.contextPath}/front?command=ageSearch&agename="+agename+"&option="+option+"&word="+word;
-		// 테마별 검색  
-		 /* $(document).ready(function () {
-			$.ajax({
-				type:"get",
-				url:"front",
-				data:"command=ageSearch&agename=${requestScope.ageName}&option="+$("#searchText option:selected").val()+"&word="+$('#text').val(),
-				success: function(result) {
-					
-				}
-			});
-		}); */
-	}
-}
-</script>
+
 </head>
 
 <%-- header 상단 메뉴바 --%>

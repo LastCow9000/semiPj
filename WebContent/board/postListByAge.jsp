@@ -93,6 +93,9 @@
 								<c:choose>
 									<c:when test="${pb.nowPage!=i}">
 									<c:choose>
+										<c:when test="${requestScope.flag&&requestScope.ageName!=null}">
+											<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
+										</c:when>
 										<c:when test="${requestScope.flag }">
 										<a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
 										</c:when>
@@ -100,14 +103,6 @@
 										<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
 										</c:otherwise>
 									</c:choose>
-										<c:choose>
-											<c:when test="${requestScope.flag}">
-												<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
-											</c:when>
-											<c:otherwise>
-												<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
-											</c:otherwise>
-										</c:choose>
 									</c:when>
 									<c:otherwise>
 										<a href="#" class="active">${i}</a>
