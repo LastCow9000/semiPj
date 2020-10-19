@@ -40,3 +40,14 @@ select * from LIKE_POST where post_no=66
 select * from member where id='donguk'
 update board set like_count = like_count-1  where post_no=67;
 update member set point = point+10  where id='donguk';
+
+-- 추가 sql
+create table follow(
+   id varchar2(100),
+   nickname varchar2(100),
+   constraint fk_follow primary key(id,nickname)
+)
+alter table scrap_post add(regdate date default sysdate);
+alter table scrap_post RENAME COLUMN regdate to scraped_regdate
+
+
