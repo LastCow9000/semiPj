@@ -243,4 +243,74 @@ public class BoardDAO {
          closeAll(pstmt, con);
       }
    }
+
+   //작성자별 검색
+   public ArrayList<PostVO> getListByOption(String option, String word) {
+	ArrayList<PostVO> list=new ArrayList<PostVO>();
+	Connection con=null;
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+	try {
+		con=getConnection();
+		StringBuilder sql=new StringBuilder();
+		 sql.append("SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE ");
+	       sql.append("FROM ( ");
+	       sql.append("SELECT ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE ");
+	       sql.append("FROM BOARD B, MEMBER M ");
+	       sql.append("WHERE B.ID=M.ID AND M.NICKNAME=? ");
+	       sql.append(") B , MEMBER M ");
+	       sql.append("WHERE B.NICKNAME=M.NICKNAME and rnum between ? and ? and ?=?");
+	       pstmt = con.prepareStatement(sql.toString());
+	       pstmt.setString(1, option);
+	       rs=pstmt.executeQuery();
+	       while(rs.next()) {
+	          PostVO pvo=new PostVO();
+	          MemberVO mvo=new MemberVO();
+	          pvo.setRnum(rs.getString(1));
+	          pvo.setPostNo(rs.getString(2));
+	          pvo.setTitle(rs.getString(3));
+	          mvo.setNickName(rs.getString(4));
+	          pvo.setMemberVO(mvo);
+	          pvo.setLikeCount(rs.getInt(5));
+	          pvo.setViewCount(rs.getInt(6));
+	          pvo.setRegDate(rs.getString(7));
+	          list.add(pvo);
+	} finally {
+		closeAll(rs, pstmt, con);
+	}
+	return list;
+}
+   
+
+public int getListCountByWriter(String option, String word) throws SQLException {
+	Connection con=null;
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+	int totalpostcount=0;
+	try {
+		con=getConnection();
+		StringBuilder sql=new StringBuilder();
+		sql.append("SELECT  count(*) ");
+        sql.append("FROM ( ");
+        sql.append("SELECT ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE ");
+        sql.append("FROM BOARD B, MEMBER M ");
+        sql.append("WHERE B.ID=M.ID ");
+        sql.append(") B , MEMBER M ");
+        sql.append("WHERE B.NICKNAME=M.NICKNAME and ");
+        sql.append(option);
+        //sql.append("m.nickname ");
+        sql.append(" like '%' || ? || '%'");
+        pstmt = con.prepareStatement(sql.toString());
+         pstmt.setString(1, word);
+	     rs=pstmt.executeQuery();
+	     if(rs.next()) {
+	    	 totalpostcount=rs.getInt(1);
+	     }
+	}finally {
+		closeAll(rs, pstmt, con);
+	}
+	return totalpostcount;
+	
+	
+}
 }// class

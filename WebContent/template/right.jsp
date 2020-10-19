@@ -16,6 +16,9 @@
 	<p>
 		<a href="${pageContext.request.contextPath}/front?command=registerForm">회원가입</a>
 	</p>	
+	<p>
+		<a href="${pageContext.request.contextPath}/front?command=findpasswordform">비밀번호 찾기</a>
+	</p>
 	
 	
 	</c:when>
@@ -35,9 +38,6 @@
 		<a href="${pageContext.request.contextPath}/front?command=getdetailmember">내 정보</a>
 	</p>
 	
-	<p>
-		<a href="#">비밀번호 찾기</a>
-	</p>
 	
 	<p>
 		<a href="#">스크랩</a>

@@ -43,6 +43,13 @@ public class HandlerMapping {
 			controller=new IdCheckResultController();
 		else if(command.contentEquals("nickCheckedResult")) 
 			controller=new NickCheckResultController();
+		//form에서 받아온 value
+		else if(command.contentEquals("findpasswordform")) 
+			controller=new FindPasswordFormController();
+		else if(command.contentEquals("findpasswordbyid")) 
+			controller=new FindPasswordByIdController();
+		else if(command.contentEquals("searchall")) 
+			controller=new SearchAllController();
 		
 		return controller;
 	}

@@ -14,7 +14,35 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <%-- css 경로 설정 --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css"/>
-
+<script type="text/javascript">
+function search() {
+	var word=document.getElementById('word');
+   if(${requestScope.ageName==null}) {
+      $(document).ready(function(){
+    	 $.ajax({
+    		type:"get",
+    	 	url:"front",
+    	 	date:"command=searchall&option="+ $("#search option:selected").val()+"&word="+word",
+    	 	success:function(result){
+    	 		
+    	 	}
+    	 });
+      });
+   } else {
+      // 테마별 검색
+      $(document).ready(function () {
+         $.ajax({
+            type:"get",
+            url:"front",
+            data:"command=ageSearch&agename=${requestScope.ageName}&option="+ $("#num option:selected").val()+"&word="+ad,
+            success: function(result) {
+               
+            }
+         });
+      });
+   }
+}
+</script>
 </head>
 
 <%-- header 상단 메뉴바 --%>
@@ -24,14 +52,14 @@
 
 <%-- 검색기능 메인화면에서는 감추고 테마별 게시판은 등장 --%>
 <div class="sch col-sm-6 col-sm-offset-6">
-<form class="form-inline">
-   <select style="width:80px; height:30px;">
+<form class="form-inline" name="sel">
+   <select style="width:80px; height:30px;" name="search" id="option">
       <option value="">---</option>
-      <option value="제목">제목</option>
-      <option value="작성자">작성자</option>
+      <option value="B.TITLE">제목</option>
+      <option value="M.NICKNAME">작성자</option>
    </select>
-    <input type="email" class="form-control" size="20">
-    <button type="button" class="btn btn-danger">Search</button>
+    <input type="text" class="form-control" size="20" id="word">
+    <button type="button" class="btn btn-danger" onclick="search()">Search</button>
   </form>
 </div>
 

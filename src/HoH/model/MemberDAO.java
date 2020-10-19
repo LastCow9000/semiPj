@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+
 
 public class MemberDAO {
 	private static MemberDAO dao=new MemberDAO();
@@ -147,6 +149,30 @@ public class MemberDAO {
 		}
 		
 		return flag;
+	}
+	public MemberVO findPasswordById(String id,String nickname) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		MemberVO vo=null;
+		try {
+			String sql  = "SELECT password,nickname from member where id=? and nickname=?";
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, nickname);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo=new MemberVO();
+				vo.setPassword(rs.getString(1));
+				vo.setNickName(nickname);			
+				}
+			
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		
+		return vo;
 	}
 }//class
 

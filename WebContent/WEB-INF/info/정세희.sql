@@ -35,8 +35,21 @@ insert into board values(board_seq.nextval,'donguk','페이징페이징','64','�
 insert into board values(board_seq.nextval,'donguk','페이징페이징','64','내용11','40',sysdate);
 insert into board values(board_seq.nextval,'donguk','페이징페이징','64','내용11','40',sysdate);
 
+SELECT password from member where id='donguk' and nickname='욱과짱'
 
 
 
+
+SELECT B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,
+B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE 
+FROM (
+SELECT ROW_NUMBER() OVER(ORDER BY POST_NO asc)
+AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,
+TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE 
+FROM BOARD B, MEMBER M 
+WHERE B.ID=M.ID AND M.AGENAME='조선시대' 
+) B , MEMBER M 
+WHERE B.NICKNAME=M.NICKNAME 
+and m.nickname like '%과%' and rnum between 16 and 23  order by rnum desc
 
 
