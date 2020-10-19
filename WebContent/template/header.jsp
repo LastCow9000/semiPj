@@ -15,7 +15,7 @@
  
  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header">
+	<div class="navbar-header">
       <a class="navbar-brand" href="${pageContext.request.contextPath}/front?command=home">HOH</a>
     </div>
     <ul class="nav navbar-nav">
@@ -24,5 +24,5 @@
       <li><a href="${pageContext.request.contextPath}/front?command=agelist&agename=고려시대">고려</a></li>
       <li><a href="${pageContext.request.contextPath}/front?command=agelist&agename=조선시대">조선</a></li>
     </ul>
-  </div>
+    </div>
 </nav>
