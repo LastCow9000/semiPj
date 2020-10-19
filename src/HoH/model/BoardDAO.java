@@ -251,28 +251,7 @@ public class BoardDAO {
       }
       
    }
-  
-	
+
+   
+   
 }// class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

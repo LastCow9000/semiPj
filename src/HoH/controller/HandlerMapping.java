@@ -52,6 +52,12 @@ public class HandlerMapping {
 			controller=new MyScrapListController();
 		else if(command.contentEquals("deleteScrapPost")) 
 			controller=new DeleteScrapPostController();
+		else if(command.contentEquals("follwerAdd")) 
+			controller=new follwerAddController();
+		else if(command.contentEquals("follwerCheck")) 
+			controller=new follwerCheckController();
+		else if(command.contentEquals("follwerDel")) 
+			controller=new follwerDeleteController();
 		
 		return controller;
 	}

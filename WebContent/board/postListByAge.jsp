@@ -35,6 +35,7 @@
 								</tr>
 							</thead>
 							<tbody>
+
 				<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
 							<c:forEach items="${requestScope.listvo.list }" var="list" varStatus="status">
 							<tr>
@@ -58,7 +59,12 @@
 										<td>${list.memberVO.nickName}</td>
 										<td>${list.likeCount}</td>
 										<td>${list.viewCount}</td>
+<<<<<<< HEAD
 										<td>${list.regDate}</td>
+=======
+										<td>${list.regDate}</td>
+
+>>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
 										
 									</tr>
 						
