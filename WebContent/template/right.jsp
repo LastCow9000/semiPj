@@ -6,7 +6,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+  <style>
+img {
+	width: 200px;
+	height:300px;
+}
+</style>
 	<!--  로그인 오른쪽에 고정되는 화면 -->
 	<c:choose>
 	<c:when test="${sessionScope.memberVO==null }">
@@ -62,10 +67,10 @@
 			<img src="조선시대.jpg"> 
 		 </c:if>
 		<c:if test="${requestScope.ageName =='고조선시대'}">
-			<img src="고조선.jpg"> 
+			<img src="고조선시대.jpg"> 
 		 </c:if>
 		 <c:if test="${requestScope.ageName =='고려시대'}">
-			<img src="고려시대.jpg"> 
+			<img src="고려시대1.jpg"> 
 		 </c:if>
 		 <c:if test="${requestScope.ageName =='삼국시대'}">
 			<img src="삼국시대.jpg"> 
@@ -75,24 +80,26 @@
 	<c:otherwise>
 		<!-- HomeController에서 받아온 rankList로 랭킹 포인트많은 순으로 정렬.  -->
 		<div class="container">
-			<h2>핳랭킹</h2>
-			<p>역대 핳피플</p>
-			<table>
+		<div class="row">
+		<div class="col-sm-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">핳랭킹 </div>
+			<table class="table hoh">
 				<thead>
 					<tr>
-						<th>닉네임</th>
+						<th>   닉네임</th>
 						<th>포인트</th>
 					</tr>
 					<c:forEach items="${requestScope.rankList}" var="list"
 						varStatus="status" begin="0" end="4" step="1">
 						<tr>
-							<th>${list.nickName}</th>
+							 <th><span class="badge badge-danger-light">${status.index+1 }</span>${list.nickName}</th>
 							<th>${list.point}</th>
 						</tr>
 					</c:forEach>
 				</thead>
-			</table>
-		</div>
+			</table></div>
+		</div></div></div>
 	</c:otherwise>
 	
 </c:choose>

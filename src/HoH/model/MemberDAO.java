@@ -179,6 +179,79 @@ public class MemberDAO {
 	      }
 	      return list;
 	   }
+	
+	public void follwerAdd(String id,String nickname) throws SQLException {
+		   Connection con=null;
+		      PreparedStatement pstmt=null;
+		      try {
+		         con=dataSource.getConnection();
+		         String sql="insert into follow(id,nickname) values(?,?)";
+		         pstmt=con.prepareStatement(sql);
+		         pstmt.setString(1, id);
+		         pstmt.setString(2, nickname);
+		         pstmt.executeUpdate();
+		      }finally {
+		         closeAll(pstmt, con);
+		      }
+	   }
+	public boolean follwerCheck(String id,String nickname) throws SQLException {
+		boolean flag = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(*) FROM follow WHERE id=? and nickName=?";
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, nickname);
+			rs =pstmt.executeQuery();
+
+			if (rs.next() && rs.getInt(1) > 0) {
+				flag = true;
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		
+		return flag;
+	}
+	public ArrayList<String> follwingList(String id) throws SQLException {
+		ArrayList<String> list = new ArrayList<String>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT nickname FROM follow WHERE id=?";
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs =pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		
+		return list;
+	}
+	public void followDelete(String nickname) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "delete follow WHERE nickname=?";
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nickname);
+			pstmt.executeUpdate();
+		}finally {
+			closeAll(pstmt, con);
+		}
+	}
 }//class
 
 

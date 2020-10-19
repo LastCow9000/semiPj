@@ -13,7 +13,15 @@ CREATE TABLE member(
    point number default 0
 )
 
+create table follow(
+	id varchar2(100),
+	nickname varchar2(100),
+	constraint fk_follow primary key(id,nickname)
+)
+CREATE SEQUENCE follow_seq nocache;
 
+select *from follow;
+drop table follow;
 CREATE SEQUENCE board_seq nocache;
 
 CREATE TABLE board(
@@ -57,6 +65,9 @@ INSERT INTO member(id, nickname, password, ageName) VALUES('lastcow', '쏭쏭이
 INSERT INTO member(id, nickname, password, ageName) VALUES('milk', '훌륭한정주임', 'milk', '고려시대');
 INSERT INTO member(id, nickname, password, ageName) VALUES('dance_machine', '노래도잘해', 'dance_machine', '삼국시대');
 INSERT INTO member(id, nickname, password, ageName) VALUES('rider', '세히찡', 'rider', '조선시대');
+
+
+
 
 insert into board(post_no,id,title,content,regdate) values(board_seq.nextval,'donguk','하이','안녕하세요',sysdate);
 insert into board(post_no,id,title,content,regdate) values(board_seq.nextval,'lastcow','안녕','ㅈㄱㄴ',sysdate);
@@ -102,6 +113,17 @@ SELECT COUNT(*) FROM member WHERE nickName='파프리카청춘이다';
 update member set nickName='파프리카파프이다', password='11111'
 WHERE id='java'
 
+
+update member set point=20 where id='lastcow';
+update member set point=450 where id='milk';
+update member set point=60 where id='dance_machine';
+update member set point=1550 where id='rider';
+
+update member set point=2550 where id='java';
+update member set point=812 where id='socold';
+update member set point=412 where id='yewool';
+
+select * from member order by point desc;
 
 
 

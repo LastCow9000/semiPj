@@ -41,7 +41,7 @@
     <div class="col-sm-10">
          <c:import url="${url}"></c:import>
   </div>
-<div class="container-fluid">    
+<div class="container-fluid">
   <div class="row content">
     <div class="col-sm-2 sidenav">
        <%-- 로그인 사이드 --%>

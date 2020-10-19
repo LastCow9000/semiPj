@@ -30,6 +30,41 @@
 			return;
 		}
 	}
+	 
+	$(document).ready(function() {
+		$("#followAdd").click(function() {
+			 if(${sessionScope.memberVO==null}) {
+		            alert("로그인한 사용자만 팔로우 가능!");
+		            return;
+		         }
+			 
+				if(confirm("팔로우하시겠습니까?")){
+			 $.ajax({
+					type:"get",
+					url:"front",
+					data:"command=follwerCheck&nickname=${requestScope.postVO.memberVO.nickName}&id=${sessionScope.memberVO.id}",				
+					success:function(result){
+						if(result!="ok"){
+								alert("이미 팔로우했습니다!");}
+						else
+							{
+							$.ajax({
+								type:"get",
+								url:"front",
+								data:"command=follwerAdd&nickname=${requestScope.postVO.memberVO.nickName}&id=${sessionScope.memberVO.id}",				
+								success:function(result){
+									alert("팔로우 추가완료!");
+									
+								}
+							})
+							
+							}
+					}
+				})
+			//alert(${requestScope.postVO.memberVO.nickName});
+			 }
+		})
+	})
 </script>
 
 </head>
@@ -99,6 +134,8 @@
 									</form>
 									<button type="button" class="btn btn-default btn-sm" onclick="scrap()"><span class="glyphicon glyphicon-bookmark"></span> 스크랩 </button>
 									<button type="button" class="btn btn-default btn-sm" onclick="like()"> <span class="glyphicon glyphicon-thumbs-up"></span>좋아요</button>
+									
+									<button type="button" class="btn btn-default btn-sm" id="followAdd" ><span class="glyphicon glyphicon-plus"></span> 팔로우 </button>
 								</td>
 							</tr>
 
