@@ -8,13 +8,24 @@ public class PostVO {
 	private int viewCount;
 	private int likeCount;
 	private String regDate;
+	private String scrapedDate;
+
 	private MemberVO memberVO;
+	
 	public PostVO() {
 		super();		
 	}
 	public String getPostNo() {
 		return postNo;
 	}
+	
+	public String getScrapedDate() {
+		return scrapedDate;
+	}
+	public void setScrapedDate(String scrapedDate) {
+		this.scrapedDate = scrapedDate;
+	}
+	
 	public void setPostNo(String postNo) {
 		this.postNo = postNo;
 	}

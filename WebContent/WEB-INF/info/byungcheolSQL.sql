@@ -13,7 +13,15 @@ CREATE TABLE member(
    point number default 0
 )
 
+create table follow(
+	id varchar2(100),
+	nickname varchar2(100),
+	constraint fk_follow primary key(id,nickname)
+)
+CREATE SEQUENCE follow_seq nocache;
 
+select *from follow;
+drop table follow;
 CREATE SEQUENCE board_seq nocache;
 
 CREATE TABLE board(
@@ -58,6 +66,9 @@ INSERT INTO member(id, nickname, password, ageName) VALUES('milk', '훌륭한정
 INSERT INTO member(id, nickname, password, ageName) VALUES('dance_machine', '노래도잘해', 'dance_machine', '삼국시대');
 INSERT INTO member(id, nickname, password, ageName) VALUES('rider', '세히찡', 'rider', '조선시대');
 
+
+
+
 insert into board(post_no,id,title,content,regdate) values(board_seq.nextval,'donguk','하이','안녕하세요',sysdate);
 insert into board(post_no,id,title,content,regdate) values(board_seq.nextval,'lastcow','안녕','ㅈㄱㄴ',sysdate);
 insert into board(post_no,id,title,content,regdate) values(board_seq.nextval,'milk','봉주르','프랑스',sysdate);
@@ -93,7 +104,7 @@ FROM BOARD B, MEMBER M
 WHERE B.ID=M.ID AND M.AGENAME='조선시대';
 
 
-SELECT COUNT(*) FROM member WHERE nickName='파프리카청춘이다';
+SELECT COUNT(*) FROM member WHERE nickName='노래도잘해';
 
 
 
@@ -102,6 +113,67 @@ SELECT COUNT(*) FROM member WHERE nickName='파프리카청춘이다';
 update member set nickName='파프리카파프이다', password='11111'
 WHERE id='java'
 
+-- 게시글 받아오기
+SELECT b.title, m.nickName, m.ageName 
+FROM board b, member m 
+WHERE b.id=m.id 
+ORDER BY like_count, view_count DESC
+
+
+SELECT b.*, m.name
+FROM   ( SELECT row_number() over(ORDER BY no DESC) AS rnum, no, title, hits, 
+			TO_CHAR(time_posted, 'YYYY-MM-DD') AS time_posted, id 
+			FROM   board) b, BOARD_MEMBER m 
+WHERE  b.id = m.id AND rnum BETWEEN ? AND ?	 
+
+   post_no number primary key,
+   id varchar2(100) not null,
+   title varchar2(100) not null,
+   view_count number default 0,
+   content clob not null,
+   like_count number default 0,
+   regdate date not null,
+
+SELECT b.*, m.name
+FROM   ( SELECT row_number() over(ORDER BY no DESC) AS rnum, no, title, hits, 
+			TO_CHAR(time_posted, 'YYYY-MM-DD') AS time_posted, id 
+			FROM   board) b, BOARD_MEMBER m 
+WHERE  b.id = m.id AND rnum BETWEEN ? AND ?	 
+
+SELECT  b.*, m.*
+FROM  ( SELECT row_number() over(ORDER BY post_no DESC) AS rnum, post_no, id, title, view_count, content, like_count, 
+		TO_CHAR(regdate, 'YYYY-MM-DD') AS regdate
+		FROM   board) b, member m
+WHERE  b.id = m.id AND m.agename='조선시대' AND rnum BETWEEN 1 AND 5
+		
+
+SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE
+FROM ( SELECT ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE ");
+		FROM BOARD B, MEMBER M ");
+WHERE B.ID=M.ID AND M.AGENAME=? ");
+) B , MEMBER M ");
+WHERE B.NICKNAME=M.NICKNAME and rnum between ? and ? order by rnum asc");
+
+
+
+
+
+
+
+
+
+
+
+update member set point=20 where id='lastcow';
+update member set point=450 where id='milk';
+update member set point=60 where id='dance_machine';
+update member set point=1550 where id='rider';
+
+update member set point=2550 where id='java';
+update member set point=812 where id='socold';
+update member set point=412 where id='yewool';
+
+select * from member order by point desc;
 
 
 

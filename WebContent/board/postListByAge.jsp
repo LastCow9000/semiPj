@@ -37,14 +37,14 @@
 								</tr>
 							</thead>
 							<tbody>
+
 				<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
 							<c:forEach items="${requestScope.listvo.list }" var="list" varStatus="status">
 							<tr>
 								<td>
 									${requestScope.totalPostCount-((pb.nowPage-1)*pb.postCountPerPage+status.index)}
 								</td>
-								<td><a 
-													href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${requestScope.totalPostCount-((pb.nowPage-1)*8+status.index)}">${list.title}</a></td>
+								<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${requestScope.totalPostCount-((pb.nowPage-1)*8+status.index)}">${list.title}</a></td>
 										<td>${list.memberVO.nickName}</td>
 										<td>${list.likeCount}</td>
 										<td>${list.viewCount}</td>
@@ -61,7 +61,12 @@
 										<td>${list.memberVO.nickName}</td>
 										<td>${list.likeCount}</td>
 										<td>${list.viewCount}</td>
+<<<<<<< HEAD
 										<td>${list.regDate}</td>
+=======
+										<td>${list.regDate}</td>
+
+>>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
 										
 									</tr>
 						

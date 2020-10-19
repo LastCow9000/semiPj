@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.sql.DataSource;
 
 
@@ -133,7 +135,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT COUNT(*) FROM member WHERE nickName=?";
+			String sql = "SELECT COUNT(*) FROM member WHERE nickname=?";
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, nickname);
@@ -147,6 +149,111 @@ public class MemberDAO {
 		}
 		
 		return flag;
+	}
+	
+	//역대 핳게시글
+	public ArrayList<MemberVO> ranking() throws SQLException{
+	      ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+	     
+	      Connection con=null;
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      try{
+	    	  StringBuilder sql = new StringBuilder();
+	          sql.append("select id,nickname,point ");
+	          sql.append("from member ");
+	          sql.append("order by point desc ");
+	          //sql.append(" ");
+	         con = dataSource.getConnection();
+	         pstmt = con.prepareStatement(sql.toString());
+	         rs = pstmt.executeQuery();
+	         while (rs.next()) {
+	        	 MemberVO memberVO = new MemberVO();
+	            memberVO.setId(rs.getString(1));
+	            memberVO.setNickName(rs.getString(2));
+	            memberVO.setPoint(rs.getInt(3));
+	            list.add(memberVO);
+	         }
+	      }finally{
+	         closeAll(rs, pstmt,con);
+	      }
+	      return list;
+	   }
+	
+	public void follwerAdd(String id,String nickname) throws SQLException {
+		   Connection con=null;
+		      PreparedStatement pstmt=null;
+		      try {
+		         con=dataSource.getConnection();
+		         String sql="insert into follow(id,nickname) values(?,?)";
+		         pstmt=con.prepareStatement(sql);
+		         pstmt.setString(1, id);
+		         pstmt.setString(2, nickname);
+		         pstmt.executeUpdate();
+		      }finally {
+		         closeAll(pstmt, con);
+		      }
+	   }
+	
+	public boolean follwerCheck(String id,String nickname) throws SQLException {
+		boolean flag = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(*) FROM follow WHERE id=? and nickName=?";
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, nickname);
+			rs =pstmt.executeQuery();
+
+			if (rs.next() && rs.getInt(1) > 0) {
+				flag = true;
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		
+		return flag;
+	}
+	
+	public ArrayList<String> follwingList(String id) throws SQLException {
+		ArrayList<String> list = new ArrayList<String>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT nickname FROM follow WHERE id=?";
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs =pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		
+		return list;
+	}
+	
+	public void followDelete(String nickname) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "delete follow WHERE nickname=?";
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nickname);
+			pstmt.executeUpdate();
+		}finally {
+			closeAll(pstmt, con);
+		}
 	}
 }//class
 
