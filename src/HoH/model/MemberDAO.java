@@ -194,6 +194,7 @@ public class MemberDAO {
 		         closeAll(pstmt, con);
 		      }
 	   }
+	
 	public boolean follwerCheck(String id,String nickname) throws SQLException {
 		boolean flag = false;
 		Connection con = null;
@@ -217,6 +218,7 @@ public class MemberDAO {
 		
 		return flag;
 	}
+	
 	public ArrayList<String> follwingList(String id) throws SQLException {
 		ArrayList<String> list = new ArrayList<String>();
 		Connection con = null;
@@ -239,6 +241,7 @@ public class MemberDAO {
 		
 		return list;
 	}
+	
 	public void followDelete(String nickname) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;

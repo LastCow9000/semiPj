@@ -9,7 +9,6 @@ public class HandlerMapping {
 	}
 	public Controller create(String command) {
 		Controller controller=null;
-		System.out.println(command);
 		if(command.contentEquals("home")) 
 			controller=new HomeController();
 		else if(command.contentEquals("login")) 

@@ -227,6 +227,10 @@ WHERE post_no = '55';
 -- scrap 삭제
 DELETE FROM scrap_post WHERE post_no='77' AND id='testyewool'
 
-
-
+-- Follow 테이블
+create table follow(
+   id varchar2(100),
+   nickname varchar2(100),
+   constraint fk_follow primary key(id,nickname)
+)
 

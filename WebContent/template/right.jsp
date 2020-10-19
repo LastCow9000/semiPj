@@ -59,7 +59,6 @@ img {
 	
 	<!-- 랭킹 기능구현 -->
 	<!-- 시대별 게시판에 들어가게 되면 HomeComtroller에서 받아온 rankList가 null이 된다. -->
-<c:set var="imgAge" value="${requestScope.board }" />
 <c:choose>
 	
 	<c:when test="${requestScope.rankList==null }">

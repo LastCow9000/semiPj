@@ -81,17 +81,8 @@
 			
 		});//sracp_btn
 		
-	});//ready
-
-	function like() {
-		if(confirm("게시글을 수정하시겠습니까??")){
-			document.updateForm.submit();
-		} else {
-			return;
-		}
-	}
-	 
-	$(document).ready(function() {
+		
+		/* 팔로우 기능 */
 		$("#followAdd").click(function() {
 			 if(${sessionScope.memberVO==null}) {
 		            alert("로그인한 사용자만 팔로우 가능!");
@@ -99,32 +90,33 @@
 		         }
 			 
 				if(confirm("팔로우하시겠습니까?")){
-			 $.ajax({
-					type:"get",
-					url:"front",
-					data:"command=follwerCheck&nickname=${requestScope.postVO.memberVO.nickName}&id=${sessionScope.memberVO.id}",				
-					success:function(result){
-						if(result!="ok"){
-								alert("이미 팔로우했습니다!");}
-						else
-							{
-							$.ajax({
-								type:"get",
-								url:"front",
-								data:"command=follwerAdd&nickname=${requestScope.postVO.memberVO.nickName}&id=${sessionScope.memberVO.id}",				
-								success:function(result){
-									alert("팔로우 추가완료!");
+				 $.ajax({
+						type:"get",
+						url:"front",
+						data:"command=follwerCheck&nickname=${requestScope.postVO.memberVO.nickName}&id=${sessionScope.memberVO.id}",				
+						success:function(result){
+							if(result != "ok"){
+									alert("이미 팔로우했습니다!");}//if
+							else
+								{
+								$.ajax({
+									type:"get",
+									url:"front",
+									data:"command=follwerAdd&nickname=${requestScope.postVO.memberVO.nickName}&id=${sessionScope.memberVO.id}",				
+									success:function(result){
+										alert("팔로우 추가완료!");
 									
 								}
-							})
+							})//ajax
 							
-							}
-					}
-				})
-			//alert(${requestScope.postVO.memberVO.nickName});
-			 }
-		})
-	})
+							}//else
+					}//success
+				})//ajax
+			 }//if
+		})//followAdd click
+		
+	});//ready
+
 	
 </script>
 
@@ -190,26 +182,13 @@
 										<input type="hidden" name="postNo" value="${requestScope.postVO.postNo}">
 									</form>  --%>
 									
-									<%-- 좋아요 기능 --%>
-									<form name="deleteForm" action="${pageContext.request.contextPath}/front" method="POST">
-										<input type="hidden" name="command" value="조하조하요~">
-										 <input type="hidden" name="no" value="${requestScope.postVO.postNo}">
-									</form>
+									
 									
 									<%-- 스크랩 버튼 --%>
 									<button type="button" id="scrap_btn" class="btn btn-default btn-sm">
 										<span class="glyphicon glyphicon-bookmark"></span> 스크랩 
 									</button>
-							
-									<%-- 좋아요 버튼 --%>
-									<button type="button" class="btn btn-default btn-sm" onclick="like()"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span>좋아요</button>
-		
-									<form name="updateForm" action="${pageContext.request.contextPath}/front" method="post">
-										<input type="hidden" name="command" value="스크랩해버릴테얌!">
-										<input type="hidden" name="no" value="${requestScope.postVO.postNo}">
-									</form>
-									<button type="button" class="btn btn-default btn-sm" onclick="scrap()"><span class="glyphicon glyphicon-bookmark"></span> 스크랩 </button>
+									
 									<button type="button" class="btn btn-default btn-sm" onclick="like()"> <span class="glyphicon glyphicon-thumbs-up"></span>좋아요</button>
 									
 									<button type="button" class="btn btn-default btn-sm" id="followAdd" ><span class="glyphicon glyphicon-plus"></span> 팔로우 </button>
