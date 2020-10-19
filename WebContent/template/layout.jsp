@@ -15,31 +15,26 @@
 <%-- css 경로 설정 --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css"/>
 <script type="text/javascript">
+
 function search() {
-	var word=document.getElementById('word');
-   if(${requestScope.ageName==null}) {
-      $(document).ready(function(){
-    	 $.ajax({
-    		type:"get",
-    	 	url:"front",
-    	 	date:"command=searchall&option="+ $("#search option:selected").val()+"&word="+word",
-    	 	success:function(result){
-    	 		
-    	 	}
-    	 });
-      });
+      var agename = "${requestScope.ageName}"
+      var option = $("#searchText option:selected").val();
+      var word = $('#text').val();
+   if(${requestScope.ageName==null}) { 
+      location.href="${pageContext.request.contextPath}/front?command=searchall&option="+option+"&word="+word;
    } else {
-      // 테마별 검색
-      $(document).ready(function () {
+      location.href="${pageContext.request.contextPath}/front?command=ageSearch&agename="+agename+"&option="+option+"&word="+word;
+      // 테마별 검색  
+       /* $(document).ready(function () {
          $.ajax({
             type:"get",
             url:"front",
-            data:"command=ageSearch&agename=${requestScope.ageName}&option="+ $("#num option:selected").val()+"&word="+ad,
+            data:"command=ageSearch&agename=${requestScope.ageName}&option="+$("#searchText option:selected").val()+"&word="+$('#text').val(),
             success: function(result) {
                
             }
          });
-      });
+      }); */
    }
 }
 </script>
@@ -52,13 +47,13 @@ function search() {
 
 <%-- 검색기능 메인화면에서는 감추고 테마별 게시판은 등장 --%>
 <div class="sch col-sm-6 col-sm-offset-6">
-<form class="form-inline" name="sel">
-   <select style="width:80px; height:30px;" name="search" id="option">
+<form class="form-inline" id="selectBox">
+   <select style="width:80px; height:30px;" id="searchText">
       <option value="">---</option>
-      <option value="B.TITLE">제목</option>
-      <option value="M.NICKNAME">작성자</option>
+      <option value="b.title">제목</option>
+      <option value="m.nickname">작성자</option>
    </select>
-    <input type="text" class="form-control" size="20" id="word">
+    <input type="text" class="form-control" size="20" id="text">
     <button type="button" class="btn btn-danger" onclick="search()">Search</button>
   </form>
 </div>
