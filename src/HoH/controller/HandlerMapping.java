@@ -43,6 +43,12 @@ public class HandlerMapping {
 			controller=new IdCheckResultController();
 		else if(command.contentEquals("nickCheckedResult")) 
 			controller=new NickCheckResultController();
+		else if(command.contentEquals("replywrite")) 
+			controller=new replyWriteController();
+		else if(command.contentEquals("replydelete")) 
+			controller=new replyDeleteController();
+		else if(command.contentEquals("replyupdate")) 
+			controller=new replyUpdateController();
 		
 		return controller;
 	}

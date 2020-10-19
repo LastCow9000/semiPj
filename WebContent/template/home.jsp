@@ -24,7 +24,7 @@
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
 									<td>${status.count}</td>
-									<td width=300px>${list.title}</td>
+									<td width=300px>${list.title} <span class="badge">${list.replyCount}</span></td>
 									<%-- 23자리까지 --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
@@ -51,7 +51,7 @@
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
 									<td>${status.count}</td>
-									<td width=200px>${list.title}</td>
+									<td width=200px>${list.title} <span class="badge">${list.replyCount}</span></td>
 									<%--23자리까지 --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
@@ -87,7 +87,7 @@
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
 									<td>${status.count}</td>
-									<td>${list.title}</td>
+									<td>${list.title} <span class="badge">${list.replyCount}</span></td>
 									<%--23자리까지 --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
@@ -116,7 +116,7 @@
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
 									<td>${status.count}</td>
-									<td width=300px>${list.title}</td>
+									<td width=300px>${list.title} <span class="badge">${list.replyCount}</span></td>
 									<%--23자리까지--%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
