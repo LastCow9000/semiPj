@@ -40,7 +40,7 @@
 	</p>
 	
 	<p>
-		<a href="#">스크랩</a>
+		<a href="${pageContext.request.contextPath}/front?command=myScrapList">마이 스크랩</a>
 	</p>
 	
 	</c:otherwise>

@@ -47,6 +47,29 @@ CREATE TABLE scrap_post (
     CONSTRAINT pk_scrap PRIMARY KEY (POST_NO,ID)
 );
 
+--스크랩 게시물 중복 확인
+SELECT post_no
+FROM   scrap_post
+WHERE  id='testyewool' AND post_no='42'
+
+-- 스크랩 게시물 등록
+INSERT INTO scrap_post VALUES('33', 'testyewool');
+INSERT INTO scrap_post VALUES('10', 'testyewool');
+
+-- 스크랩 게시물 확인
+SELECT  post_no
+FROM	scrap_post
+WHERE	id='testyewool'
+ORDER BY post_no desc;
+
+-- 스크랩 게시물
+
+SELECT m.id, m.nickname, b.title,b.regDate,b.content, 
+b.view_count, b.like_count, m.ageName, s.scraped_regdate 
+FROM member m, board b, scrap_post s 
+WHERE m.id = b.id AND s.post_no = b.post_no AND b.post_no='3'
+
+
 select * from scrap_post
 select * from reply
 select * from board;
@@ -78,6 +101,7 @@ INSERT INTO scrap_post VALUES('1', 'donguk');
 INSERT INTO scrap_post VALUES('1', 'yewool');
 INSERT INTO scrap_post VALUES('3', 'socold');
 INSERT INTO scrap_post VALUES('3', 'yomi');
+INSERT INTO SCRAP_POST VALUES('42', 'testyewool');
 select * from member m, board b, reply r, scrap_post sp where m.id = b.id and b.id=sp.id and r.post_no=b.post_no;
 
 -- 게시글 상세보기
@@ -174,3 +198,35 @@ INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '4', '
 INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '16', 'reply9');
 INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '11', 'reply9');
 INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '6', 'reply9');
+
+
+--Home화면에서 핳 게시글 5개 가져오는 쿼리문 + postNo
+SELECT b.title, m.nickName, m.ageName, b.post_no
+FROM board b, member m 
+WHERE b.id=m.id 
+ORDER BY like_count DESC, view_count DESC
+
+
+select * from scrap_post;
+alter table scrap_post add(regdate date default sysdate);
+alter table scrap_post RENAME COLUMN scrapted_regdate to scraped_regdate
+
+
+SELECT post_no, scraped_regdate
+FROM scrap_post 
+WHERE id='testyewool'
+ORDER BY scraped_regdate desc
+
+
+INSERT INTO scrap_post(post_no, id) VALUES('77', 'testyewool')
+
+select *
+from  BOARD
+WHERE post_no = '55';
+
+-- scrap 삭제
+DELETE FROM scrap_post WHERE post_no='77' AND id='testyewool'
+
+
+
+

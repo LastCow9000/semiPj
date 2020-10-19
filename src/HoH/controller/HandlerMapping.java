@@ -43,6 +43,14 @@ public class HandlerMapping {
 			controller=new IdCheckResultController();
 		else if(command.contentEquals("nickCheckedResult")) 
 			controller=new NickCheckResultController();
+		else if(command.contentEquals("CheckscrapPost")) 
+			controller=new CheckScrapPostController();
+		else if(command.contentEquals("ScrapPost")) 
+			controller=new ScrapPostController();
+		else if(command.contentEquals("myScrapList")) 
+			controller=new MyScrapListController();
+		else if(command.contentEquals("deleteScrapPost")) 
+			controller=new DeleteScrapPostController();
 		
 		return controller;
 	}

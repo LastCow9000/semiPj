@@ -37,6 +37,7 @@ public class BoardDAO {
          con.close();
    }
    //핳게시물 받아오기
+   // -> postNo도 넘어오게 query문 수정
       public ArrayList<PostVO> getListByLike() throws SQLException{
          ArrayList<PostVO> list=new ArrayList<PostVO>();
          Connection con=null;
@@ -44,11 +45,14 @@ public class BoardDAO {
          ResultSet rs=null;
          try {
             con=dataSource.getConnection();
-            String sql="SELECT b.title, m.nickName, m.ageName FROM board b, member m WHERE b.id=m.id ORDER BY like_count DESC, view_count DESC";
+            String sql="SELECT b.title, m.nickName, m.ageName, b.post_no "
+            		+ "FROM board b, member m "
+            		+ "WHERE b.id=m.id ORDER BY like_count DESC, view_count DESC";
             pstmt=con.prepareStatement(sql);
             rs=pstmt.executeQuery();
             while(rs.next()) {
                PostVO pvo=new PostVO();
+               pvo.setPostNo(rs.getString(4));
                MemberVO mvo=new MemberVO();
                pvo.setTitle(rs.getString(1));
                mvo.setNickName(rs.getString(2));
@@ -105,8 +109,8 @@ public class BoardDAO {
    }
 
    /**
-    * 기능 : 시대 별 게시글 상세보기 기능 postDetailByNo(String postNo) : PostVO
-    * 
+    * 기능 : 시대 별 게시글 상세보기 기능 
+    * postDetailByNo(String postNo) : PostVO
     * @throws SQLException
     */
    public PostVO postDetailByNo(String postNo) throws SQLException {
@@ -117,12 +121,13 @@ public class BoardDAO {
       try {
          con = dataSource.getConnection();
          StringBuilder sql = new StringBuilder();
-         // 제목,
          // select m.id, m.nickname, b.title,b.regdate,b.content,b.view_count,
          // b.like_count
          // from member m, board b where m.id = b.id and b.post_no='2';
-         sql.append("select m.id, m.nickname, b.title,b.regDate,b.content,b.view_count, b.like_count ");
-         sql.append("from member m, board b where m.id = b.id and b.post_no=? ");
+         sql.append("SELECT m.id, m.nickname, b.title, b.regDate,b.content, ");
+		 sql.append("b.view_count, b.like_count, m.ageName ");
+         sql.append("FROM member m, board b ");
+         sql.append("WHERE m.id = b.id AND b.post_no=? ");
          pstmt = con.prepareStatement(sql.toString());
          pstmt.setString(1, postNo);
          rs = pstmt.executeQuery();
@@ -130,6 +135,7 @@ public class BoardDAO {
             MemberVO memberVO = new MemberVO();
             memberVO.setId(rs.getString("id"));
             memberVO.setNickName(rs.getString("nickname"));
+            memberVO.setAgeName(rs.getString("ageName"));
             postVO = new PostVO();
             postVO.setPostNo(postNo);
             postVO.setTitle(rs.getString("title"));
@@ -227,6 +233,7 @@ public class BoardDAO {
          closeAll(pstmt, con);
       }
    }
+   
    //게시물 수정
    public void updatePost(PostVO postVO) throws SQLException {
       Connection con=null;
@@ -242,5 +249,30 @@ public class BoardDAO {
       }finally {
          closeAll(pstmt, con);
       }
+      
    }
+  
+	
 }// class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
