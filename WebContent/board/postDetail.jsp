@@ -9,12 +9,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	
 <script>
+if(${requestScope.likeCheck==1}) {
+	$(document).ready(function() { 
+		$("#heartBlank").hide();
+		$("#heart").html("<i class='fa fa-heart' style='color:red'></i>")
+	});
+}
 	function scrap(){
 		if(confirm("게시글을 삭제하시겠습니까?")){
 			document.removeForm.submit();
@@ -23,13 +30,38 @@
 		}
 	}
 	
-	function like() {
-		if(confirm("게시글을 수정하시겠습니까??")){
-			document.updateForm.submit();
-		} else {
-			return;
-		}
-	}
+	
+	$(document).ready(function() {
+		$("#likeBtn").click(function(){
+			if(${sessionScope.memberVO==null}) {
+				alert("로그인한 사용자만 좋아요 가능!");
+				return;
+			}
+			$.ajax({
+				type:"get",
+				url:"front",
+				data:"command=likeCount&loginId=${sessionScope.memberVO.id}&postNo=${requestScope.postVO.postNo}&postId=${requestScope.postVO.memberVO.id}",
+				success: function(result){ 
+					if(result==="좋아요한 게시물") {
+						if(confirm("이미 좋아요를 누른 게시물입니다.\n 좋아요를 취소하시겠습니까?")) {
+								$.ajax({
+									type:"get",
+									url:"front",
+									data:"command=likeCancel&loginId=${sessionScope.memberVO.id}&postNo=${requestScope.postVO.postNo}&postId=${requestScope.postVO.memberVO.id}",
+									success: function(result){
+										$("#heartBlank").show();
+										$("#heart").hide();
+									}
+								}); // ajax
+						} 
+						$("#heart").html("<i class='fa fa-heart' style='color:red'></i>");
+					}
+					$("#heartBlank").hide();
+					$("#heart").show().html("<i class='fa fa-heart' style='color:red'></i>");				
+				}
+			}); // ajax
+		}); // click
+	}); //ready
 </script>
 
 </head>
@@ -98,7 +130,9 @@
 										<input type="hidden" name="no" value="${requestScope.postVO.postNo}">
 									</form>
 									<button type="button" class="btn btn-default btn-sm" onclick="scrap()"><span class="glyphicon glyphicon-bookmark"></span> 스크랩 </button>
-									<button type="button" class="btn btn-default btn-sm" onclick="like()"> <span class="glyphicon glyphicon-thumbs-up"></span>좋아요</button>
+									<%-- 좋아요 버튼 --%>
+									<button type="button" class="btn btn-default btn-sm" onclick="like()" id="likeBtn"> <span class="fa fa-heart-o" style="color:red" id="heartBlank"></span><span id="heart"></span>좋아요</button>
+									<span id="likeView"></span>
 								</td>
 							</tr>
 

@@ -2,8 +2,11 @@ package HoH.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import HoH.model.BoardDAO;
+import HoH.model.MemberDAO;
+import HoH.model.MemberVO;
 import HoH.model.PostVO;
 
 // 시대 별 게시글 상세보기 기능
@@ -12,16 +15,18 @@ public class DetailPostController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
-		
-		//로그인 유무 확인
-//		HttpSession session = request.getSession(false);
-//		if(session == null || session.getAttribute("memberVO") == null) {
-//			return "redirect:index.jsp";
-//		}
-		
 		//list에서 제목을 통해 postNo 받아옴
 		String postNo = request.getParameter("postNo");
 		String rnum = request.getParameter("rnum");
+		
+		// 로그인 유무 확인
+		HttpSession session = request.getSession(false);
+		if(session.getAttribute("memberVO") != null) {
+				MemberVO membervo = (MemberVO)session.getAttribute("memberVO");
+				String loginId = membervo.getId();
+				int likeCheck = BoardDAO.getInstance().likeCheck(loginId, postNo);
+				request.setAttribute("likeCheck", likeCheck);
+		}
 		
 		// PostVO 객체 만들기 전에 조회수 증가하는 dao다녀옴
 		BoardDAO.getInstance().updateview_count(postNo);

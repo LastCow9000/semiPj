@@ -43,6 +43,12 @@ public class HandlerMapping {
 			controller=new IdCheckResultController();
 		else if(command.contentEquals("nickCheckedResult")) 
 			controller=new NickCheckResultController();
+		else if(command.contentEquals("likeCount")) 
+			controller=new LikeCountController();
+		else if(command.contentEquals("likeCancel")) 
+			controller=new LikeCancelController();
+		else if(command.contentEquals("ageSearch")) 
+			controller=new AgeSearchController();
 		
 		return controller;
 	}

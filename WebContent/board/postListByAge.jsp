@@ -14,7 +14,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+
 <body>
+
 	<div class="container">
 		<div class="container">
 			<div class="row">
@@ -85,8 +87,14 @@
 								end="${pb.endOfPageGroup}">
 								<c:choose>
 									<c:when test="${pb.nowPage!=i}">
-										<a
-											href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
+										<c:choose>
+											<c:when test="${requestScope.flag}">
+												<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
+											</c:when>
+											<c:otherwise>
+												<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
+											</c:otherwise>
+										</c:choose>
 									</c:when>
 									<c:otherwise>
 										<a href="#" class="active">${i}</a>
