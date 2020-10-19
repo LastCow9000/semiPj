@@ -43,12 +43,42 @@ public class HandlerMapping {
 			controller=new IdCheckResultController();
 		else if(command.contentEquals("nickCheckedResult")) 
 			controller=new NickCheckResultController();
+<<<<<<< HEAD
 		else if(command.contentEquals("replywrite")) 
 			controller=new replyWriteController();
 		else if(command.contentEquals("replydelete")) 
 			controller=new replyDeleteController();
 		else if(command.contentEquals("replyupdate")) 
 			controller=new replyUpdateController();
+=======
+		//form에서 받아온 value
+		else if(command.contentEquals("findpasswordform")) 
+			controller=new FindPasswordFormController();
+		else if(command.contentEquals("findpasswordbyid")) 
+			controller=new FindPasswordByIdController();
+		else if(command.contentEquals("searchall")) 
+			controller=new SearchAllController();
+		else if(command.contentEquals("CheckscrapPost")) 
+			controller=new CheckScrapPostController();
+		else if(command.contentEquals("ScrapPost")) 
+			controller=new ScrapPostController();
+		else if(command.contentEquals("myScrapList")) 
+			controller=new MyScrapListController();
+		else if(command.contentEquals("deleteScrapPost")) 
+			controller=new DeleteScrapPostController();
+		else if(command.contentEquals("follwerAdd")) 
+			controller=new follwerAddController();
+		else if(command.contentEquals("follwerCheck")) 
+			controller=new follwerCheckController();
+		else if(command.contentEquals("follwerDel")) 
+			controller=new follwerDeleteController();
+		else if(command.contentEquals("likeCount")) 
+			controller=new LikeCountController();
+		else if(command.contentEquals("likeCancel")) 
+			controller=new LikeCancelController();
+		else if(command.contentEquals("ageSearch")) 
+			controller=new AgeSearchController();
+>>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
 		
 		return controller;
 	}

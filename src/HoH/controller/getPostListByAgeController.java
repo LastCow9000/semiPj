@@ -14,6 +14,7 @@ public class getPostListByAgeController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//if(request.getParameter("") != null) return ""; //검색 컨트롤러 ㄱㄱ
 		String ageName = request.getParameter("agename");
 		int totalPostCount = BoardDAO.getInstance().getTotalPostCount(ageName);
 		String pageNo = request.getParameter("pageNo");

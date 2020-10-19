@@ -8,8 +8,14 @@ public class PostVO {
 	private int viewCount;
 	private int likeCount;
 	private String regDate;
+<<<<<<< HEAD
 	private int replyCount;
+=======
+	private String scrapedDate;
+
+>>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
 	private MemberVO memberVO;
+	
 	public PostVO() {
 		super();		
 	}
@@ -28,6 +34,14 @@ public class PostVO {
 	public String getPostNo() {
 		return postNo;
 	}
+	
+	public String getScrapedDate() {
+		return scrapedDate;
+	}
+	public void setScrapedDate(String scrapedDate) {
+		this.scrapedDate = scrapedDate;
+	}
+	
 	public void setPostNo(String postNo) {
 		this.postNo = postNo;
 	}

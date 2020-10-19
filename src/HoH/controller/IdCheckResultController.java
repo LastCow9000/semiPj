@@ -11,7 +11,7 @@ public class IdCheckResultController implements Controller {
 	public String execute(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
 		
-		String id = request.getParameter("id");
+		String id = request.getParameter("id").trim();
 		
 		//MemberDAO의 checkId 함수로 확인
 		// 아이디가 중복이면 : true / 중복아니면 : false
