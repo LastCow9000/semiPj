@@ -44,7 +44,7 @@ function search() {
 <%-- header 상단 메뉴바 --%>
 <c:import url="/template/header.jsp"></c:import>
 
-<body>
+<body bgcolor="red">
 
 <%-- 검색기능 메인화면에서는 감추고 테마별 게시판은 등장 --%>
 <div class="sch col-sm-6 col-sm-offset-6">

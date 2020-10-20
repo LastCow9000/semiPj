@@ -139,28 +139,59 @@
 </script>
 </head>
 <body>
-<div class="row">
-<div class="col-sm-9 col-sm-offset-1">
+<div class="container">
+	<div class="row">
+	    <div class="col-sm-6">
+	    
 <form action="${pageContext.request.contextPath}/front" method="Post" id="registerForm">
-<input type="hidden" name="command" value="register">
-	아이디 <input type="text" name="id" id="memberId" required="required">
-	<span id="idCheckResult"></span><br>
+	<input type="hidden" name="command" value="register">
 	
-	패스워드 <input type="password" name="password" id="passwordC" required="required">
-	<span id="passwordResult"></span><br>
-	패스워드 확인 <input type="password" name="password" id="passwordChecked" required="required">
-	<span id="passwordCheckResult"></span><br>
+	<table class="table hoh">
 	
-	닉네임 <input type="text" name="nickname" id="memberNick" required="required">
-	<span id="nickCheckResult"></span><br>
+		<tr align="center">
+			<td>아이디</td>
+			<td><input type="text" name="id" id="memberId" required="required"></td>
+			<td><span id="idCheckResult"></span></td>
+		</tr>
+		
+		<tr align="center">
+			<td>패스워드</td>
+			<td><input type="password" name="password" id="passwordC" required="required"></td>
+			<td><span id="passwordResult"></span></td>
+		</tr>
+		
+		<tr align="center">
+			<td>패스워드 확인</td>
+			<td><input type="password" name="password" id="passwordChecked" required="required"></td>
+			<td><span id="passwordCheckResult"></span></td>
+		</tr>
+
+		<tr align="center">
+			<td>닉네임</td>
+			<td><input type="text" name="nickname" id="memberNick" required="required"></td>
+			<td><span id="nickCheckResult"></span></td>
+		</tr>
 	
-	시대 <input type="checkbox" name="checkbox1" value="고조선시대" onclick="oneCheckbox(this)">고조선시대
-	<input type="checkbox" name="checkbox1" value="삼국시대" onclick="oneCheckbox(this)">삼국시대
-	<input type="checkbox" name="checkbox1" value="고려시대" onclick="oneCheckbox(this)">고려시대
-	<input type="checkbox" name="checkbox1" value="조선시대" onclick="oneCheckbox(this)">조선시대<br>
-	<input type="submit" value="회원가입">
+		<tr align="center">
+			<td>시대</td>
+			<td colspan="2" align="left">
+				<input type="checkbox" name="checkbox1" value="고조선시대" onclick="oneCheckbox(this)">고조선시대
+				<input type="checkbox" name="checkbox1" value="삼국시대" onclick="oneCheckbox(this)">삼국시대
+				<input type="checkbox" name="checkbox1" value="고려시대" onclick="oneCheckbox(this)">고려시대
+				<input type="checkbox" name="checkbox1" value="조선시대" onclick="oneCheckbox(this)">조선시대<br>
+			</td>
+			<td><span id="nickCheckResult"></span></td>
+		</tr>
+		
+		<tr>
+			<td colspan="3" align="center"><input type="submit" class="btn-warning" value="회원가입"></td>
+		</tr>
+	</table>
+	
 </form>
-</div>
+
+		</div>
+	</div>
 </div>
 </body>
 </html>

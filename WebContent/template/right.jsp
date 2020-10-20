@@ -3,16 +3,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style> 
 .age {
 	width: 200px;
 	height:300px;
 }
 </style>
+
 	<!--  로그인 오른쪽에 고정되는 화면 -->
 	<c:choose>
 	<c:when test="${sessionScope.memberVO==null }">
@@ -85,7 +86,7 @@
 			<table class="table hoh">
 				<thead>
 					<tr>
-						<th>   닉네임</th>
+						<th>닉네임</th>
 						<th>포인트</th>
 					</tr>
 					<c:forEach items="${requestScope.rankList}" var="list"

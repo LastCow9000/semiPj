@@ -25,8 +25,8 @@
 			htmls +='<input type="password" id="password" placeholder="비밀번호를 입력하세요">';
 			htmls +='</div>';
 			htmls +='<div class="col-sm-8" align="right">';
-			htmls += '<input type="button" class="btn btn-info" value="확인" onclick="updateReply(' + rid + ')" style="padding-right:5px">';
-			htmls += '<input type="button" class="btn btn-info" value="취소" onClick="showReplyList()">';
+			htmls += '<input type="button" class="btn btn-info btn-sm" value="확인" onclick="updateReply(' + rid + ')" style="padding-right:5px">';
+			htmls += '&nbsp;<input type="button" class="btn btn-info btn-sm" value="취소" onClick="showReplyList()">';
 			htmls +='</div>';
 			htmls += '</span>';
 			htmls += '</span>';		
@@ -73,9 +73,9 @@
 
 			<div class="col-sm-9">
 			<c:if test="${sessionScope.memberVO!=null}">
-				<h3>
-					<small>댓글</small>
-				</h3>
+				<h4>
+					댓글
+				</h4><br>
 				<form name="replyForm" action="${pageContext.request.contextPath}/front" method="post">
 					<div class="form-group">
 						<input type="text" name="nick" placeholder="작성자명" required="required">
@@ -84,11 +84,10 @@
 					</div>
 					<input type="hidden" name="command" value="replywrite"> 
 					<input type="hidden" name="postNo" id="postNo" value="${requestScope.postVO.postNo}">
-					<button type="submit" class="btn btn-success">작성</button>
+					<button type="submit" class="btn btn-success btn-sm">작성</button>
 				</form>
-				<br>
-				<br>
 			</c:if>
+				<hr>
 				<p>
 					<span class="badge">${requestScope.replyCount}</span> 개의 댓글:
 				</p>
@@ -111,14 +110,13 @@
 								<input type="hidden" id="repPassword" name="repPassword" value="${repList.password}">
 								<input type="hidden" id="btn-del" name="btn-del" value="$('#btn_del').val()">
 								<p id="repContent${repList.comNo}">${repList.content}</p>
-								<br>
 								<c:if test="${sessionScope.memberVO!=null}">
-								<button class="btn btn-info" id="updateBtn" onclick="updateRep('${repList.comNo}','${repList.content}')">수정</button>
-								<button class="btn btn-danger btn-delete"  id="btn_del" value="${repList.comNo}">삭제</button>
+								<button class="btn btn-info btn-sm" id="updateBtn" onclick="updateRep('${repList.comNo}','${repList.content}')">수정</button>
+								<button class="btn btn-danger btn-sm btn-delete"  id="btn_del" value="${repList.comNo}">삭제</button>
 								</c:if>
 							</div>
-							
 						</div>
+						<br><br>
 					</c:forEach>
 					
 				</div>
