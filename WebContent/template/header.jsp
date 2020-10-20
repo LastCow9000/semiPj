@@ -4,7 +4,7 @@
 
 <c:set value="${pageContext.request.contextPath}" var="path" />
 
-<nav class="navbar navbar-default bg-warning">
+<nav class="navbar bg-warning">
 
 	<div class="container-fluid">
 		<!-- header - 홈 부분 -->

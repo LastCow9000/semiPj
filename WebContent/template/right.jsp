@@ -69,10 +69,14 @@
       <a href="${path}/front?command=getdetailmember">내 정보</a>
    </p>
    
-   
    <p>
       <a href="${path}/front?command=myScrapList">마이 스크랩</a>
    </p>
+   
+   <p>
+   		<a href="${path}/front?command=myFollowList">마이 팔로우</a>
+   </p>
+   
    <%-- 등급 progress bar --%>
    <c:choose>
    <c:when test="${rank=='iron'}">

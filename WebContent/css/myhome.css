@@ -5,11 +5,6 @@
 	height: 80px;
 }
 
-/* 내비게이션 바 색 변경 */
-.navbar-default { 
-	background-color: #e74c3c; 
-}
-
 /* 네비게이션 메뉴 가운데 정렬*/
 .navbar-nav.navbar-center {
     position: absolute;
@@ -45,7 +40,7 @@
 	padding-top:10px;
 	width: 180px;
 	height: 80px;
-	color : white;
+	color : #008080;
 	text-align: center;
 	font-family: 궁서;
 	font-size: 35px;
