@@ -14,7 +14,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+
 <body>
+
 	<div class="container">
 		<div class="container">
 			<div class="row">
@@ -42,7 +44,9 @@
 								<td>
 									${requestScope.totalPostCount-((pb.nowPage-1)*pb.postCountPerPage+status.index)}
 								</td>
-								<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${requestScope.totalPostCount-((pb.nowPage-1)*8+status.index)}">${list.title}</a></td>
+								<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${requestScope.totalPostCount-((pb.nowPage-1)*8+status.index)}">
+								${list.title} <span class="badge">${list.replyCount}</span>
+								</a></td>
 										<td>${list.memberVO.nickName}</td>
 										<td>${list.likeCount}</td>
 										<td>${list.viewCount}</td>
@@ -59,13 +63,7 @@
 										<td>${list.memberVO.nickName}</td>
 										<td>${list.likeCount}</td>
 										<td>${list.viewCount}</td>
-<<<<<<< HEAD
 										<td>${list.regDate}</td>
-=======
-										<td>${list.regDate}</td>
-
->>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
-										
 									</tr>
 						
 
@@ -90,8 +88,17 @@
 								end="${pb.endOfPageGroup}">
 								<c:choose>
 									<c:when test="${pb.nowPage!=i}">
-										<a
-											href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
+									<c:choose>
+										<c:when test="${requestScope.flag&&requestScope.ageName!=null}">
+											<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
+										</c:when>
+										<c:when test="${requestScope.flag }">
+										<a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
+										</c:when>
+										<c:otherwise>
+										<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
+										</c:otherwise>
+									</c:choose>
 									</c:when>
 									<c:otherwise>
 										<a href="#" class="active">${i}</a>

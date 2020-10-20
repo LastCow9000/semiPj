@@ -5,13 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	if(confirm("${requestScope.postNo} 스크랩 완료!\n마이 스크랩 페이지로 이동하시겠습니까?"))
-		location.href = "";
-	else
-		return;
-</script>
 </head>
 <body>
+<script type="text/javascript">
+	alert("${requestScope.vo.nickName}님의 비밀번호는 ${requestScope.pw}입니다");
+	location.href="${pageContext.request.contextPath}/front?command=home";
+</script>
 </body>
 </html>
