@@ -155,15 +155,6 @@ WHERE B.ID=M.ID AND M.AGENAME=? ");
 WHERE B.NICKNAME=M.NICKNAME and rnum between ? and ? order by rnum asc");
 
 
-
-
-
-
-
-
-
-
-
 update member set point=20 where id='lastcow';
 update member set point=450 where id='milk';
 update member set point=60 where id='dance_machine';
@@ -176,6 +167,7 @@ update member set point=412 where id='yewool';
 select * from member order by point desc;
 
 
-
+alter table scrap_post add(regdate date default sysdate);
+alter table scrap_post RENAME COLUMN regdate to scraped_regdate;
 
 

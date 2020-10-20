@@ -52,7 +52,9 @@ img {
 	<p>
 		<a href="${pageContext.request.contextPath}/front?command=myScrapList">마이 스크랩</a>
 	</p>
-	
+	<p>
+		<a href="${pageContext.request.contextPath}/front?command=myList">마이 스크랩</a>
+	</p>
 	</c:otherwise>
 	</c:choose>
 	<br>
