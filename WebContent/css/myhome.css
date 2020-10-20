@@ -1,41 +1,9 @@
-<<<<<<< HEAD
-  /* Remove the navbar's default rounded borders and increase the bottom margin */ 
-    .navbar {
-      margin-bottom: 25px;
-      border-radius: 0;
-    }
-    
-    /* Remove the jumbotron's default bottom margin */ 
-     .jumbotron {
-      margin-bottom: 0px;
-      height: 100px;
-    }
-    
-    .sch {
-     margin-bottom: 25px;
-    }
-    .panel-primary>.panel-heading{
-     background-color: #00ff00;
-    }
-    
-   
-    /* Add a gray background color and some padding to the footer */
-    footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
-   .pagingArea{
-    	text-align: center;
-    }
-  	.pagination {
-  display: inline-block;
-} 
-=======
 /* Remove the navbar's default rounded borders and increase the bottom margin */
 .navbar {
 	margin-bottom: 25px;
 	border-radius: 0;
 }
+
 
 /* Remove the jumbotron's default bottom margin */
 .jumbotron {
@@ -55,6 +23,7 @@
 	text-align: center;
 }
 
+
 /* Add a gray background color and some padding to the footer */
 footer {
 	background-color: #f2f2f2;
@@ -68,7 +37,6 @@ footer {
 .pagination {
 	display: inline-block;
 }
->>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
 
 .pagination a {
 	color: black;
