@@ -2,11 +2,11 @@ package HoH.controller;
 
 import java.util.ArrayList;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import HoH.model.MemberDAO;
+import HoH.model.FollowDAO;
 import HoH.model.MemberVO;
 
 public class GetDetailMemberController implements Controller {
@@ -21,7 +21,7 @@ public class GetDetailMemberController implements Controller {
 		}
 		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
 	    String id = memberVO.getId();
-		ArrayList<String> followingList = MemberDAO.getInstance().follwingList(id);
+		ArrayList<String> followingList = FollowDAO.getInstance().follwingList(id);
 		request.setAttribute("followingList", followingList);
 		return "/template/layout.jsp";
 	}

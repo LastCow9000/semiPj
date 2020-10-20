@@ -51,8 +51,9 @@
 	<p>
 		<a href="${path}/front?command=myScrapList">마이 스크랩</a>
 	</p>
+	
 	<p>
-		<a href="${pageContext.request.contextPath}/front?command=myList">마이 스크랩</a>
+		<a href="${path}/front?command=myFollowList">마이 팔로우</a>
 	</p>
 	</c:otherwise>
 	</c:choose>

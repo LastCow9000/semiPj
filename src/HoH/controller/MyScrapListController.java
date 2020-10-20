@@ -39,7 +39,7 @@ public class MyScrapListController implements Controller {
 		}
 		
 		request.setAttribute("scrapedPostVOList", scrapedPostVOList);
-		
+		System.out.println(scrapedPostVOList.get(1));
 		//url 보내주기
 		request.setAttribute("url", "/member/my-scrap-list.jsp");
 		

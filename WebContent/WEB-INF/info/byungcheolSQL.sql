@@ -171,3 +171,17 @@ alter table scrap_post add(regdate date default sysdate);
 alter table scrap_post RENAME COLUMN regdate to scraped_regdate;
 
 
+
+select m.id, m.nickname, b.title,b.regDate,b.content,  b.post_no, 
+			 b.view_count, b.like_count, m.ageName,b.post_no 
+	    from member m, board b where m.id = b.id and m.nickname in 
+	    (select f.nickname from member m, follow f 
+	         where m.id=f.id and m.id='donguk')
+	    order by b.post_no desc;
+select *
+from member m, board b 
+where m.id=b.id and 
+
+select b.post_no
+
+select * from dual;
