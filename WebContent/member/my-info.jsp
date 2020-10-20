@@ -83,9 +83,13 @@
 						<td><input type="submit" id="delete" value="삭제하기"></td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><input type="button"
-							value="회원정보 수정하기"
-							onclick="location.href='${pageContext.request.contextPath}/front?command=updatememberForm'">
+						<td colspan="2" align="center">
+						<input type="button" value="회원정보 수정하기" onclick="location.href='${pageContext.request.contextPath}/front?command=updatememberForm'">
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<input type="button" value="회원탈퇴" onclick="location.href='${pageContext.request.contextPath}/front?command=updatememberForm'">
 						</td>
 					</tr>
 				</table>
