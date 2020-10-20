@@ -43,6 +43,19 @@ public class HandlerMapping {
 			controller=new IdCheckResultController();
 		else if(command.contentEquals("nickCheckedResult")) 
 			controller=new NickCheckResultController();
+		else if(command.contentEquals("replywrite")) 
+			controller=new replyWriteController();
+		else if(command.contentEquals("replydelete")) 
+			controller=new replyDeleteController();
+		else if(command.contentEquals("replyupdate")) 
+			controller=new replyUpdateController();
+		//form에서 받아온 value
+		else if(command.contentEquals("findpasswordform")) 
+			controller=new FindPasswordFormController();
+		else if(command.contentEquals("findpasswordbyid")) 
+			controller=new FindPasswordByIdController();
+		else if(command.contentEquals("searchall")) 
+			controller=new SearchAllController();
 		else if(command.contentEquals("CheckscrapPost")) 
 			controller=new CheckScrapPostController();
 		else if(command.contentEquals("ScrapPost")) 
@@ -63,7 +76,6 @@ public class HandlerMapping {
 			controller=new LikeCancelController();
 		else if(command.contentEquals("ageSearch")) 
 			controller=new AgeSearchController();
-		
 		return controller;
 	}
 }

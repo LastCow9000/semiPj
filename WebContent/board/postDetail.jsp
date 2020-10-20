@@ -197,7 +197,7 @@ if(${requestScope.likeCheck==1}) {
 
 							<tr>
 								<td colspan="1">제목 ${requestScope.postVO.title}</td>
-								<td colspan="1" align="right">작성일 ${requestScope.postVO.regDate }</td>
+								<td colspan="1" align="right"><span class="glyphicon glyphicon-time"></span>작성일 ${requestScope.postVO.regDate }</td>
 							</tr>
 
 							<tr>
@@ -239,7 +239,7 @@ if(${requestScope.likeCheck==1}) {
 							</tr>
 
 							<tr>
-								<td colspan="3">댓글 폼 부분</td>
+								<td colspan="3"><c:import url="/board/reply.jsp"/></td>
 							</tr>
 
 						</table>

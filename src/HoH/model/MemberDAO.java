@@ -135,7 +135,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT COUNT(*) FROM member WHERE nickname=?";
+			String sql = "SELECT COUNT(*) FROM member WHERE nickName=?";
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, nickname);
@@ -149,6 +149,30 @@ public class MemberDAO {
 		}
 		
 		return flag;
+	}
+	public MemberVO findPasswordById(String id,String nickname) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		MemberVO vo=null;
+		try {
+			String sql  = "SELECT password,nickname from member where id=? and nickname=?";
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, nickname);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo=new MemberVO();
+				vo.setPassword(rs.getString(1));
+				vo.setNickName(nickname);			
+				}
+			
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		
+		return vo;
 	}
 	
 	//역대 핳게시글
