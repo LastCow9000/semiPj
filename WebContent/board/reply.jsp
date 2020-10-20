@@ -12,8 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
-	 function updateRep(rid, content){
+	 function updateRep(rNo, content){
 		 var htmls = "";
 			htmls += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
 			htmls += content;
@@ -25,108 +24,113 @@
 			htmls +='<input type="password" id="password" placeholder="비밀번호를 입력하세요">';
 			htmls +='</div>';
 			htmls +='<div class="col-sm-8" align="right">';
-			htmls += '<input type="button" class="btn btn-info btn-sm" value="확인" onclick="updateReply(' + rid + ')" style="padding-right:5px">';
-			htmls += '&nbsp;<input type="button" class="btn btn-info btn-sm" value="취소" onClick="showReplyList()">';
+			htmls += '<button class="btn btn-info btn-sm save" id="save" value="'+ rNo +'" style="padding-right:5px">저장</button>';
+			htmls += '<input type="button" class="btn btn-info" value="취소" onClick="document.location.reload()">';
 			htmls +='</div>';
 			htmls += '</span>';
 			htmls += '</span>';		
-			$('#repContent' + rid).html(htmls);
+			$('#repContent' + rNo).html(htmls);
 		} 
 	 
-	function updateReply(rid){
-		$(document).ready(function() {
-			if($("#password").val()==$("#repPassword").val()){
-			$.ajax({
-				type:"get",
-				url:"${pageContext.request.contextPath}/front",
-				data:"command=replyupdate&content="+ $("#editContent").val() +"&repNo="+ rid + "&password=" + $("#password").val(),
-				success:function(result){
-					if(result=="ok"){
-						location.href="${pageContext.request.contextPath}/front?command=detailpost&postNo="+$("#postNo").val();
-					}
-				}
+			$(document).ready(function() {
+				$(".save").click(function(){
+					alert($(this).val());
+			if($("#password").val()==$(".repPassword").val()){
+					$.ajax({
+						type:"get",
+						url:"${pageContext.request.contextPath}/front",
+						data:"command=replyupdate&content="+ $("#editContent").val() +"&repNo="+ rNo + "&password=" + $("#password").val(),
+						success:function(result){
+							if(result=="ok"){
+								location.href="${pageContext.request.contextPath}/front?command=detailpost&postNo="+$("#postNo").val();
+							}
+						}//success
+					});//ajax
+					}else{
+						alert("비밀번호를 확인하세요!");
+					}//else
+				});//click
+			});//ready
+			
+	/* 	// 댓글(게시글) 다시 보기위한 새로고침
+		function showReplyList(){
+			$(document).ready(function() {
+				location.href="${pageContext.request.contextPath}/front?command=detailpost&postNo="+$("#postNo").val();
 			});
-			}else{
-				alert("비밀번호를 확인하세요!");
-			}
-		});
-	}
-	
-	function showReplyList(){
+		} */
+			
+		//댓글삭제
 		$(document).ready(function() {
-			location.href="${pageContext.request.contextPath}/front?command=detailpost&postNo="+$("#postNo").val();
+			var options='width=450, height=200, top=185, left=250'; //팝업창 옵션
+			$("#replyListForm").on("click", ".deleteBtn", function(){
+				//alert($(this).val());
+				//alert($(".repPassword"+$(this).val()).val());
+				var repPassword=$(".repPassword"+$(this).val()).val();
+				window.open("${pageContext.request.contextPath}/board/repDeleteConfirm.jsp?repNo="+$(this).val()+"&repPassword="+repPassword, "delconfirmpopup", options);
+			});
 		});
-	}
-	
-	$(document).ready(function() {
-		var options='width=450, height=200, top=185, left=250';
-		$("#replyForm").on("click", "#btn_del", function(){
-			alert($(this).val());
-			window.open("${pageContext.request.contextPath}/board/repDeleteConfirm.jsp", "delconfirmpopup", options);
-		});
-	});
-</script>
-</head>
-<body>
-	<div class="container-fluid">
-		<div class="row content">
+	</script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row content">
 
 			<div class="col-sm-9">
 			<c:if test="${sessionScope.memberVO!=null}">
 				<h4>
 					댓글
-				</h4><br>
+				</h4>					
 				<form name="replyForm" action="${pageContext.request.contextPath}/front" method="post">
-					<div class="form-group">
-						<input type="text" name="nick" placeholder="작성자명" required="required">
-						<input type="password" name="password" placeholder="비밀번호(4자리)" required="required">
-						<textarea name="replyContent" id="replyContent" class="form-control" rows="3" required></textarea>
-					</div>
-					<input type="hidden" name="command" value="replywrite"> 
-					<input type="hidden" name="postNo" id="postNo" value="${requestScope.postVO.postNo}">
-					<button type="submit" class="btn btn-success btn-sm">작성</button>
-				</form>
-			</c:if>
-				<hr>
-				<p>
-					<span class="badge">${requestScope.replyCount}</span> 개의 댓글:
-				</p>
-				<br>
-				<div id="replyForm">
-				
-					<c:forEach items="${requestScope.replyList}" var="repList">
-						<div class="row">
-						
-							<div class="col-sm-2 text-center">
-								<img src="${pageContext.request.contextPath}/image/dankun.jpg" class="img-rounded" height="65" width="65" alt="profileImage">					
-							</div>
-							
-							<div class="col-sm-10">
-								<h4>
-									${repList.nick} 		repNo(프라이머리키):${repList.comNo}
-								</h4>
-								
-								<input type="hidden" id="repNo" name="repNo" value="${repList.comNo}">
-								<input type="hidden" id="repPassword" name="repPassword" value="${repList.password}">
-								<input type="hidden" id="btn-del" name="btn-del" value="$('#btn_del').val()">
-								<p id="repContent${repList.comNo}">${repList.content}</p>
-								<c:if test="${sessionScope.memberVO!=null}">
-								<button class="btn btn-info btn-sm" id="updateBtn" onclick="updateRep('${repList.comNo}','${repList.content}')">수정</button>
-								<button class="btn btn-danger btn-sm btn-delete"  id="btn_del" value="${repList.comNo}">삭제</button>
-								</c:if>
-							</div>
+						<div class="form-group">
+							<input type="text" name="nick" placeholder="작성자명" required="required">
+							<input type="password" name="password" placeholder="비밀번호(4자리)" required="required">
+							<textarea name="replyContent" id="replyContent" class="form-control" rows="3" required></textarea>
 						</div>
-						<br><br>
-					</c:forEach>
+						<input type="hidden" name="command" value="replywrite"> 
+						<input type="hidden" name="postNo" id="postNo" value="${requestScope.postVO.postNo}">
+						<button type="submit" class="btn btn-success">작성</button>
+					</form>
+					<br>
+					<br>
+				</c:if>
+					<p>
+						<span class="badge">${requestScope.replyCount}</span> 개의 댓글:
+					</p>
+					<br>
+					<div id="replyListForm">
 					
+						<c:forEach items="${requestScope.replyList}" var="repList">
+							<div class="row">
+							
+								<div class="col-sm-2 text-center">
+									<img src="${pageContext.request.contextPath}/image/dankun.jpg" class="img-rounded" height="65" width="65" alt="profileImage">					
+								</div>
+								
+								<div class="col-sm-10">
+									<h4>
+										${repList.nick} 		repNo(프라이머리키):${repList.comNo}
+									</h4>
+									
+									<input type="hidden" name="repNo" value="${repList.comNo}">
+									<input type="hidden" class="repPassword${repList.comNo}" name="repPassword" value="${repList.password}">
+									<p id="repContent${repList.comNo}">${repList.content}</p>
+									<br>
+									<c:if test="${sessionScope.memberVO!=null}">
+									<button class="btn btn-info updateBtn" onclick="updateRep('${repList.comNo}','${repList.content}')">수정</button>
+									<button class="btn btn-danger deleteBtn" value="${repList.comNo}">삭제</button>
+									</c:if>
+								</div>
+								
+							</div>
+						</c:forEach>
+					</div>
 				</div>
-			</div>
-			
-		</div>
-	</div>
-</body>
-</html>
 
+			</div>
+		</div>
+	</body>
+	</html>
+	
 
 
 

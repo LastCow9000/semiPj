@@ -2,9 +2,8 @@
 
 /* 내비게이션 바 두께*/
 .navbar {
-	padding-top: 10px;
-	border-radius: 10px;
-	height: 80px;
+	margin-bottom: 25px;
+	border-radius: 0;
 }
 
 /* 네비게이션 메뉴 가운데 정렬*/
@@ -61,12 +60,11 @@
 	color : #008080;
 	text-align: center;
 	font-style: italic;
-	font-family: 궁서;
-	font-size: 20px;
+	font-size: 15px;
 	font-weight: bold ;
 }
 
-.footer p>.corp{
+.footer>p>.corp{
 	padding-top:10px;
 	color : #008080;
 	text-align: center;
@@ -143,4 +141,16 @@ footer {
 .pagination a:hover:not(.active) {
 	background-color: #ddd;
 	border-radius: 5px;
+}
+
+.age {
+	width: 200px;
+	height:300px;
+}
+.progress{
+	width: 250px;
+}
+.rank{
+	width: 180px;
+	height: 180px;
 }
