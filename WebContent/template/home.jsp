@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col-sm-5">
 			<div class="panel panel-primary">
-				<div class="panel-heading">고조선 시대 Hot 게시물~!</div>
+				<div class="panel-heading">고조선 시대 HoH 게시물~!</div>
 				<form id="gojosun">
 					<table class="table hoh">
 						<thead>
@@ -41,8 +41,8 @@
 			</div>
 		</div>
 		<div class="col-sm-5">
-			<div class="panel panel-danger">
-				<div class="panel-heading">삼국 시대 Hot 게시물~!</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">삼국 시대 HoH 게시물~!</div>
 				<form id="threeKingdom">
 					<table class="table hoh">
 						<thead>
@@ -77,7 +77,7 @@
 	<div class="row">
 		<div class="col-sm-5">
 			<div class="panel panel-primary">
-				<div class="panel-heading">고려 시대 Hot 게시물~!</div>
+				<div class="panel-heading">고려 시대 HoH 게시물~!</div>
 				<div class="panel-body">
 					<form id="goryeo">
 						<table class="table hoh">
@@ -106,7 +106,7 @@
 		</div>
 		<div class="col-sm-5">
 			<div class="panel panel-primary">
-				<div class="panel-heading">조선 시대 Hot 게시물~!</div>
+				<div class="panel-heading">조선 시대 HoH 게시물~!</div>
 				<div class="panel-body">
 					<form id="josun-list.jsp">
 						<table class="table hoh">

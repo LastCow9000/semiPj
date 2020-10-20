@@ -2,8 +2,12 @@
 
 /* 내비게이션 바 두께*/
 .navbar {
-	margin-bottom: 25px;
-	border-radius: 0;
+	height: 80px;
+}
+
+/* 내비게이션 바 색 변경 */
+.navbar-default { 
+	background-color: #e74c3c; 
 }
 
 /* 네비게이션 메뉴 가운데 정렬*/
@@ -40,8 +44,8 @@
 .nav-item a{
 	padding-top:10px;
 	width: 180px;
-	height: 60px;
-	color : #008080;
+	height: 80px;
+	color : white;
 	text-align: center;
 	font-family: 궁서;
 	font-size: 35px;

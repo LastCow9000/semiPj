@@ -39,7 +39,7 @@
 
 							<tr>
 								<td colspan="3">본문 내용</td>
-							</tr>
+							</tr>	
 
 							<tr>
 								<td colspan="3">

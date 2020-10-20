@@ -253,3 +253,6 @@ ALTER TABLE member add(rank varchar2(10) default 'iron');
 select* from member;
 			
 
+SELECT *
+FROM   member
+WHERE  id='donguk'
