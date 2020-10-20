@@ -8,7 +8,6 @@ public class FindPasswordFormController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setAttribute("url", "/member/findpasswordbyid-form.jsp");
-		// TODO Auto-generated method stub
 		return "/template/layout.jsp";
 	}
 

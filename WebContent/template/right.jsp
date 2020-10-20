@@ -2,20 +2,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<<<<<<< HEAD
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-=======
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
-img {
+.age {
 	width: 200px;
 	height:300px;
 }
 </style>
->>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
 	<!--  로그인 오른쪽에 고정되는 화면 -->
 	<c:choose>
 	<c:when test="${sessionScope.memberVO==null }">
@@ -31,12 +28,10 @@ img {
 		<a href="${path}/front?command=registerForm">회원가입</a>
 	</p>	
 	<p>
-		<a href="${pageContext.request.contextPath}/front?command=findpasswordform">비밀번호 찾기</a>
+		<a href="${path}/front?command=findpasswordform">비밀번호 찾기</a>
 	</p>
 	
-	
 	</c:when>
-	
 	<c:otherwise>
 	<p align="center">
 		${sessionScope.memberVO.ageName } <br>
@@ -54,7 +49,7 @@ img {
 	
 	
 	<p>
-		<a href="${pageContext.request.contextPath}/front?command=myScrapList">마이 스크랩</a>
+		<a href="${path}/front?command=myScrapList">마이 스크랩</a>
 	</p>
 	
 	</c:otherwise>
@@ -67,16 +62,16 @@ img {
 	
 	<c:when test="${requestScope.rankList==null }">
 		 <c:if test="${requestScope.ageName =='조선시대'}">
-			<img src="조선시대.jpg"> 
+			<img class="age" src="${path}/image/조선시대.jpg"> 
 		 </c:if>
 		<c:if test="${requestScope.ageName =='고조선시대'}">
-			<img src="고조선시대.jpg"> 
+			<img class="age" src="${path}/image/고조선시대.jpg"> 
 		 </c:if>
 		 <c:if test="${requestScope.ageName =='고려시대'}">
-			<img src="고려시대1.jpg"> 
+			<img class="age" src="${path}/image/고려시대.jpg"> 
 		 </c:if>
 		 <c:if test="${requestScope.ageName =='삼국시대'}">
-			<img src="삼국시대.jpg"> 
+			<img class="age" src="${path}/image/삼국시대.jpg"> 
 		 </c:if>
 		
 	</c:when>

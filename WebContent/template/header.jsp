@@ -16,13 +16,8 @@
  -->
  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-<<<<<<< HEAD
     <div class="navbar-header">
       <a class="navbar-brand" href="${path}/front?command=home">HOH</a>
-=======
-	<div class="navbar-header">
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/front?command=home">HOH</a>
->>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
     </div>
     <ul class="nav navbar-nav">
       <li><a href="${path}/front?command=agelist&agename=고조선시대">고조선</a></li>

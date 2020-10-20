@@ -43,14 +43,12 @@ public class HandlerMapping {
 			controller=new IdCheckResultController();
 		else if(command.contentEquals("nickCheckedResult")) 
 			controller=new NickCheckResultController();
-<<<<<<< HEAD
 		else if(command.contentEquals("replywrite")) 
 			controller=new replyWriteController();
 		else if(command.contentEquals("replydelete")) 
 			controller=new replyDeleteController();
 		else if(command.contentEquals("replyupdate")) 
 			controller=new replyUpdateController();
-=======
 		//form에서 받아온 value
 		else if(command.contentEquals("findpasswordform")) 
 			controller=new FindPasswordFormController();
@@ -78,8 +76,6 @@ public class HandlerMapping {
 			controller=new LikeCancelController();
 		else if(command.contentEquals("ageSearch")) 
 			controller=new AgeSearchController();
->>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
-		
 		return controller;
 	}
 }

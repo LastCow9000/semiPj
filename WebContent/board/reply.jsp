@@ -60,7 +60,7 @@
 	
 	$(document).ready(function() {
 		var options='width=450, height=200, top=185, left=250';
-		$("#replyList").on("click", "#btn_del", function(){
+		$("#replyForm").on("click", "#btn_del", function(){
 			alert($(this).val());
 			window.open("${pageContext.request.contextPath}/board/repDeleteConfirm.jsp", "delconfirmpopup", options);
 		});
@@ -88,15 +88,16 @@
 				</form>
 				<br>
 				<br>
-		</c:if>
+			</c:if>
 				<p>
 					<span class="badge">${requestScope.replyCount}</span> 개의 댓글:
 				</p>
 				<br>
-				<div id="replyList">
+				<div id="replyForm">
 				
 					<c:forEach items="${requestScope.replyList}" var="repList">
 						<div class="row">
+						
 							<div class="col-sm-2 text-center">
 								<img src="${pageContext.request.contextPath}/image/dankun.jpg" class="img-rounded" height="65" width="65" alt="profileImage">					
 							</div>
@@ -111,18 +112,18 @@
 								<input type="hidden" id="btn-del" name="btn-del" value="$('#btn_del').val()">
 								<p id="repContent${repList.comNo}">${repList.content}</p>
 								<br>
-								
 								<c:if test="${sessionScope.memberVO!=null}">
 								<button class="btn btn-info" id="updateBtn" onclick="updateRep('${repList.comNo}','${repList.content}')">수정</button>
 								<button class="btn btn-danger btn-delete"  id="btn_del" value="${repList.comNo}">삭제</button>
 								</c:if>
-								
 							</div>
+							
 						</div>
 					</c:forEach>
 					
-					</div>
+				</div>
 			</div>
+			
 		</div>
 	</div>
 </body>
