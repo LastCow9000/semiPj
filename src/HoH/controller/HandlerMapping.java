@@ -76,6 +76,10 @@ public class HandlerMapping {
 			controller=new LikeCancelController();
 		else if(command.contentEquals("ageSearch")) 
 			controller=new AgeSearchController();
+		else if(command.contentEquals("deletememberform")) 
+			controller=new DeleteMemberFormController();
+		else if(command.contentEquals("deletememeber")) 
+			controller=new DeleteMemberController();
 		return controller;
 	}
 }

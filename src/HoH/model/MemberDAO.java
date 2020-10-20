@@ -279,6 +279,28 @@ public class MemberDAO {
 			closeAll(pstmt, con);
 		}
 	}
+	
+ 	// return : true - 잘 작동 / return :false - 잘 작동 X
+	public boolean DeleteMember(String sessionid, String password) throws SQLException {
+ 		boolean flag = false;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="delete FROM MEMBER WHERE ID=? AND PASSWORD=? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sessionid);
+			pstmt.setString(2, password);
+			int affectedRow = pstmt.executeUpdate();
+ 			//영향을 준 row가 있다면 affectedRow은 양수
+ 			if (affectedRow > 0) 
+ 				flag = true;
+		} finally {
+			closeAll(pstmt, con);
+		}
+		
+		return flag;
+	}
 }//class
 
 
