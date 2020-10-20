@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-
 
 public class MemberDAO {
 	private static MemberDAO dao=new MemberDAO();
