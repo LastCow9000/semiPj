@@ -76,6 +76,8 @@ public class HandlerMapping {
 			controller=new LikeCancelController();
 		else if(command.contentEquals("ageSearch")) 
 			controller=new AgeSearchController();
+		else if(command.contentEquals("myFollowList")) 
+			controller=new MyFollowListController();
 		return controller;
 	}
 }

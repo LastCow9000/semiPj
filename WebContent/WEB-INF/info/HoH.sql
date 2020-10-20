@@ -243,6 +243,7 @@ SELECT * FROM reply;
 ALTER TABLE board ADD(rep_count number default 0); 
 
 
+
 SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE, B.rep_count 
 FROM ( SELECT ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE, B.rep_count
 FROM BOARD B, MEMBER M WHERE B.ID=M.ID AND M.AGENAME='삼국시대') B , MEMBER M WHERE B.NICKNAME=M.NICKNAME and rnum between 1 and 3;
@@ -251,3 +252,4 @@ FROM BOARD B, MEMBER M WHERE B.ID=M.ID AND M.AGENAME='삼국시대') B , MEMBER 
 ALTER TABLE member add(rank varchar2(10) default 'iron');
 select* from member;
 			
+

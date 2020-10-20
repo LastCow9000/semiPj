@@ -74,13 +74,12 @@
 	<body>
 		<div class="container-fluid">
 			<div class="row content">
-
-			<div class="col-sm-9">
-			<c:if test="${sessionScope.memberVO!=null}">
-				<h4>
-					댓글
-				</h4>					
-				<form name="replyForm" action="${pageContext.request.contextPath}/front" method="post">
+				<div class="col-sm-9">
+				<c:if test="${sessionScope.memberVO!=null}">
+				    <h4>
+				    	댓글
+				    </h4>		
+					<form name="replyForm" action="${pageContext.request.contextPath}/front" method="post">
 						<div class="form-group">
 							<input type="text" name="nick" placeholder="작성자명" required="required">
 							<input type="password" name="password" placeholder="비밀번호(4자리)" required="required">
@@ -130,7 +129,6 @@
 		</div>
 	</body>
 	</html>
-	
 
 
 
