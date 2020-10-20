@@ -37,7 +37,8 @@ public class BoardDAO {
 			con.close();
 	}
 
-	// 핳게시물 받아오기
+	//핳게시물 받아오기
+	// -> postNo도 넘어오게 query문 수정
 	public ArrayList<PostVO> getListByLike() throws SQLException {
 		ArrayList<PostVO> list = new ArrayList<PostVO>();
 		Connection con = null;
@@ -45,16 +46,19 @@ public class BoardDAO {
 		ResultSet rs = null;
 		try {
 			con = dataSource.getConnection();
-			String sql = "SELECT b.title, b.rep_count, m.nickName, m.ageName FROM board b, member m WHERE b.id=m.id ORDER BY like_count DESC, view_count DESC";
+			String sql = "SELECT b.title, m.nickName, m.ageName, b.post_no,  b.rep_count "
+					+ "FROM board b, member m "
+					+ "WHERE b.id=m.id ORDER BY like_count DESC, view_count DESC";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				PostVO pvo = new PostVO();
 				MemberVO mvo = new MemberVO();
 				pvo.setTitle(rs.getString(1));
-				pvo.setReplyCount(rs.getInt(2));
-				mvo.setNickName(rs.getString(3));
-				mvo.setAgeName(rs.getString(4));
+				mvo.setNickName(rs.getString(2));
+				mvo.setAgeName(rs.getString(3));
+				 pvo.setPostNo(rs.getString(4));
+				 pvo.setReplyCount(rs.getInt(5));
 				pvo.setMemberVO(mvo);
 				list.add(pvo);
 			}
