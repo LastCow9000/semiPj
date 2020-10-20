@@ -53,3 +53,15 @@ footer {
 	background-color: #ddd;
 	border-radius: 5px;
 }
+
+.age {
+	width: 200px;
+	height:300px;
+}
+.progress{
+	width: 250px;
+}
+.rank{
+	width: 180px;
+	height: 180px;
+}
