@@ -33,8 +33,11 @@ CREATE TABLE reply (
    rep_no number primary key,
    post_no number not null,
    rep_content varchar2(500) not null,
+   nick varchar2(30) not null, 
+   password varchar2(30) not null,
    constraint fk_boardno foreign key(post_no) references board(post_no) on delete cascade
 );
+
 
 
 CREATE TABLE scrap_post (
@@ -65,10 +68,6 @@ INSERT INTO member(id, nickname, password, ageName) VALUES('yoeongsub', '잘생�
 INSERT INTO member(id, nickname, password, ageName) VALUES('yewool', '스텔라', 'milk', '고려시대');
 INSERT INTO member(id, nickname, password, ageName) VALUES('socold', '추워', 'dance_machine', '삼국시대');
 INSERT INTO member(id, nickname, password, ageName) VALUES('yomi', '요미세히', 'yomi', '조선시대');
-
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '1', 'yomi1');
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '2', 'yomi2');
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '3', 'yomi3');
 
 INSERT INTO scrap_post VALUES('1', 'donguk');
 INSERT INTO scrap_post VALUES('1', 'yewool');
@@ -177,18 +176,6 @@ INSERT INTO scrap_post VALUES('12', 'donguk');
 INSERT INTO scrap_post VALUES('36', 'donguk');
 INSERT INTO scrap_post VALUES('16', 'donguk');
 
-
---댓글 추가
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '1', 'reply4');
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '6', 'reply5');
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '33', 'reply6');
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '6', 'reply7');
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '5', 'reply8');
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '4', 'reply9');
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '16', 'reply9');
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '11', 'reply9');
-INSERT INTO reply(rep_no, post_no, rep_content) VALUES(reply_seq.nextval, '6', 'reply9');
-
 SELECT  b.*, m.*
 FROM  ( SELECT row_number() over(ORDER BY post_no DESC) AS rnum, post_no, id, title, view_count, content, like_count, TO_CHAR(regdate, 'YYYY-MM-DD') AS regdate
 FROM   board) b, member m
@@ -199,3 +186,64 @@ FROM (
 SELECT ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE
 FROM BOARD B, MEMBER M WHERE B.ID=M.ID AND M.AGENAME=?) B, MEMBER M 
 WHERE B.NICKNAME=M.NICKNAME and rnum between ? and ? order by rnum asc
+
+
+
+																							-- 주말이후 다시 적용할 것들 
+-- alter 구문
+/*
+1. 테이블 컬럼 추가하기(ALTER TABLE ADD)
+[문법] ALTER TABLE 테이블명 ADD(컬럼명 데이타타입(사이즈));
+( EX ) USER라는 테이블에 USER_NAME이라는 컬럼을 VARCHAR2(13) 타입으로 추가할 때
+-> ALTER TABLE USER ADD(USER_NAME VARCHAR2(13)); 
+
+2. 테이블 컬럼 수정하기(ALTER TABLE MODIFY)
+[문법] ALTER TABLE 테이블명 MODIFY(컬럼명 테이타타입(사이즈));
+( EX ) USER라는 테이블에 USER_AGE 라는 컬럼을 NUMBER(3) 타입으로 수정할 때
+-> ALTER TABLE USER MODIFY(USER_AGE NUMBER(3));
+ 
+3. 테이블 컬럼 삭제하기(ALTER TABLE DROP)
+[문법] ALTER TABLE 테이블명 DROP COLUMN 컬럼명
+( EX ) USER라는 테이블에 USER_NAME 이라는 컬럼을 삭제할 때
+-> ALTER TABLE USER DROP COLUMN USER_NAME;
+
+4. 테이블 컬럼 이름 변경하기(ALTER TABLE RENAME)
+[문법] ALTER TABLE 테이블명 RENAME COLUMN 원래컬럼명 TO 바꿀컬럼명;
+( EX ) USER라는 테이블에 USER_NAME 이라는 컬럼을 USER_FIRST_NAME으로 변경할 때
+-> ALTER TABLE USER RENAME COLUMN USER_NAME TO USER_FIRST_NAME;
+*/
+
+DROP TABLE reply;
+DROP SEQUENCE reply_seq;
+
+CREATE TABLE reply (
+   rep_no number primary key,
+   post_no number not null,
+   rep_content varchar2(500) not null,
+   nick varchar2(30) not null, 
+   password varchar2(30) not null,
+   constraint fk_boardno foreign key(post_no) references board(post_no) on delete cascade
+);
+
+CREATE SEQUENCE reply_seq nocache;
+
+--댓글 추가
+INSERT INTO reply(rep_no, post_no, rep_content, nick, password) VALUES(reply_seq.nextval, '2', 'yomi2', '나는왕이다2', '1111');
+INSERT INTO reply(rep_no, post_no, rep_content, nick, password) VALUES(reply_seq.nextval, '3', 'yomi3', '나는왕이다', '1111');
+INSERT INTO reply(rep_no, post_no, rep_content, nick, password) VALUES(reply_seq.nextval, '6', 'reply5', '나는왕이다', '1111');
+INSERT INTO reply(rep_no, post_no, rep_content, nick, password) VALUES(reply_seq.nextval, '33', 'reply6', '나는왕이다', '1111');
+INSERT INTO reply(rep_no, post_no, rep_content, nick, password) VALUES(reply_seq.nextval, '6', 'reply7', '나는왕이다', '1111');
+INSERT INTO reply(rep_no, post_no, rep_content, nick, password) VALUES(reply_seq.nextval, '5', 'reply8', '나는왕이다', '1111');
+INSERT INTO reply(rep_no, post_no, rep_content, nick, password) VALUES(reply_seq.nextval, '4', 'reply9', '나는왕이다', '1111');
+INSERT INTO reply(rep_no, post_no, rep_content, nick, password) VALUES(reply_seq.nextval, '16', 'reply9', '나는왕이다', '1111');
+INSERT INTO reply(rep_no, post_no, rep_content, nick, password) VALUES(reply_seq.nextval, '11', 'reply9', '나는왕이다', '1111');
+INSERT INTO reply(rep_no, post_no, rep_content, nick, password) VALUES(reply_seq.nextval, '6', 'reply9', '나는왕이다', '1111');
+
+SELECT * FROM reply;
+ALTER TABLE board ADD(rep_count number default 0); 
+
+
+SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE, B.rep_count 
+FROM ( SELECT ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE, B.rep_count
+FROM BOARD B, MEMBER M WHERE B.ID=M.ID AND M.AGENAME='삼국시대') B , MEMBER M WHERE B.NICKNAME=M.NICKNAME and rnum between 1 and 3;
+			

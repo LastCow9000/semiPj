@@ -14,6 +14,7 @@ public class getPostListByAgeController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//if(request.getParameter("") != null) return ""; //검색 컨트롤러 ㄱㄱ
 		String ageName = request.getParameter("agename");
 		int totalPostCount = BoardDAO.getInstance().getTotalPostCount(ageName);
 		String pageNo = request.getParameter("pageNo");
@@ -27,15 +28,47 @@ public class getPostListByAgeController implements Controller {
 		ListVO lvo=new ListVO(list, pagingBean);
 		if(ageName.contentEquals("고조선시대")) {
 			list = BoardDAO.getInstance().getListByAge(ageName,pagingBean);
+			if(list!=null) {
+				for (int i = 0; i < list.size(); i++) {
+					String postNo=list.get(i).getPostNo();
+					int replyCount=BoardDAO.getInstance().getReplyListCount(postNo);
+					BoardDAO.getInstance().updateReplyCount(replyCount, postNo);
+					list = BoardDAO.getInstance().getListByAge(ageName,pagingBean);
+				}
+			}
 			lvo.setList(list);
 		} else if(ageName.contentEquals("삼국시대")) {
 			list = BoardDAO.getInstance().getListByAge(ageName,pagingBean);
+			if(list!=null) {
+				for (int i = 0; i < list.size(); i++) {
+					String postNo=list.get(i).getPostNo();
+					int replyCount=BoardDAO.getInstance().getReplyListCount(postNo);
+					BoardDAO.getInstance().updateReplyCount(replyCount, postNo);
+					list = BoardDAO.getInstance().getListByAge(ageName,pagingBean);
+				}
+			}
 			lvo.setList(list);
 		} else if(ageName.contentEquals("고려시대")) {
 			list = BoardDAO.getInstance().getListByAge(ageName , pagingBean);
+			if(list!=null) {
+				for (int i = 0; i < list.size(); i++) {
+					String postNo=list.get(i).getPostNo();
+					int replyCount=BoardDAO.getInstance().getReplyListCount(postNo);
+					BoardDAO.getInstance().updateReplyCount(replyCount, postNo);
+					list = BoardDAO.getInstance().getListByAge(ageName,pagingBean);
+				}
+			}
 			lvo.setList(list);
 		} else if(ageName.contentEquals("조선시대")) {
 			list = BoardDAO.getInstance().getListByAge(ageName, pagingBean);
+			if(list!=null) {
+				for (int i = 0; i < list.size(); i++) {
+					String postNo=list.get(i).getPostNo();
+					int replyCount=BoardDAO.getInstance().getReplyListCount(postNo);
+					BoardDAO.getInstance().updateReplyCount(replyCount, postNo);
+					list = BoardDAO.getInstance().getListByAge(ageName,pagingBean);
+				}
+			}
 			lvo.setList(list);
 		}
 		
