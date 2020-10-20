@@ -6,9 +6,10 @@
     
     /* Remove the jumbotron's default bottom margin */ 
      .jumbotron {
-      margin-bottom: 25px;
-      height: 150px;
+      margin-bottom: 0px;
+      height: 100px;
     }
+    
     .sch {
      margin-bottom: 25px;
     }

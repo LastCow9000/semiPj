@@ -19,7 +19,7 @@ public class HandlerMapping {
 			controller=new registerFormController();
 		else if(command.contentEquals("register")) 
 			controller=new RegisterController();
-		else if(command.contentEquals("getdetailmember")) 
+		else if(command.contentEquals("getdetailmem ber")) 
 			controller=new GetDetailMemberController();
 		else if(command.contentEquals("updatememberForm")) 
 			controller=new UpdateMemberFormController();
