@@ -49,6 +49,9 @@ public class AgeSearchController implements Controller {
 			lvo.setList(list);
 			flag =true;
 		}
+		
+		ArrayList<PostVO> noticeList = BoardDAO.getInstance().getNoticeList();
+		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("listvo", lvo);
 		request.setAttribute("ageName", ageName);
 		request.setAttribute("totalPostCount", ageTotalPostCount);
@@ -57,8 +60,6 @@ public class AgeSearchController implements Controller {
 		request.setAttribute("ageName", ageName);
 		request.setAttribute("option", option);
 		request.setAttribute("word", word	);
-		System.out.println("ㅎㅇ");
-		System.out.println(lvo.toString());
 		return "/template/layout.jsp";
 	}
 

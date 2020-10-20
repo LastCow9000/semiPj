@@ -96,40 +96,6 @@ if(${requestScope.likeCheck==1}) {
          
       });//sracp_btn
       
-      
-      /* 팔로우 기능 */
-      $("#followAdd").click(function() {
-          if(${sessionScope.memberVO==null}) {
-                  alert("로그인한 사용자만 팔로우 가능!");
-                  return;
-               }
-          
-            if(confirm("팔로우하시겠습니까?")){
-             $.ajax({
-                  type:"get",
-                  url:"front",
-                  data:"command=follwerCheck&nickname=${requestScope.postVO.memberVO.nickName}&id=${sessionScope.memberVO.id}",            
-                  success:function(result){
-                     if(result != "ok"){
-                           alert("이미 팔로우했습니다!");}//if
-                     else
-                        {
-                        $.ajax({
-                           type:"get",
-                           url:"front",
-                           data:"command=follwerAdd&nickname=${requestScope.postVO.memberVO.nickName}&id=${sessionScope.memberVO.id}",            
-                           success:function(result){
-                              alert("팔로우 추가완료!");
-                           
-                        }
-                     })//ajax
-                     
-                     }//else
-               }//success
-            })//ajax
-          }//if
-      })//followAdd click
-      
    
       $("#likeBtn").click(function(){
          if(${sessionScope.memberVO==null}) {
@@ -194,10 +160,7 @@ if(${requestScope.likeCheck==1}) {
                      </c:if>
 
 
-                     <tr align="left">
-                        <td colspan="3">글번호 ${requestScope.rnum}</td>
-                     </tr>
-
+                   
                      <tr>
                         <td colspan="1">제목 ${requestScope.postVO.title}</td>
                         <td colspan="1" align="right"><span class="glyphicon glyphicon-time"></span>작성일 ${requestScope.postVO.regDate }</td>
@@ -240,11 +203,6 @@ if(${requestScope.likeCheck==1}) {
                            <button type="button" class="btn btn-default btn-sm" id="followAdd" ><span class="glyphicon glyphicon-plus"></span> 팔로우 </button>
                         </td>
                      </tr>
-
-                     <tr>
-                        <td colspan="3"><c:import url="/board/reply.jsp"/></td>
-                     </tr>
-
                   </table>
 
                </div>

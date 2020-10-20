@@ -39,6 +39,14 @@
 							<tbody>
 
 				<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
+				<tr bgcolor='red'>
+					<td>${requestScope.noticeList[0].postNo}</td>
+					<td>${requestScope.noticeList[0].title}</td>
+					<td>${requestScope.noticeList[0].memberVO.nickName}</td>
+					<td>${requestScope.noticeList[0].likeCount}</td>
+					<td>${requestScope.noticeList[0].viewCount}</td>
+					<td>${requestScope.noticeList[0].regDate}</td>
+				</tr>
 							<c:forEach items="${requestScope.listvo.list }" var="list" varStatus="status">
 							<tr>
 								<td>
@@ -76,52 +84,85 @@
 						<button type="submit" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/front?command=writepostform'">글쓰기</button>
 					</div>
 					</c:if>
-					<%-- 페이징 처리 --%>
-					<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
-					<div class="pagingArea">
-						<div class="pagination">
-							<c:if test="${pb.previousPageGroup}">
-								<a
-									href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
-							</c:if>
-							<c:forEach var="i" begin="${pb.startOfPageGroup}"
-								end="${pb.endOfPageGroup}">
-								<c:choose>
-									<c:when test="${pb.nowPage!=i}">
-										<c:choose>
-											<c:when test="${requestScope.flag&&requestScope.ageName!=null}">
-												<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
-											</c:when>
-											<c:otherwise>
-												<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
-											</c:otherwise>
-										</c:choose>
-									<c:choose>
-										<c:when test="${requestScope.flag&&requestScope.ageName!=null}">
-											<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
-										</c:when>
-										<c:when test="${requestScope.flag }">
-										<a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
-										</c:when>
-										<c:otherwise>
-										<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
-										</c:otherwise>
-									</c:choose>
-									</c:when>
-									<c:otherwise>
-										<a href="#" class="active">${i}</a>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-							<c:if test="${pb.nextPageGroup}">
-								<a
-									href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
-							</c:if>
+					<c:if test="${sessionScope.memberVO.id =='adminmts'}">
+					<div align="right">
+						<button type="submit" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/front?command=writeNotice'">공지사항 작성</button>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+					</c:if>
+					   <%-- 페이징 처리 --%>
+               <c:set var="pb" value="${requestScope.listvo.pagingBean}" />
+               <div class="pagingArea">
+                  <div class="pagination">
+                  <c:choose>
+                    <c:when test="${requestScope.flag&&requestScope.ageName!=null}">
+                      <%-- 왼쪽 페이지 이동 --%>
+                     		<c:if test="${pb.previousPageGroup}">
+                        		<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.startOfPageGroup-1}">&laquo;동</a>
+                     		</c:if>
+                    </c:when>
+                     <c:when test="${requestScope.flag }">
+                       <%-- 왼쪽 페이지 이동 --%>
+                     		<c:if test="${pb.previousPageGroup}">
+                        		<a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.startOfPageGroup-1}">&laquo;세</a>
+                     		</c:if>
+                     </c:when>
+                     <c:otherwise>
+                   <%-- 왼쪽 페이지 이동 --%>
+                     		<c:if test="${pb.previousPageGroup}">
+                        		<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.startOfPageGroup-1}">&laquo;일</a>
+                     		</c:if>
+                     		</c:otherwise>
+                     		</c:choose>
+                     <c:forEach var="i" begin="${pb.startOfPageGroup}" end="${pb.endOfPageGroup}">
+                        <c:choose>
+                           <c:when test="${pb.nowPage!=i}">
+                           <c:choose>
+                              <c:when test="${requestScope.flag&&requestScope.ageName!=null}">
+                              	
+                                 <a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}동</a>
+                                 
+                              </c:when>
+                              <c:when test="${requestScope.flag }">
+                              <a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}세</a>
+                              </c:when>
+                              <c:otherwise>
+                             
+                              <a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}일</a>
+                              
+                              </c:otherwise>
+                           </c:choose>
+                           </c:when>
+                           <c:otherwise>
+                              <a href="#" class="active">${i}</a>
+                           </c:otherwise>
+                        </c:choose>
+                     </c:forEach>
+                      <c:choose>
+                    <c:when test="${requestScope.flag&&requestScope.ageName!=null}">
+                         <%-- 오른쪽 페이지 이동 --%>
+                     <c:if test="${pb.nextPageGroup}">
+                        <a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.endOfPageGroup+1}">&raquo;동</a>
+                     </c:if>
+                    </c:when>
+                     <c:when test="${requestScope.flag }">
+                          <%-- 오른쪽 페이지 이동 --%>
+                     <c:if test="${pb.nextPageGroup}">
+                        <a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.endOfPageGroup+1}">&raquo;세</a>
+                     </c:if>
+                     </c:when>
+                     <c:otherwise>
+                       <%-- 오른쪽 페이지 이동 --%>
+                     <c:if test="${pb.nextPageGroup}">
+                        <a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.endOfPageGroup+1}">&raquo;일</a>
+                     </c:if>
+                     		</c:otherwise>
+                     		</c:choose>
+                 
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </body>
 </html>

@@ -110,11 +110,7 @@ public class BoardDAO {
 		return list;
 	}
 
-	/**
-	 * 기능 : 시대 별 게시글 상세보기 기능 postDetailByNo(String postNo) : PostVO
-	 * 
-	 * @throws SQLException
-	 */
+	 //기능 : 시대 별 게시글 상세보기 기능 postDetailByNo(String postNo) : PostVO
 	public PostVO postDetailByNo(String postNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -641,4 +637,202 @@ public class BoardDAO {
 		}
 		return list;
 	}
+	
+	// 작성자 닉네임으로 속한 시대 불러옴
+	public String getAgeNameByNickname(String nickName) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String ageName = null;
+		try {
+			con = getConnection();
+			String sql = "select ageName from MEMBER where nickname =?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nickName);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				ageName = rs.getString(1);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return ageName;
+	}
+	
+	// 공지사항 작성
+	public int wirteNoticePost(PostVO postVO) throws SQLException {
+		int latestPostNo = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = dataSource.getConnection();
+			String sql = "insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,?,?,?,sysdate)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, postVO.getMemberVO().getId());
+			pstmt.setString(2, postVO.getTitle());
+			pstmt.setString(3, postVO.getContent());
+			pstmt.executeUpdate();
+			pstmt.close();
+
+			sql = "SELECT notice_board_seq.currval FROM dual";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				latestPostNo = rs.getInt(1);
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+
+		return latestPostNo;
+	}
+	
+	// 공지사항 리스트 불러오기
+		public ArrayList<PostVO> getNoticeList() throws SQLException {
+			ArrayList<PostVO> list = new ArrayList<PostVO>();
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = getConnection();
+				StringBuilder sql = new StringBuilder();
+				sql.append("select b.post_no,B.TITLE,M.NICKNAME,b.like_count,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE ");
+				sql.append("from notice_board b , member m ");
+				sql.append("where b.id=m.id order by post_no desc ");
+				pstmt = con.prepareStatement(sql.toString());
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					PostVO pvo = new PostVO();
+					MemberVO mvo = new MemberVO();
+					pvo.setPostNo(rs.getString(1));
+					pvo.setTitle(rs.getString(2));
+					mvo.setNickName(rs.getString(3));
+					pvo.setMemberVO(mvo);
+					pvo.setLikeCount(rs.getInt(4));
+					pvo.setViewCount(rs.getInt(5));
+					pvo.setRegDate(rs.getString(6));
+					list.add(pvo);
+				}
+
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return list;
+		}
+		
+		// 공지사항 전체 리스트 불러오기
+		public ArrayList<PostVO> getAllNoticeList(PagingBean pb) throws SQLException {
+			ArrayList<PostVO> list = new ArrayList<PostVO>();
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = getConnection();
+				StringBuilder sql = new StringBuilder();
+				sql.append("SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE ");
+				sql.append("FROM ( ");
+				sql.append(
+						"SELECT ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE ");
+				sql.append("FROM notice_board B, MEMBER M ");
+				sql.append("WHERE B.ID=M.ID ");
+				sql.append(") B , MEMBER M ");
+				sql.append("WHERE B.NICKNAME=M.NICKNAME and rnum between ? and ? ");
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, pb.getStartRowNumber());
+				pstmt.setInt(2, pb.getEndRowNumber());
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					PostVO pvo = new PostVO();
+					MemberVO mvo = new MemberVO();
+					pvo.setRnum(rs.getString(1));
+					pvo.setPostNo(rs.getString(2));
+					pvo.setTitle(rs.getString(3));
+					mvo.setNickName(rs.getString(4));
+					pvo.setMemberVO(mvo);
+					pvo.setLikeCount(rs.getInt(5));
+					pvo.setViewCount(rs.getInt(6));
+					pvo.setRegDate(rs.getString(7));
+					list.add(pvo);
+				}
+
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return list;
+		}
+		
+		// 공지사항 총 게시물 수
+		public int totalNoticeCount() throws SQLException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			int totalNoticeCount = 0;
+			try {
+				con = getConnection();
+				String sql = "select count(*) from notice_board";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					totalNoticeCount = rs.getInt(1);
+				}
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return totalNoticeCount;
+		}
+		
+		// 공지사항 번호로 공지사항 상세보기
+		public PostVO noticeDetailByNo(String postNo) throws SQLException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			PostVO postVO = null;
+			try {
+				con = dataSource.getConnection();
+				StringBuilder sql = new StringBuilder();
+				sql.append("select m.id, m.nickname, b.title,b.regDate,b.content, ");
+				sql.append("b.view_count, b.like_count ");
+				sql.append("FROM member m, notice_board b ");
+				sql.append("WHERE m.id = b.id AND b.post_no=?");
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setString(1, postNo);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					MemberVO memberVO = new MemberVO();
+					memberVO.setId(rs.getString("id"));
+					memberVO.setNickName(rs.getString("nickname"));
+					postVO = new PostVO();
+					postVO.setPostNo(postNo);
+					postVO.setTitle(rs.getString("title"));
+					postVO.setContent(rs.getString("content"));
+					postVO.setRegDate(rs.getString("regDate"));
+					postVO.setViewCount(rs.getInt("view_count"));
+					postVO.setLikeCount(rs.getInt("like_count"));
+					postVO.setMemberVO(memberVO);
+				}
+
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+
+			return postVO;
+
+		}
+		
+		// 공지사항 조회수 증가
+		public void updateNoticeViewCount(String postNo) throws SQLException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = getConnection();
+				String sql = "update notice_board set view_count=view_count+1 where post_no=? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, postNo);
+				pstmt.executeUpdate();
+			} finally {
+				closeAll(pstmt, con);
+			}
+
+		}
+		
 }// class

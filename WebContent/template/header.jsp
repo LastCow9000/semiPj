@@ -24,6 +24,7 @@
       <li><a href="${path}/front?command=agelist&agename=삼국시대">삼국</a></li>
       <li><a href="${path}/front?command=agelist&agename=고려시대">고려</a></li>
       <li><a href="${path}/front?command=agelist&agename=조선시대">조선</a></li>
+      <li><a href="${path}/front?command=noticeList&agename=공지사항">공지사항</a></li>
     </ul>
     </div>
 </nav>

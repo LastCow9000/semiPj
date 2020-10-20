@@ -49,12 +49,12 @@ public class PagingBean {
 		return totalPage;
 	}
 	private int getTotalPageGroup() {
-		int num = getTotalPage()%postCountPerPage;
+		int num = getTotalPage()%pageCountPerPageGroup;
 		int totalPageGroup=0;
 		if(num==0) {
-			totalPageGroup = getTotalPage()/postCountPerPage;
+			totalPageGroup = getTotalPage()/pageCountPerPageGroup;
 		}else {
-			totalPageGroup= getTotalPage()/postCountPerPage+1;
+			totalPageGroup= getTotalPage()/pageCountPerPageGroup+1;
 		}
 		return totalPageGroup;
 	}
