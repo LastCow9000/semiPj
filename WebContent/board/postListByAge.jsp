@@ -93,7 +93,7 @@
 								<c:choose>
 									<c:when test="${pb.nowPage!=i}">
 										<c:choose>
-											<c:when test="${requestScope.flag}">
+											<c:when test="${requestScope.flag&&requestScope.ageName!=null}">
 												<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
 											</c:when>
 											<c:otherwise>
