@@ -1,8 +1,6 @@
 package HoH.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import HoH.model.FollowDAO;
 import HoH.model.MemberVO;
 import HoH.model.PostVO;
-import HoH.model.ScrapDAO;
 
 public class MyFollowListController implements Controller {
 

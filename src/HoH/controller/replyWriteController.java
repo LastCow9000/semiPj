@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import HoH.model.BoardDAO;
-import HoH.model.MemberVO;
 import HoH.model.PostVO;
 import HoH.model.ReplyVO;
 

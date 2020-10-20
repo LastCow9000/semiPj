@@ -154,7 +154,7 @@ public ArrayList<PostVO> getMyFollowPostList(String id)
             postVO.setMemberVO(memberVO);
             list.add(postVO);
          }
-         System.out.println(postVO.getPostNo());
+   
       } finally {
          closeAll(rs, pstmt, con);
       }
