@@ -25,45 +25,17 @@ public class FollowDAO {
 		return dataSource.getConnection();
 	}
 
-<<<<<<< HEAD
+	public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException {
+	      if (pstmt != null)
+	         pstmt.close();
+	      if (con != null)
+	          con.close();
+   }
    public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection con) throws SQLException {
       if (rs != null)
          rs.close();
-      if (pstmt != null)
-         pstmt.close();
-      if (con != null)
-         con.close();
+      closeAll(pstmt, con);
    }
-   
-  
-   public void follwerAdd(String id,String nickname) throws SQLException {
-	   Connection con=null;
-	      PreparedStatement pstmt=null;
-	      try {
-	         con=dataSource.getConnection();
-	         String sql="insert into follow(id,nickname) values(?,?)";
-	         pstmt=con.prepareStatement(sql);
-	         pstmt.setString(1, id);
-	         pstmt.setString(2, nickname);
-	         pstmt.executeUpdate();
-	      }finally {
-	         closeAll(pstmt, con);
-	      }
-   }
-=======
-	public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException {
-		closeAll(null, pstmt, con);
-	}
->>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
-
-	public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection con) throws SQLException {
-		if (rs != null)
-			rs.close();
-		if (pstmt != null)
-			pstmt.close();
-		if (con != null)
-			con.close();
-	}
 
 	/**
 	 * 기능 : 시대 별 게시글 상세보기 기능 postDetailByNo(String postNo) : PostVO
@@ -109,7 +81,6 @@ public class FollowDAO {
 		return flag;
 	}
 
-<<<<<<< HEAD
 public String followDelete(String nickname) throws SQLException {
 	String flag="fail";
 	Connection con = null;
@@ -124,7 +95,10 @@ public String followDelete(String nickname) throws SQLException {
 			flag="ok";
 	}finally {
 		closeAll(pstmt, con);
-=======
+	}
+	return flag;
+}
+		
 	public ArrayList<String> follwingList(String id) throws SQLException {
 		ArrayList<String> list = new ArrayList<String>();
 		Connection con = null;
@@ -146,26 +120,8 @@ public String followDelete(String nickname) throws SQLException {
 		}
 
 		return list;
->>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
 	}
-<<<<<<< HEAD
-	return flag;
-=======
-
-	public void followDelete(String nickname) throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			String sql = "delete follow WHERE nickname=?";
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, nickname);
-			pstmt.executeUpdate();
-		} finally {
-			closeAll(pstmt, con);
-		}
-	}
-
+	// 팔로우 한 사람들의 게시글을 불러오는 리스트
 	public ArrayList<PostVO> getMyFollowPostList(String id) throws SQLException {
 		ArrayList<PostVO> list = new ArrayList<PostVO>();
 		PostVO postVO = null;
@@ -233,7 +189,7 @@ public String followDelete(String nickname) throws SQLException {
 		}
 		return totalCount;
 	}
-	//페이징을 위한 
+	//페이징을 위한 것(rnum 때문)
 	public ArrayList<PostVO> getMyFollowPostingList(String id,PagingBean pagingBean) throws SQLException {
 		ArrayList<PostVO> list = new ArrayList<PostVO>();
 		PostVO postVO = null;
@@ -276,6 +232,5 @@ public String followDelete(String nickname) throws SQLException {
 		}
 
 		return list;
-	}// getMyScrapPostList
->>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
+	}
 }
