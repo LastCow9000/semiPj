@@ -20,6 +20,10 @@ function search() {
       var agename = "${requestScope.ageName}"
       var option = $("#searchText option:selected").val();
       var word = $('#text').val();
+      if(word==="") {
+			alert("검색할 단어를 입력하세요");
+			return false;
+      }
    if(${requestScope.ageName==null}) { 
       location.href="${pageContext.request.contextPath}/front?command=searchall&option="+option+"&word="+word;
    } else {
