@@ -9,9 +9,9 @@
 <title>HOH 메인화면</title>
 <%-- bootstrap 에서 가져온 링크들  --%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<%-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">--%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<%-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--%>
 <%-- css 경로 설정 --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css"/>
 <script type="text/javascript">
@@ -42,7 +42,7 @@ function search() {
 <%-- header 상단 메뉴바 --%>
 <c:import url="/template/header.jsp"></c:import>
 
-<body bgcolor="red">
+<body bgcolor="#dbd8e3">
 
 <%-- 검색기능 메인화면에서는 감추고 테마별 게시판은 등장 --%>
 <div class="sch col-sm-6 col-sm-offset-6">

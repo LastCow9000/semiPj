@@ -20,26 +20,24 @@
          <div class="row">
             <div class="col-sm-10">
                <div class="panel panel-primary">
+     				<div class="panel-heading">${requestScope.postVO.memberVO.ageName}</div>
+               
                   <form action="${pageContext.request.contextPath}/front" method="post">
                   <table class="table hoh">
-                     
-                     <tr align="left">
-                        <td colspan="3">글번호 ${requestScope.rnum}</td>
+
+                     <tr>
+                        <td colspan="2">제목&nbsp;&nbsp;<input type="text" name="title" value=" ${requestScope.postVO.title}" size="60"></td>
+						<td colspan="1" align="right"><span class="glyphicon glyphicon-time"></span> 작성일 : ${requestScope.postVO.regDate }</td>
                      </tr>
 
                      <tr>
-                        <td colspan="1">제목&nbsp;&nbsp;<input type="text" name="title" value=" ${requestScope.postVO.title}" size="60"></td>
-                        <td colspan="1" align="right">작성일 ${requestScope.postVO.regDate }</td>
-                     </tr>
-
-                     <tr>
-                        <td colspan="1" align="left">작성자 ${requestScope.postVO.memberVO.nickName }</td>
-                        <td colspan="1" align="right">조회수 ${requestScope.postVO.viewCount }</td>
-                        <td colspan="1" align="right">좋아요수 ${requestScope.postVO.likeCount }</td>
-                     </tr>
-
-                     <tr>
-                        <td colspan="3">본문 내용</td>
+						<td colspan="1" align="left">작성자 <strong>${requestScope.postVO.memberVO.nickName}</strong></td>
+						<td colspan="2" align="right">
+						<span class="glyphicon glyphicon-user"></span>
+						<strong>${requestScope.postVO.viewCount}</strong>  | 
+						<span class="glyphicon glyphicon-thumbs-up"></span>
+						<strong>${requestScope.postVO.likeCount }</strong>
+						</td>
                      </tr>
 
                      <tr>
@@ -52,10 +50,9 @@
                      <td colspan="3" class="btnArea">
                         <input type="hidden" name="command" value="updatepost">
                         <input type="hidden" name="postNo" value="${requestScope.postVO.postNo}">
-                        <button type="submit" class="btn">수정 완료</button>
+                        <button type="submit" class="btn btn-info">수정 완료</button>
                      </td>
                      </tr>
-                  
                   </table>
                   </form>
                </div>

@@ -1,87 +1,5 @@
 /* Remove the navbar's default rounded borders and increase the bottom margin */
 
-/* 내비게이션 바 두께*/
-.navbar {
-	height: 80px;
-}
-
-/* 네비게이션 메뉴 가운데 정렬*/
-.navbar-nav.navbar-center {
-    position: absolute;
-    left: 35%;
-    transform: translatex(-30%);
-}	
-
-/* header 로고를 위해 그 공간 padding 없애기 */
-.navbar-header>.navbar-brand{
-	padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px; 
-}
-
-/* header 로고 image 크기 */
-.logo{
-	padding-top: 0px;
-	padding-left: 30px;
-	padding-bottom: 0px;
-	width: 100px;
-	height: 70px;
-}
-
-/* body 색 */
-.body {
-	background-color: red !important;
-}
-
-
-/* header munu a tag */
-.nav-item a{
-	padding-top:10px;
-	width: 180px;
-	height: 80px;
-	color : #008080;
-	text-align: center;
-	font-family: 궁서;
-	font-size: 35px;
-	font-weight: bold ;
-	cursor: "pointer";
-}
-
-.nav-item:hover{
-	background-color: #CCCCFF; 
-}
-
-/* footer p tag*/
-
-.footer p{
-	padding-top:10px;
-	color : #008080;
-	text-align: center;
-	font-style: italic;
-	font-size: 15px;
-	font-weight: bold ;
-}
-
-.footer>p>.corp{
-	padding-top:10px;
-	color : #008080;
-	text-align: center;
-	font-size: 15px;
-	font-weight: bold ;
-}
-
-
-
-/* header menu image 내비게이션바에 꽉 차게 */
-.navbar-nav>li>.img_pad {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px; 
-}
-
-
 /* Remove the jumbotron's default bottom margin */
 .jumbotron {
 	margin-bottom: 25px;
@@ -92,23 +10,23 @@
 	margin-bottom: 25px;
 }
 
-
 /* table th center 정리*/
 th {
 	text-align: center;
 }
 
-
-
 /*게시글 상단바부분 CSS */
 .panel-primary>.panel-heading {
-	border-color: #000000;
-	background-color: #7c8383;
-	font-family: "돋음";
-	text-align: center;
+   border-color: #000000;
+   background-color: #394867;
+   font-family: "돋음";
+   text-align: center;
 }
 
-
+/*게시글 박스전체부분 */
+.panel-primary {
+    border-color: #394867;
+}
 /* Add a gray background color and some padding to the footer */
 footer {
 	height: 200px;
@@ -153,3 +71,127 @@ footer {
 	width: 180px;
 	height: 180px;
 }
+
+
+/**** 예울 수정 ****/
+
+/* postDetail 부분 수정 */
+
+/* FOOTER */
+
+.footer{
+	background-color : #9ba4b4;
+}
+
+.footer p{
+	padding-top:10px;
+	color : white;
+	text-align: center;
+	font-style: italic;
+	font-size: 15px;
+}
+
+.footer p>.corp{
+	font-size: 10px;
+}
+
+
+/* HEADER */
+
+/* 내비게이션 바 두께*/
+.navbar {
+	height: 80px;
+	background-color: #14274e;
+}
+
+/* 네비게이션 메뉴 가운데 정렬*/
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 35%;
+    transform: translatex(-30%);
+}	
+
+/* header 로고를 위해 그 공간 padding 없애기 */
+.navbar-header>.navbar-brand{
+	padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px; 
+}
+
+/* header 로고 image 크기 */
+.logo{
+	padding-top: 10px;
+	padding-left: 30px;
+	padding-bottom: 0px;
+	width: 150px;
+	height: 60px;
+}
+
+
+/* header munu a tag */
+
+.nav-item a{
+	margin-top: 10px;
+	width: 180px;
+	height: 100%;
+	color : white;
+	text-align: center;
+	font-family: 궁서;
+	font-size: 35px;
+	font-weight: bold ;
+	cursor: "pointer";
+}
+
+.navbar .navbar-nav > li > a:hover,
+.navbar .navbar-nav > li > a:focus,
+.navbar .navbar-nav > li > a:active  {
+	background-color: #394867; 
+    color: #f1f6f9;
+}
+
+.navbar .navbar-nav > li > a:hover:not(.active) {
+	background-color: #394867;
+}
+
+
+/* header menu image 내비게이션바에 꽉 차게 */
+.navbar-nav>li>.img_pad {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px; 
+}
+
+
+/* postDetail에서 쓰는 btn */
+.postbtn td{
+	text-align: right;
+}
+
+
+/* 댓글 hr */
+hr.reply {
+	color : #394867;
+}
+
+hr.devideHr {
+	border-top: 3px double #394867;
+}
+
+
+/* 글쓰기 제목 너비 */
+#writePost input[type=text]{
+	width: 90%;
+	float : center;
+}
+
+/**** 예울 수정 끝 ****/
+
+
+
+
+
+
+
+
