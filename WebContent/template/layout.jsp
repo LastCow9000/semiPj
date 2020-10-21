@@ -17,7 +17,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#selectBox").submit(function () {
-		//alert("gdgd");
 		search();
 		return false;
 	});	
@@ -52,6 +51,7 @@ function search() {
 <body bgcolor="red">
 
 <%-- 검색기능 메인화면에서는 감추고 테마별 게시판은 등장 --%>
+<c:if test="${requestScope.ageName != '공지사항'}">
 <div class="sch col-sm-6 col-sm-offset-6">
 <form class="form-inline" id="selectBox" >
    <select style="width:80px; height:30px;" id="searchText">
@@ -62,7 +62,7 @@ function search() {
     <button type="submit" class="btn btn-danger" >Search</button>
   </form>
 </div>
-
+</c:if>
 <%-- 메인화면 --%>
 <div class="container">    
   <div class="row">
