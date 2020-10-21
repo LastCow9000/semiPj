@@ -115,7 +115,7 @@
 		// 닉네임 중복확인해서 사용가능 상태일때만 가입되도록 한다.
 		 $("#registerForm").submit(function() {
 			if(checkNick==""){
-				alert("닉네임 중복확인하세요!");
+				alert("닉네임을 확인해주세요!");
 				return false;
 			}
 		});
