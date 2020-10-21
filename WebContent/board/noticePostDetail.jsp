@@ -142,14 +142,14 @@ if(${requestScope.likeCheck==1}) {
                         <tr align="right">
                            <td colspan="3" class="btnArea">
                               <form name="deleteForm" action="${pageContext.request.contextPath}/front" method="post">
-                                 <input type="hidden" name="command" value="deletepost">
+                                 <input type="hidden" name="command" value="deleteNoticePost">
                                  <input type="hidden" name="no" value="${requestScope.postVO.postNo}"> 
                                  <input type="hidden" name="nickName" value="${requestScope.postVO.memberVO.nickName }"> 
                                  <input  type="submit" class="btn" value="삭제">
                               </form>
                               <c:if test="${requestScope.postVO.memberVO.id == sessionScope.memberVO.id}">
                                <form name="updateForm" action="${pageContext.request.contextPath}/front" method="post">
-                                 <input type="hidden" name="command" value="updateform">
+                                 <input type="hidden" name="command" value="updateNoticeform">
                                  <input type="hidden" name="no" value="${requestScope.postVO.postNo}"> 
                                  <input type="hidden" name="rnum" value="${requestScope.rnum}"> 
                                  <input type="submit" class="btn" value="수정">

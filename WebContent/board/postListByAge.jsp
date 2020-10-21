@@ -33,11 +33,10 @@
 				</tr>
 							<c:forEach items="${requestScope.listvo.list }" var="list" varStatus="status">
 							<tr>
-								<td>
-									${requestScope.totalPostCount-((pb.nowPage-1)*pb.postCountPerPage+status.index)}
-								</td>
-								<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${requestScope.totalPostCount-((pb.nowPage-1)*8+status.index)}">
-								${list.title} <span class="badge">${list.replyCount}</span>
+								<td>${requestScope.totalPostCount-((pb.nowPage-1)*pb.postCountPerPage+status.index)}</td>
+								<td><a
+									href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${requestScope.totalPostCount-((pb.nowPage-1)*8+status.index)}">
+										${list.title} <span class="badge">${list.replyCount}</span>
 								</a></td>
 										<td>${list.memberVO.nickName}</td>
 										<td>${list.likeCount}</td>
@@ -67,19 +66,19 @@
                     <c:when test="${requestScope.flag&&requestScope.ageName!=null}">
                       <%-- 왼쪽 페이지 이동 --%>
                      		<c:if test="${pb.previousPageGroup}">
-                        		<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.startOfPageGroup-1}">&laquo;동</a>
+                        		<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
                      		</c:if>
                     </c:when>
                      <c:when test="${requestScope.flag }">
                        <%-- 왼쪽 페이지 이동 --%>
                      		<c:if test="${pb.previousPageGroup}">
-                        		<a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.startOfPageGroup-1}">&laquo;세</a>
+                        		<a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
                      		</c:if>
                      </c:when>
                      <c:otherwise>
                    <%-- 왼쪽 페이지 이동 --%>
                      		<c:if test="${pb.previousPageGroup}">
-                        		<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.startOfPageGroup-1}">&laquo;일</a>
+                        		<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
                      		</c:if>
                      		</c:otherwise>
                      		</c:choose>
@@ -96,9 +95,7 @@
                               <a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
                               </c:when>
                               <c:otherwise>
-                             
                               <a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
-                              
                               </c:otherwise>
                            </c:choose>
                            </c:when>

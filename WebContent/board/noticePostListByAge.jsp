@@ -31,90 +31,67 @@
 									<th>좋아요</th>
 									<th>조회수</th>
 									<th>게시일</th>
-									<th>
-							</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-
-							<c:forEach items="${requestScope.listvo.list }" var="list" varStatus="status">
-							<tr>
-								<td>
-									${requestScope.totalPostCount-((pb.nowPage-1)*pb.postCountPerPage+status.index)}
-								</td>
-								<td><a href="${pageContext.request.contextPath}/front?command=noticeDetailpost&postNo=${list.postNo}">${list.title}</a></td>
-										<td>${list.memberVO.nickName}</td>
-										<td>${list.likeCount}</td>
-										<td>${list.viewCount}</td>
-										<td>${list.regDate}</td>
-							</tr>
-							</c:forEach>
-					
-								<%-- <c:forEach var="list" items="${requestScope.listvo.list}">
-
+								<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
+								<c:forEach items="${requestScope.listvo.list }" var="list"
+									varStatus="status">
 									<tr>
-										<td>${list.rnum}</td>
-										<td><a 
-													href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${list.rnum}">${list.title}</a></td>
+										<td>${requestScope.totalPostCount-((pb.nowPage-1)*pb.postCountPerPage+status.index)}</td>
+										<td><a
+											href="${pageContext.request.contextPath}/front?command=noticeDetailpost&postNo=${list.postNo}">${list.title}</a></td>
 										<td>${list.memberVO.nickName}</td>
 										<td>${list.likeCount}</td>
 										<td>${list.viewCount}</td>
 										<td>${list.regDate}</td>
 									</tr>
-						
+								</c:forEach>
 
-								</c:forEach> --%>
 							</tbody>
 						</table>
 					</div>
 					<c:if test="${sessionScope.memberVO.id =='adminmts'}">
-					<div align="right">
-						<button type="submit" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/front?command=writeNotice'">공지사항 작성</button>
+						<div align="right">
+							<button type="submit" class="btn btn-primary"
+								onclick="location.href='${pageContext.request.contextPath}/front?command=writeNotice'">공지사항
+								작성</button>
 						</div>
 					</c:if>
 					<%-- 페이징 처리 --%>
 					<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
 					<div class="pagingArea">
 						<div class="pagination">
-							<c:if test="${pb.previousPageGroup}">
-								<a
-									href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
-							</c:if>
+							<c:choose>
+								<%-- 왼쪽 페이지 이동 --%>
+								<c:when test="${pb.previousPageGroup}">
+									<a
+										href="front?command=noticeList&agename=${requestScope.ageName}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
+								</c:when>
+							</c:choose>
 							<c:forEach var="i" begin="${pb.startOfPageGroup}"
 								end="${pb.endOfPageGroup}">
 								<c:choose>
 									<c:when test="${pb.nowPage!=i}">
-										<c:choose>
-											<c:when test="${requestScope.flag&&requestScope.ageName!=null}">
-												<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
-											</c:when>
-											<c:otherwise>
-												<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
-											</c:otherwise>
-										</c:choose>
-									<c:choose>
-										<c:when test="${requestScope.flag&&requestScope.ageName!=null}">
-											<a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
-										</c:when>
-										<c:when test="${requestScope.flag }">
-										<a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
-										</c:when>
-										<c:otherwise>
-										<a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
-										</c:otherwise>
-									</c:choose>
+										<a
+											href="front?command=noticeList&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
 									</c:when>
 									<c:otherwise>
 										<a href="#" class="active">${i}</a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-							<c:if test="${pb.nextPageGroup}">
-								<a
-									href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
-							</c:if>
+							<c:choose>
+								<%-- 오른쪽 페이지 이동 --%>
+								<c:when test="${pb.nextPageGroup}">
+									<a
+										href="front?command=noticeList&agename=${requestScope.ageName}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
+								</c:when>
+							</c:choose>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
