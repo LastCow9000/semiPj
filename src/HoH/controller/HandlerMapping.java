@@ -88,6 +88,12 @@ public class HandlerMapping {
 			controller=new DeleteMemberController();
 		else if(command.contentEquals("myFollowList")) 
 			controller=new MyFollowListController();
+		else if(command.contentEquals("deleteNoticePost")) 
+			controller=new DeleteNoticePostController();
+		else if(command.contentEquals("updateNoticeform")) 
+			controller=new UpdateNoticeformController();
+		else if(command.contentEquals("updateNoticePost")) 
+			controller=new UpdateNoticePostController();
 		return controller;
 	}
 }

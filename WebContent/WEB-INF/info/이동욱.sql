@@ -69,7 +69,41 @@ CREATE TABLE notice_board(
 )
 alter table notice_board add(like_count number default 0);
 
+<<<<<<< HEAD
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
+=======
 insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'donguk','1','안녕하세요',sysdate);
+>>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
+
+insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
 
 select b.post_no,B.TITLE,M.NICKNAME,b.like_count,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE 
 from notice_board b , member m
@@ -87,3 +121,17 @@ WHERE B.ID=M.ID
 WHERE B.NICKNAME=M.NICKNAME  
 
 select count(*) from notice_board
+
+
+select * from member
+SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE
+				FROM (
+						SELECT ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') AS AGEDATE
+				FROM notice_board B, MEMBER M 
+				WHERE B.ID=M.ID 
+				) B , MEMBER M 
+				WHERE B.NICKNAME=M.NICKNAME and rnum between 17 and 32
+
+
+
+

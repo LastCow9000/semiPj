@@ -1,18 +1,24 @@
 /* Remove the navbar's default rounded borders and increase the bottom margin */
 
 /* Remove the jumbotron's default bottom margin */
-.jumbotron {
-	margin-bottom: 25px;
-	height: 150px;
-}
+
+
+/**세희 수정 시작 **/
+
+/* home.jsp 부분*/
 
 .sch {
-	margin-bottom: 25px;
+   margin-bottom: 25px;
 }
+
 
 /* table th center 정리*/
 th {
-	text-align: center;
+   text-align: center;
+}
+
+.panel-body{
+	padding: 0px;
 }
 
 /*게시글 상단바부분 CSS */
@@ -27,50 +33,80 @@ th {
 .panel-primary {
     border-color: #394867;
 }
-/* Add a gray background color and some padding to the footer */
-footer {
-	height: 200px;
-	background-color: #f2f2f2;
-	padding: 25px;
-}
 
+
+/* 페이징 */
 .pagingArea {
-	text-align: center;
+   text-align: center;
 }
 
 .pagination {
-	display: inline-block;
+   display: inline-block;
 }
 
 .pagination a {
-	color: black;
-	float: left;
-	padding: 8px 16px;
-	text-decoration: none;
+   color: black;
+   float: left;
+   padding: 8px 16px;
+   text-decoration: none;
 }
 
 .pagination a.active {
-	background-color: #808080;
-	color: white;
-	border-radius: 5px;
+   background-color: #808080;
+   color: white;
+   border-radius: 5px;
 }
 
 .pagination a:hover:not(.active) {
-	background-color: #ddd;
-	border-radius: 5px;
+   background-color: #ddd;
+   border-radius: 5px;
 }
 
+/* 지도 */
 .age {
-	width: 200px;
-	height:300px;
+   width: 200px;
+   height:300px;
 }
+
+/* 랭킹 */
 .progress{
-	width: 250px;
+   width: 250px;
 }
 .rank{
-	width: 180px;
-	height: 180px;
+   width: 180px;
+   height: 180px;
 }
+
+ /* right css적용 부분*/
+
+.idform{
+	height: 30px;
+    padding: 6px 12px;
+	line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;									
+}
+
+.passform{
+	height: 30px;
+    padding: 6px 12px;
+	line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;									
+}
+
+.table>thead>tr>th {
+	text-align: left;
+	padding: 10px;
+}
+
+/**세희 수정 끝 **/
 
 
 /**** 예울 수정 ****/
@@ -187,11 +223,4 @@ hr.devideHr {
 }
 
 /**** 예울 수정 끝 ****/
-
-
-
-
-
-
-
 
