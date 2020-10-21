@@ -67,3 +67,36 @@ create table follow(
 alter table scrap_post add(regdate date default sysdate);
 alter table scrap_post RENAME COLUMN regdate to scraped_regdate
 
+
+--추가 영섭 sql
+
+CREATE TABLE reply (
+   rep_no number primary key,
+   post_no number not null,
+   rep_content varchar2(500) not null,
+   nick varchar2(30) not null, 
+   password varchar2(30) not null,
+   constraint fk_boardno foreign key(post_no) references board(post_no) on delete cascade
+);
+
+CREATE SEQUENCE reply_seq nocache;
+
+
+ALTER TABLE board ADD(rep_count number default 0); 
+
+
+
+delete 
+from MEMBER 
+where ID='yewool' AND PASSWORD='milk'
+
+SELECT * FROM MEMBER 
+select * FROM POST 
+WHERE AGENAME='고려시대'
+
+COMMIT
+
+
+
+
+

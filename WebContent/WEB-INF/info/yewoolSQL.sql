@@ -12,8 +12,8 @@ CREATE TABLE member(
    ageName varchar2(100) NOT NULL,
    point number default 0
 )
-
-
+DELETE member WHERE id='test';
+select * from member where id='testyewool';
 CREATE SEQUENCE board_seq nocache;
 
 CREATE TABLE board(
@@ -208,8 +208,8 @@ ORDER BY like_count DESC, view_count DESC
 
 
 select * from scrap_post;
-alter table scrap_post add(regdate date default sysdate);
-alter table scrap_post RENAME COLUMN scrapted_regdate to scraped_regdate
+alter table scrap_post add(scraped_regdate date default sysdate);
+alter table scrap_post RENAME COLUMN regdate to scraped_regdate
 
 
 SELECT post_no, scraped_regdate

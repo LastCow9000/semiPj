@@ -33,7 +33,8 @@ public class SearchAllController implements Controller {
 			list=BoardDAO.getInstance().getListByOption(option,word,pagingBean);
 			lvo.setList(list);
 			flag=true;
-			System.out.println("gf");
+			ArrayList<PostVO> noticeList = BoardDAO.getInstance().getNoticeList();
+			request.setAttribute("noticeList", noticeList);
 		request.setAttribute("listvo", lvo);
 		request.setAttribute("totalPostCount", totalPostCount);
 		request.setAttribute("url", "/board/postListByAge.jsp");

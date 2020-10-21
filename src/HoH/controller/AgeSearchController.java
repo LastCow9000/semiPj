@@ -20,9 +20,7 @@ public class AgeSearchController implements Controller {
 		String option = request.getParameter("option");
 		String word = request.getParameter("word");
 		sql.append(word);
-		System.out.println(ageName+option+sql.toString());
 		int ageTotalPostCount = BoardDAO.getInstance().totalAgePostCount(ageName, option, sql.toString());
-		System.out.println(ageTotalPostCount);
 		String pageNo = request.getParameter("pageNo");
 		PagingBean pagingBean = null;
 		ArrayList<PostVO> list = new ArrayList<PostVO>();
@@ -49,6 +47,9 @@ public class AgeSearchController implements Controller {
 			lvo.setList(list);
 			flag =true;
 		}
+		
+		ArrayList<PostVO> noticeList = BoardDAO.getInstance().getNoticeList();
+		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("listvo", lvo);
 		request.setAttribute("ageName", ageName);
 		request.setAttribute("totalPostCount", ageTotalPostCount);
@@ -57,8 +58,6 @@ public class AgeSearchController implements Controller {
 		request.setAttribute("ageName", ageName);
 		request.setAttribute("option", option);
 		request.setAttribute("word", word	);
-		System.out.println("ㅎㅇ");
-		System.out.println(lvo.toString());
 		return "/template/layout.jsp";
 	}
 
