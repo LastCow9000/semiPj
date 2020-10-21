@@ -807,4 +807,36 @@ public class BoardDAO {
 
 		}
 		
+		// 공지사항 게시물 삭제
+		public void deleteNoticePost(String postNo) throws SQLException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = dataSource.getConnection();
+				String sql = "DELETE FROM notice_board WHERE post_No=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, postNo);
+				pstmt.executeUpdate();
+			} finally {
+				closeAll(pstmt, con);
+			}
+		}
+		
+		// 공지사항 게시물 수정
+		public void updateNoticePost(PostVO postVO) throws SQLException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = dataSource.getConnection();
+				String sql = "UPDATE notice_board set title=?, content=? WHERE post_No=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, postVO.getTitle());
+				pstmt.setString(2, postVO.getContent());
+				pstmt.setString(3, postVO.getPostNo());
+				pstmt.executeUpdate();
+			} finally {
+				closeAll(pstmt, con);
+			}
+		}
+		
 }// class

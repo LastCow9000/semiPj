@@ -9,12 +9,12 @@
 	<div class="row">
 		<div class="col-sm-5">
 			<div class="panel panel-primary">
-				<div class="panel-heading">고조선 시대 핳 게시물</div>
+				<div class="panel-heading">고조선시대 핳 게시물</div>
 				<form id="gojosun">
 					<table class="table hoh">
 						<thead>
-							<tr>
-								<td>순위</td>
+							<tr align="center">
+								<td align="center">순위</td>
 								<td colspan='1'>제목</td>
 								<td colspan='20'>작성자</td>
 							</tr>
@@ -22,11 +22,21 @@
 						<tbody>
 							<c:forEach items="${requestScope.gojosunList}" var="list"
 								varStatus="status" begin="0" end="4" step="1">
-								<tr>
+								<tr align="center">
 									<td>${status.count}</td>
 									<!-- 제목 -->
-									<c:set var="title" value="${list.title }"/>
-									<td width=300px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${fn:substring(title,0,8)}... <span class="badge">${list.replyCount}</span></a></td>
+									<td width=300px>
+									<a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">
+									<c:choose>
+									<c:when test="${fn:length(list.title) gt 10}">
+									<c:out value="${fn:substring(list.title, 0, 9) }..."></c:out>
+									</c:when>
+									<c:otherwise>
+									${list.title}
+									</c:otherwise>
+									</c:choose>
+									<span class="label label-danger">${list.replyCount}</span></a>
+									</td>
 									<%-- 23자리까지 --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
@@ -37,12 +47,12 @@
 			</div>
 		</div>
 		<div class="col-sm-5">
-			<div class="panel panel-danger">
-				<div class="panel-heading">삼국 시대 핳 게시물</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">삼국시대 핳 게시물</div>
 				<form id="threeKingdom">
 					<table class="table hoh">
 						<thead>
-							<tr>
+							<tr align="center">
 								<td>순위</td>
 								<td colspan='1'>제목</td>
 								<td colspan='20'>작성자</td>
@@ -51,12 +61,22 @@
 						<tbody>
 							<c:forEach items="${requestScope.threeKingdomList}" var="list"
 								varStatus="status" begin="0" end="4" step="1">
-								<tr>
+								<tr align="center" 	>
 									<!-- 순위 -->
 									<td>${status.count}</td>
 									<!-- 제목 -->
-									<c:set var="title" value="${list.title }"/>
-									<td width=200px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${fn:substring(title,0,8)}...<span class="badge">${list.replyCount}</span></a></td>
+									<td width=300px>
+									<a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">
+									<c:choose>
+									<c:when test="${fn:length(list.title) gt 10}">
+									<c:out value="${fn:substring(list.title, 0, 9) }..."></c:out>
+									</c:when>
+									<c:otherwise>
+									${list.title}
+									</c:otherwise>
+									</c:choose>
+									<span class="label label-danger">${list.replyCount}</span></a>
+									</td>
 									<%--작성자(닉네임) --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
@@ -78,12 +98,12 @@
 	<div class="row">
 		<div class="col-sm-5">
 			<div class="panel panel-primary">
-				<div class="panel-heading">고려 시대 핳 게시물</div>
+				<div class="panel-heading">고려시대 핳 게시물</div>
 				<div class="panel-body">
 					<form id="goryeo">
 						<table class="table hoh">
 							<thead>
-								<tr>
+								<tr align="center">
 									<td>순위</td>
 									<td colspan='1'>제목</td>
 									<td colspan='20'>작성자</td>
@@ -92,11 +112,21 @@
 							<tbody>
 								<c:forEach items="${requestScope.goryeoList}" var="list"
 								varStatus="status" begin="0" end="4" step="1">
-								<tr>
+								<tr align="center">
 									<td>${status.count}</td>
 										<!-- 제목 -->
-									<c:set var="title" value="${list.title }"/>
-									<td width=200px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${fn:substring(title,0,8)}... <span class="badge">${list.replyCount}</span></a></td>
+									<td width=300px>
+									<a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">
+									<c:choose>
+									<c:when test="${fn:length(list.title) gt 10}">
+									<c:out value="${fn:substring(list.title, 0, 9) }..."></c:out>
+									</c:when>
+									<c:otherwise>
+									${list.title}
+									</c:otherwise>
+									</c:choose>
+									<span class="label label-danger">${list.replyCount}</span></a>
+									</td>
 									<%--23자리까지 --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
@@ -109,12 +139,12 @@
 		</div>
 		<div class="col-sm-5">
 			<div class="panel panel-primary">
-				<div class="panel-heading">조선 시대 핳 게시물</div>
+				<div class="panel-heading">조선시대 핳 게시물</div>
 				<div class="panel-body">
 					<form id="josun-list.jsp">
 						<table class="table hoh">
 							<thead>
-								<tr>
+								<tr align="center">
 									<td>순위</td>
 									<td colspan='1'>제목</td>
 									<td colspan='20'>작성자</td>
@@ -123,11 +153,21 @@
 							<tbody>
 								<c:forEach items="${requestScope.josunList}" var="list"
 								varStatus="status" begin="0" end="4" step="1">
-								<tr>
+								<tr align="center">
 									<td>${status.count}</td>
 										<!-- 제목 -->
-									<c:set var="title" value="${list.title }"/>
-									<td width=300px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${fn:substring(title,0,8)} <span class="badge">${list.replyCount}</span></a></td>
+									<td width=300px>
+									<a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">
+									<c:choose>
+									<c:when test="${fn:length(list.title) gt 10}">
+									<c:out value="${fn:substring(list.title, 0, 9) }..."></c:out>
+									</c:when>
+									<c:otherwise>
+									${list.title}
+									</c:otherwise>
+									</c:choose>
+									<span class="label label-danger">${list.replyCount}</span></a>
+									</td>
 									<%--23자리까지--%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>

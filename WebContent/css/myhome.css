@@ -1,8 +1,143 @@
 /* Remove the navbar's default rounded borders and increase the bottom margin */
 
+/* Remove the jumbotron's default bottom margin */
+
+
+/**세희 수정 시작 **/
+
+/* home.jsp 부분*/
+
+.sch {
+   margin-bottom: 25px;
+}
+
+
+/* table th center 정리*/
+th {
+   text-align: center;
+}
+
+.panel-body{
+	padding: 0px;
+}
+
+/*게시글 상단바부분 CSS */
+.panel-primary>.panel-heading {
+   border-color: #000000;
+   background-color: #394867;
+   font-family: "돋음";
+   text-align: center;
+}
+
+/*게시글 박스전체부분 */
+.panel-primary {
+    border-color: #394867;
+}
+
+
+/* 페이징 */
+.pagingArea {
+   text-align: center;
+}
+
+.pagination {
+   display: inline-block;
+}
+
+.pagination a {
+   color: black;
+   float: left;
+   padding: 8px 16px;
+   text-decoration: none;
+}
+
+.pagination a.active {
+   background-color: #808080;
+   color: white;
+   border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+   background-color: #ddd;
+   border-radius: 5px;
+}
+
+/* 지도 */
+.age {
+   width: 200px;
+   height:300px;
+}
+
+/* 랭킹 */
+.progress{
+   width: 250px;
+}
+.rank{
+   width: 180px;
+   height: 180px;
+}
+
+ /* right css적용 부분*/
+
+.idform{
+	height: 30px;
+    padding: 6px 12px;
+	line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;									
+}
+
+.passform{
+	height: 30px;
+    padding: 6px 12px;
+	line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;									
+}
+
+.table>thead>tr>th {
+	text-align: left;
+	padding: 10px;
+}
+
+/**세희 수정 끝 **/
+
+
+/**** 예울 수정 ****/
+
+/* postDetail 부분 수정 */
+
+/* FOOTER */
+
+.footer{
+	background-color : #9ba4b4;
+}
+
+.footer p{
+	padding-top:10px;
+	color : white;
+	text-align: center;
+	font-style: italic;
+	font-size: 15px;
+}
+
+.footer p>.corp{
+	font-size: 10px;
+}
+
+
+/* HEADER */
+
 /* 내비게이션 바 두께*/
 .navbar {
 	height: 80px;
+	background-color: #14274e;
 }
 
 /* 네비게이션 메뉴 가운데 정렬*/
@@ -22,25 +157,21 @@
 
 /* header 로고 image 크기 */
 .logo{
-	padding-top: 0px;
+	padding-top: 10px;
 	padding-left: 30px;
 	padding-bottom: 0px;
-	width: 100px;
-	height: 70px;
-}
-
-/* body 색 */
-.body {
-	background-color: red !important;
+	width: 150px;
+	height: 60px;
 }
 
 
 /* header munu a tag */
+
 .nav-item a{
-	padding-top:10px;
+	margin-top: 10px;
 	width: 180px;
-	height: 80px;
-	color : #008080;
+	height: 100%;
+	color : white;
 	text-align: center;
 	font-family: 궁서;
 	font-size: 35px;
@@ -48,29 +179,16 @@
 	cursor: "pointer";
 }
 
-.nav-item:hover{
-	background-color: #CCCCFF; 
+.navbar .navbar-nav > li > a:hover,
+.navbar .navbar-nav > li > a:focus,
+.navbar .navbar-nav > li > a:active  {
+	background-color: #394867; 
+    color: #f1f6f9;
 }
 
-/* footer p tag*/
-
-.footer p{
-	padding-top:10px;
-	color : #008080;
-	text-align: center;
-	font-style: italic;
-	font-size: 15px;
-	font-weight: bold ;
+.navbar .navbar-nav > li > a:hover:not(.active) {
+	background-color: #394867;
 }
-
-.footer>p>.corp{
-	padding-top:10px;
-	color : #008080;
-	text-align: center;
-	font-size: 15px;
-	font-weight: bold ;
-}
-
 
 
 /* header menu image 내비게이션바에 꽉 차게 */
@@ -82,74 +200,27 @@
 }
 
 
-/* Remove the jumbotron's default bottom margin */
-.jumbotron {
-	margin-bottom: 25px;
-	height: 150px;
-}
-
-.sch {
-	margin-bottom: 25px;
+/* postDetail에서 쓰는 btn */
+.postbtn td{
+	text-align: right;
 }
 
 
-/* table th center 정리*/
-th {
-	text-align: center;
+/* 댓글 hr */
+hr.reply {
+	color : #394867;
+}
+
+hr.devideHr {
+	border-top: 3px double #394867;
 }
 
 
-
-/*게시글 상단바부분 CSS */
-.panel-primary>.panel-heading {
-	border-color: #000000;
-	background-color: #7c8383;
-	font-family: "돋음";
-	text-align: center;
+/* 글쓰기 제목 너비 */
+#writePost input[type=text]{
+	width: 90%;
+	float : center;
 }
 
+/**** 예울 수정 끝 ****/
 
-/* Add a gray background color and some padding to the footer */
-footer {
-	height: 200px;
-	background-color: #f2f2f2;
-	padding: 25px;
-}
-
-.pagingArea {
-	text-align: center;
-}
-
-.pagination {
-	display: inline-block;
-}
-
-.pagination a {
-	color: black;
-	float: left;
-	padding: 8px 16px;
-	text-decoration: none;
-}
-
-.pagination a.active {
-	background-color: #808080;
-	color: white;
-	border-radius: 5px;
-}
-
-.pagination a:hover:not(.active) {
-	background-color: #ddd;
-	border-radius: 5px;
-}
-
-.age {
-	width: 200px;
-	height:300px;
-}
-.progress{
-	width: 250px;
-}
-.rank{
-	width: 180px;
-	height: 180px;
-}

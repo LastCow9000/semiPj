@@ -53,49 +53,48 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4">
-
+				<c:set var="following" value="${requestScope.followingList.size()}"></c:set>
 				<table class="table hoh">
 					<tr align="center">
 						<td>아이디</td>
-						<td>${sessionScope.memberVO.id}</td>
+						<td colspan=${following}>${sessionScope.memberVO.id}</td>
 					</tr>
 					<tr align="center">
 						<td>닉네임</td>
-						<td>${sessionScope.memberVO.nickName}</td>
+						<td colspan=${following}>${sessionScope.memberVO.nickName}</td>
 					</tr>
 					<tr align="center">
 						<td>시대</td>
-						<td>${sessionScope.memberVO.ageName}</td>
+						<td colspan=${following}>${sessionScope.memberVO.ageName}</td>
 					</tr>
 
 					<tr align="center">
-						<td>팔로잉<input type="checkbox" name="checkAll"
-							id="th_checkAll"></td>
+						<td rowspan=${following+1}>팔로잉<input type="checkbox"
+							name="checkAll" id="th_checkAll"></td>
+
 						<c:forEach items="${requestScope.followingList }" var="list">
-
-							<td><input type="checkbox" name="checkRow" id="check"
-								value="${list}" />${list}</td>
+							<tr>
+								<td colspan=${following}><input type="checkbox"
+									name="checkRow" id="check" value="${list}" />${list}</td>
+							</tr>
 						</c:forEach>
-
 					</tr>
-
 					<tr>
-						<td><input type="submit" id="delete" value="삭제하기"></td>
+						<td colspan=${following+1 }><input type="submit" id="delete"
+							value="삭제하기"></td>
 					</tr>
-						<tr>
-						<td colspan="2" align="center">
-						<input type="button" value="회원정보 수정하기" onclick="location.href='${pageContext.request.contextPath}/front?command=updatememberForm'">
+					<tr>
+						<td colspan="2" align="center"><input type="button"
+							value="회원정보 수정하기"
+							onclick="location.href='${pageContext.request.contextPath}/front?command=updatememberForm'">
 						</td>
-						<td>
-						<input type="button" value="회원탈퇴" onclick="location.href='${pageContext.request.contextPath}/front?command=deletememberform'">
+						<td><input type="button" value="회원탈퇴"
+							onclick="location.href='${pageContext.request.contextPath}/front?command=deletememberform'">
 						</td>
 					</tr>
 				</table>
-
-
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

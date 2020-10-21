@@ -97,6 +97,13 @@ WHERE AGENAME='고려시대'
 COMMIT
 
 
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'donguk','dksdifhsidfjslkjflksdjflksdjflsdjfxklsj','안녕하세요',sysdate, 20);
+
+INSERT INTO member(id, nickname, password, ageName) VALUES('donguk', '욱과짱', 'donguk', '조선시대');
 
 
+INSERT INTO member(id, nickname, password, ageName) VALUES('lastcow', '쏭쏭이', 'lastcow', '고조선시대');
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'lastcow','dks','용현이가 도와준다',sysdate, 20);
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'lastcow','dksㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹ','용현이가 도와준다',sysdate, 20);
 
+insert into board(post_no,id,title,content,regdate, like_count) values(board_seq.nextval,'lastcow','d1111111111111111ks','용현이가 도와준다',sysdate, 20);

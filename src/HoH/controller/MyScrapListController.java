@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import HoH.model.FollowDAO;
 import HoH.model.ListVO;
 import HoH.model.MemberVO;
 import HoH.model.PagingBean;
@@ -29,29 +30,38 @@ public class MyScrapListController implements Controller {
         String id = memberVO.getId();
         
         //BoardDAO에 있는 getMyScrapPostList를 통해 postNo목록 가져오기
-        
+		ArrayList<String> postNoList 
+			= ScrapDAO.getInstance().getMyScrapPostList(id);
+		
 		//scrap된 post들의 모음을 만든다.
 		ArrayList<PostVO> scrapedPostVOList = new ArrayList<PostVO>();
+		ArrayList<PostVO> flist = new ArrayList<PostVO>();
+		int totalFollowPostCount = ScrapDAO.getInstance().getTotalScrapCount(id);
+		String pageNo = request.getParameter("pageNo");
+		PagingBean pagingBean = null;
+if (pageNo == null) {
+			pagingBean = new PagingBean(totalFollowPostCount);
+		} else {
+			pagingBean = new PagingBean(totalFollowPostCount, Integer.parseInt(pageNo));
+		}	
+		flist = ScrapDAO.getInstance().getMyScrapPostingList(id, pagingBean);
 
-		//페이징
-		int totalScrapCount=ScrapDAO.getInstance().getTotalScrapPostCount();
-		String pageNo=request.getParameter("pageNo");
-		PagingBean pagingBean=null;
-		if(pageNo==null)
-			pagingBean=new PagingBean(totalScrapCount);
-		else
-			pagingBean=new PagingBean(totalScrapCount, Integer.parseInt(pageNo));
-		
-		ArrayList<PostVO> list=ScrapDAO.getInstance().getMyScrapPostList(id, pagingBean);
-		System.out.println(list);
-		ListVO listVO=new ListVO(list, pagingBean);
 		//각각의 postNo로 PostVO객체를 만들어온다.
-		for (int i = 0; i < list.size(); i++) {
-			scrapedPostVOList.add(ScrapDAO.getInstance().ScrapPostDetailByNo(list.get(i).getPostNo()));
+		for (int i = 0; i < postNoList.size(); i++) {
+			scrapedPostVOList.add(ScrapDAO.getInstance().ScrapPostDetailByNo(postNoList.get(i)));
+			
 		}
 		
-		listVO.setList(scrapedPostVOList);
-		request.setAttribute("lvo", listVO);
+
+		
+		ListVO lvo = new ListVO(flist, pagingBean);
+		lvo.setList(flist);
+		System.out.println(lvo);
+		request.setAttribute("listvo", lvo);
+		//여기까지 페이징
+		
+		
+		
 		request.setAttribute("scrapedPostVOList", scrapedPostVOList);
 		//url 보내주기
 		request.setAttribute("url", "/member/my-scrap-list.jsp");

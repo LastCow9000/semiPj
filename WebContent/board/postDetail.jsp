@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+
+<%-- 수정버튼과 삭제버튼이 한줄로나오게끔 ! --%>
+<style type="text/css">
+ form{display:inline}
+</style>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -16,21 +22,14 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
    
 <script>
-if(${requestScope.likeCheck==1}) {
-   $(document).ready(function() { 
-      $("#heartBlank").hide();
-      $("#heart").html("<i class='fa fa-heart' style='color:red'></i>")
-   });
-}
-   function scrap(){
-      if(confirm("게시글을 삭제하시겠습니까?")){
-         document.removeForm.submit();
-      } else {
-         return;
-      }
-   }
-   
-   
+
+	if(${requestScope.likeCheck==1}) {
+	   $(document).ready(function() { 
+	      $("#heartBlank").hide();
+	      $("#heart").html("<i class='fa fa-heart' style='color:red'></i>")
+	   });
+	}
+	
    $(document).ready(function() {
    
    /* 스크랩 기능 */
@@ -41,7 +40,7 @@ if(${requestScope.likeCheck==1}) {
          
          // 1) 비 로그인시, alert -> return 
          if(${sessionScope.memberVO == null}){
-            alert("로그인 후 사용하세요.");
+            alert("로그인 후 사용할 수 있습니다.");
             return;
          }//if
          
@@ -100,7 +99,7 @@ if(${requestScope.likeCheck==1}) {
       /* 팔로우 기능 */
       $("#followAdd").click(function() {
           if(${sessionScope.memberVO==null}) {
-                  alert("로그인한 사용자만 팔로우 가능!");
+                  alert("로그인 후 사용할 수 있습니다.");
                   return;
                }
           
@@ -133,7 +132,7 @@ if(${requestScope.likeCheck==1}) {
    
       $("#likeBtn").click(function(){
          if(${sessionScope.memberVO==null}) {
-            alert("로그인한 사용자만 좋아요 가능!");
+            alert("로그인 후 사용할 수 있습니다.");
             return;
          }
          $.ajax({
@@ -142,7 +141,7 @@ if(${requestScope.likeCheck==1}) {
             data:"command=likeCount&loginId=${sessionScope.memberVO.id}&postNo=${requestScope.postVO.postNo}&postId=${requestScope.postVO.memberVO.id}",
             success: function(result){ 
                if(result==="좋아요한 게시물") {
-                  if(confirm("이미 좋아요를 누른 게시물입니다.\n 좋아요를 취소하시겠습니까?")) {
+                  if(confirm("이미 좋아요를 누른 게시물입니다.\n좋아요를 취소하시겠습니까?")) {
                         $.ajax({
                            type:"get",
                            url:"front",
@@ -160,6 +159,7 @@ if(${requestScope.likeCheck==1}) {
             }
          }); // ajax
       }); // click
+            
    }); //ready
 </script>
 
@@ -167,46 +167,48 @@ if(${requestScope.likeCheck==1}) {
 <body>
 	<div class="container">
 			<div class="row">
-				<div class="col-sm-9">
+				<div class="col-sm-10">
+					<div class="panel panel-primary">
+						<div class="panel-heading">${requestScope.postVO.memberVO.ageName}</div>
+					<table class="table hoh">
 					<%-- 버튼 부분: 본인의 아이디와 일치할 경우 '수정' '삭제' 버튼 보임 --%>
-					                     <c:if test="${requestScope.postVO.memberVO.id == sessionScope.memberVO.id  || sessionScope.memberVO.id == 'adminmts'}">
+                                                                               
+					<%-- admin일 경우 삭제버튼만 보임 --%>
+                     <c:if test="${requestScope.postVO.memberVO.id == sessionScope.memberVO.id  || sessionScope.memberVO.id == 'adminmts'}">
                         <tr align="right">
-                           <td colspan="3" class="btnArea">
+                           <td colspan="3" class="btnArea postbtn">
                               <form name="deleteForm" action="${pageContext.request.contextPath}/front" method="post">
                                  <input type="hidden" name="command" value="deletepost">
                                  <input type="hidden" name="no" value="${requestScope.postVO.postNo}"> 
                                  <input type="hidden" name="nickName" value="${requestScope.postVO.memberVO.nickName }"> 
-                                 <input  type="submit" class="btn" value="삭제">
-                              </form>
+                                 <input type="submit" class="btn btn-warning" value="삭제">
+                              </form> &nbsp;
                               <c:if test="${requestScope.postVO.memberVO.id == sessionScope.memberVO.id}">
                                <form name="updateForm" action="${pageContext.request.contextPath}/front" method="post">
                                  <input type="hidden" name="command" value="updateform">
                                  <input type="hidden" name="no" value="${requestScope.postVO.postNo}"> 
                                  <input type="hidden" name="rnum" value="${requestScope.rnum}"> 
-                                 <input type="submit" class="btn" value="수정">
+                                 <input type="submit" class="btn btn-info" value="수정">
                               </form>
                               </c:if>
                            </td>
                         </tr>
                      </c:if>
+					
 
-					<div class="panel panel-primary">
-						<div class="panel-heading">${requestScope.postVO.memberVO.ageName}</div>
-						<table class="table hoh">
 						<tr>
 							<td colspan="2"><strong>${requestScope.postVO.title}</strong></td>
 							<td colspan="1" align="right"><span class="glyphicon glyphicon-time"></span> 작성일 : ${requestScope.postVO.regDate }</td>
 						</tr>
 
 						<tr>
-							<td colspan="1" align="left">닉네임 <strong>${requestScope.postVO.memberVO.nickName}</strong></td>
+							<td colspan="1" align="left">작성자 <strong>${requestScope.postVO.memberVO.nickName}</strong></td>
 							<td colspan="2" align="right">
 							<span class="glyphicon glyphicon-user"></span>
 							<strong>${requestScope.postVO.viewCount}</strong>  | 
 							<span class="glyphicon glyphicon-thumbs-up"></span>
 							<strong>${requestScope.postVO.likeCount }</strong>
 							</td>
-
 						</tr>
 
 						<tr>
@@ -217,14 +219,6 @@ if(${requestScope.likeCheck==1}) {
 						<tr align="center">
 						
 							<td colspan="3" class="btnArea">
-									<%-- 스크랩 기능
-								<form id="scrapForm" action="${pageContext.request.contextPath}/front" method="POST">
-									<input type="hidden" name="command" value="scrapPost">
-									<input type="hidden" name="postNo" value="${requestScope.postVO.postNo}">
-								</form>  --%>
-								
-								
-								
 								<%-- 스크랩 버튼 --%>
 								<button type="button" id="scrap_btn" class="btn btn-default btn-sm">
 									<span class="glyphicon glyphicon-bookmark"></span> 스크랩 
