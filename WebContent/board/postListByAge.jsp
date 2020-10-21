@@ -33,10 +33,18 @@
 				</tr>
 							<c:forEach items="${requestScope.listvo.list }" var="list" varStatus="status">
 							<tr>
+<<<<<<< HEAD
 								<td>${requestScope.totalPostCount-((pb.nowPage-1)*pb.postCountPerPage+status.index)}</td>
 								<td><a
 									href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${requestScope.totalPostCount-((pb.nowPage-1)*8+status.index)}">
 										${list.title} <span class="badge">${list.replyCount}</span>
+=======
+								<td>
+									${requestScope.totalPostCount-((pb.nowPage-1)*pb.postCountPerPage+status.index)}
+								</td>
+								<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${requestScope.totalPostCount-((pb.nowPage-1)*8+status.index)}">
+								${list.title} <span class="label label-info">${list.replyCount}</span>
+>>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
 								</a></td>
 										<td>${list.memberVO.nickName}</td>
 										<td>${list.likeCount}</td>
