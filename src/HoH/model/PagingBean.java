@@ -4,7 +4,7 @@ public class PagingBean {
 	// 현재 페이지 
 	private int nowPage=1;
 	// 페이지당 게시물 수 
-	private int postCountPerPage=8;
+	private int postCountPerPage=16;
 	// 페이징 밑에 있는 1~4까지 있는거
 	private int pageCountPerPageGroup=4;
 	// 총 게시물 수
@@ -49,12 +49,12 @@ public class PagingBean {
 		return totalPage;
 	}
 	private int getTotalPageGroup() {
-		int num = getTotalPage()%postCountPerPage;
+		int num = getTotalPage()%pageCountPerPageGroup;
 		int totalPageGroup=0;
 		if(num==0) {
-			totalPageGroup = getTotalPage()/postCountPerPage;
+			totalPageGroup = getTotalPage()/pageCountPerPageGroup;
 		}else {
-			totalPageGroup= getTotalPage()/postCountPerPage+1;
+			totalPageGroup= getTotalPage()/pageCountPerPageGroup+1;
 		}
 		return totalPageGroup;
 	}

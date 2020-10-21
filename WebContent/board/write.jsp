@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +15,17 @@
 <div class="container">
 <form action="${pageContext.request.contextPath}/front" method="post">
 	<input type="hidden" name="command" value="writepost">
-	<h3>글쓰기</h3>
+	<c:choose>
+		<c:when test="${sessionScope.memberVO.id=='adminmts' }">
+			<h3>공지사항 작성</h3>
+		</c:when>
+		<c:otherwise>
+			<h3>글쓰기</h3>
+		</c:otherwise>
+	</c:choose>
 	<input type="text" name="title" placeholder="제목을 입력하세요"><br><br>
 	<textarea rows="20" cols="30" placeholder="내용을 입력하세요" name="content"></textarea><br>
-	<input type="submit" value="작성하기"  class="btn btn-primary">
+			<input type="submit" value="작성하기"  class="btn btn-primary">
 </form>
 </div>
 </body>

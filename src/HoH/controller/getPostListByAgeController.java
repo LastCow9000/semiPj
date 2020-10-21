@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.dbcp.pool2.BaseObject;
+
 import HoH.model.BoardDAO;
 import HoH.model.ListVO;
 import HoH.model.PagingBean;
@@ -20,6 +22,7 @@ public class getPostListByAgeController implements Controller {
 		String pageNo = request.getParameter("pageNo");
 		PagingBean pagingBean = null;
 		ArrayList<PostVO> list = new ArrayList<PostVO>();
+		ArrayList<PostVO> noticeList = new ArrayList<PostVO>();
 		if(pageNo==null) {
 			pagingBean = new PagingBean(totalPostCount);
 		} else {
@@ -70,8 +73,10 @@ public class getPostListByAgeController implements Controller {
 				}
 			}
 			lvo.setList(list);
-		}
+		} 
 		
+		noticeList = BoardDAO.getInstance().getNoticeList();
+		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("listvo", lvo);
 		request.setAttribute("ageName", ageName);
 		request.setAttribute("totalPostCount", totalPostCount);
