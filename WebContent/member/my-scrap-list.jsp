@@ -80,7 +80,7 @@
 						</thead>
 						
 						<tbody>
-						<c:forEach items="${requestScope.scrapedPostVOList}" var="list" varStatus="status">
+						<c:forEach items="${requestScope.listvo.list}" var="list" varStatus="status">
 						<tr>
 							<td>${list.memberVO.ageName}</td>
 							<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title}</a></td>
@@ -106,6 +106,38 @@
 	
 						</tbody>
 					</table>
+			</div>
+			<%-- 페이징 처리 --%>
+			<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
+			<div class="pagingArea">
+				<div class="pagination">
+	
+							<%-- 왼쪽 페이지 이동 --%>
+							<c:if test="${pb.previousPageGroup}">
+								<a
+									href="front?command=myScrapList&id=${sessionScope.memberVO.id}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
+							</c:if>
+					
+					<c:forEach var="i" begin="${pb.startOfPageGroup}"
+						end="${pb.endOfPageGroup}">
+						<c:choose>
+							<c:when test="${pb.nowPage!=i}">
+										<a
+											href="front?command=myScrapList&id=${sessionScope.memberVO.id}&pageNo=${i}">${i}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="#" class="active">${i}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					
+							<%-- 오른쪽 페이지 이동 --%>
+							<c:if test="${pb.nextPageGroup}">
+								<a
+									href="front?command=myScrapList&id=${sessionScope.memberVO.id}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
+							</c:if>
+					
+				</div>
 			</div>
 		</div>
 	</div>

@@ -74,7 +74,7 @@ public class getPostListByAgeController implements Controller {
 			}
 			lvo.setList(list);
 		} 
-		
+	
 		noticeList = BoardDAO.getInstance().getNoticeList();
 		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("listvo", lvo);

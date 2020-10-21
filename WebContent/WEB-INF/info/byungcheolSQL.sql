@@ -169,20 +169,99 @@ select * from member order by point desc;
 
 alter table scrap_post add(regdate date default sysdate);
 alter table scrap_post RENAME COLUMN regdate to scraped_regdate;
+insert into scrap_post values('1','donguk',sysdate);
+insert into scrap_post values('2','donguk',sysdate);
+insert into scrap_post values('3','donguk',sysdate);
+insert into scrap_post values('4','donguk',sysdate);
+insert into scrap_post values('15','donguk',sysdate);
+insert into scrap_post values('17','donguk',sysdate);
+insert into scrap_post values('16','donguk',sysdate);
+insert into scrap_post values('18','donguk',sysdate);
+insert into scrap_post values('21','donguk',sysdate);
+insert into scrap_post values('31','donguk',sysdate);
+insert into scrap_post values('22','donguk',sysdate);
+insert into scrap_post values('23','donguk',sysdate);
+insert into scrap_post values('24','donguk',sysdate);
+insert into scrap_post values('25','donguk',sysdate);
+insert into scrap_post values('26','donguk',sysdate);
+insert into scrap_post values('31','donguk',sysdate);
+insert into scrap_post values('32','donguk',sysdate);
+insert into scrap_post values('33','donguk',sysdate);
+insert into scrap_post values('34','donguk',sysdate);
+insert into scrap_post values('35','donguk',sysdate);
+insert into scrap_post values('36','donguk',sysdate);
+insert into scrap_post values('37','donguk',sysdate);
+insert into scrap_post values('38','donguk',sysdate);
+insert into scrap_post values('39','donguk',sysdate);
+insert into scrap_post values('40','donguk',sysdate);
+insert into scrap_post values('41','donguk',sysdate);
+insert into scrap_post values('42','donguk',sysdate);
+insert into scrap_post values('43','donguk',sysdate);
+
+insert into scrap_post values('51','donguk',sysdate);
+insert into scrap_post values('52','donguk',sysdate);
+insert into scrap_post values('53','donguk',sysdate);
+insert into scrap_post values('54','donguk',sysdate);
+insert into scrap_post values('55','donguk',sysdate);
+insert into scrap_post values('56','donguk',sysdate);
+insert into scrap_post values('57','donguk',sysdate);
+insert into scrap_post values('58','donguk',sysdate);
+insert into scrap_post values('59','donguk',sysdate);
+insert into scrap_post values('60','donguk',sysdate);
+insert into scrap_post values('61','donguk',sysdate);
+insert into scrap_post values('62','donguk',sysdate);
+insert into scrap_post values('63','donguk',sysdate);
+insert into scrap_post values('64','donguk',sysdate);
+insert into scrap_post values('65','donguk',sysdate);
+insert into scrap_post values('66','donguk',sysdate);
+insert into scrap_post values('67','donguk',sysdate);
+insert into scrap_post values('68','donguk',sysdate);
+insert into scrap_post values('69','donguk',sysdate);
+insert into scrap_post values('70','donguk',sysdate);
+insert into scrap_post values('71','donguk',sysdate);
+insert into scrap_post values('72','donguk',sysdate);
+insert into scrap_post values('74','donguk',sysdate);
+insert into scrap_post values('75','donguk',sysdate);
+insert into scrap_post values('76','donguk',sysdate);
+insert into scrap_post values('77','donguk',sysdate);
+insert into scrap_post values('78','donguk',sysdate);
+insert into scrap_post values('79','donguk',sysdate);
+insert into scrap_post values('80','donguk',sysdate);
+insert into scrap_post values('81','donguk',sysdate);
+insert into scrap_post values('82','donguk',sysdate);
+insert into scrap_post values('83','donguk',sysdate);
+insert into scrap_post values('84','donguk',sysdate);
+insert into scrap_post values('85','donguk',sysdate);
+insert into scrap_post values('86','donguk',sysdate);
+insert into scrap_post values('87','donguk',sysdate);
+insert into scrap_post values('88','donguk',sysdate);
+insert into scrap_post values('89','donguk',sysdate);
+insert into scrap_post values('90','donguk',sysdate);
+insert into scrap_post values('91','donguk',sysdate);
+insert into scrap_post values('92','donguk',sysdate);
+insert into scrap_post values('93','donguk',sysdate);
+insert into scrap_post values('94','donguk',sysdate);
+insert into scrap_post values('95','donguk',sysdate);
+insert into scrap_post values('96','donguk',sysdate);
+insert into scrap_post values('97','donguk',sysdate);
+
+insert into scrap_post values('98','donguk',sysdate);
+insert into scrap_post values('99','donguk',sysdate);
+insert into scrap_post values('100','donguk',sysdate);
+insert into scrap_post values('101','donguk',sysdate);
+insert into scrap_post values('102','donguk',sysdate);
+insert into scrap_post values('103','donguk',sysdate);
+insert into scrap_post values('104','donguk',sysdate);
+insert into scrap_post values('105','donguk',sysdate);
+insert into scrap_post values('106','donguk',sysdate);
 
 
-
-select ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM, m.id, m.nickname, b.title,b.regDate,b.content,  b.post_no, 
-			 b.view_count, b.like_count, m.ageName,b.post_no 
-	    from member m, board b where m.id = b.id and m.nickname in 
-	    (select f.nickname from member m, follow f 
-	         where m.id=f.id and m.id='donguk')
-	    order by b.post_no desc;
-select *
-from member m, board b 
-where m.id=b.id and 
-
-select b.post_no
+select *from SCRAP_POST
+select b.rnum, b.id, b.nickname,b.title,b.regDate,b.content,b.view_count, b.like_count, b.ageName,b.post_no 
+from(select ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM, m.id, m.nickname, b.title,b.regDate,b.content,  
+b.view_count, b.like_count, m.ageName,b.post_no from member m, board b where m.id = b.id and m.nickname 
+in (select f.nickname from member m, follow f where m.id=f.id and m.id='donguk') 
+order by b.post_no desc) b where b.rnum between 1 and 8;
 
 SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE, B.rep_count 
 FROM ( 
@@ -196,3 +275,33 @@ SELECT COUNT(*) from member m, board b where m.id = b.id and m.nickname in
 	    (select f.nickname from member m, follow f 
 	         where m.id=f.id and m.id='donguk')
 	    order by b.post_no desc;
+	    
+SELECT COUNT(*) from member m, scrap b where m.id = b.id and m.nickname in 
+	    (select f.nickname from member m, follow f 
+	         where m.id=f.id and m.id='donguk')
+	    order by b.post_no desc;
+SELECT count(*) FROM scrap_post WHERE id='donguk'
+ORDER BY scraped_regdate desc
+
+
+SELECT post_no, scraped_regdate, ROW_NUMBER() OVER(ORDER BY scraped_regdate desc) AS RNUM
+FROM scrap_post 
+WHERE id='donguk'
+ORDER BY scraped_regdate desc;
+
+SELECT b.rnum
+FROM (SELECT b.post_no, sp.scraped_regdate, ROW_NUMBER() OVER(ORDER BY sp.scraped_regdate desc) AS RNUM, m.agename, b.title,b.LIKE_COUNT,b.VIEW_COUNT
+FROM scrap_post sp, member m, board b  WHERE m.id='donguk' and m.id=sp.id and sp.post_no = b.post_no) b 
+where b.rnum between 1 and 8;
+
+select b.rnum, b.post_no, b.scraped_regdate,b.agename, b.title,b.LIKE_COUNT,b.VIEW_COUNT, b.agename,b.nickname
+from ( select ROW_NUMBER() OVER(ORDER BY sp.scraped_regdate desc) AS RNUM,
+b.post_no, sp.scraped_regdate,m.agename, b.title,b.LIKE_COUNT,b.VIEW_COUNT,m.nickname
+from  scrap_post sp, member m, board b WHERE m.id='donguk' and m.id=sp.id and sp.post_no = b.post_no) b
+where b.rnum between 1 and 8;
+
+select b.rnum, b.post_no, b.scraped_regdate,b.agename, b.title,b.LIKE_COUNT,b.VIEW_COUNT,b.nickname,b.id,b.content
+from (select ROW_NUMBER() OVER(ORDER BY sp.scraped_regdate desc) AS RNUM, m.id,
+			b.post_no, sp.scraped_regdate,m.agename, b.title,b.LIKE_COUNT,b.VIEW_COUNT,m.nickname,b.content
+					from  scrap_post sp, member m, board b WHERE m.id='donguk' and m.id=sp.id and sp.post_no = b.post_no) b 
+			where b.rnum between 1 and 8

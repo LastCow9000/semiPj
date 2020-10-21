@@ -32,6 +32,7 @@ public class PagingBean {
 	public int getStartRowNumber() {
 		return (nowPage-1)*postCountPerPage+1;
 	}
+	
 	public int getEndRowNumber() {
 		int endRowNumber = nowPage*postCountPerPage;
 		if(totalPostCount<endRowNumber)
@@ -91,6 +92,7 @@ public class PagingBean {
 		}
 		return flag;
 	}
+	
 }
 
 
