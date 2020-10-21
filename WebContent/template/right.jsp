@@ -74,7 +74,7 @@
    </p>
    
    <p>
-   		<a href="${path}/front?command=myFollowList">마이 팔로우</a>
+         <a href="${path}/front?command=myFollowList">마이 팔로우</a>
    </p>
    
    <%-- 등급 progress bar --%>

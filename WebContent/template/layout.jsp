@@ -27,22 +27,12 @@ function search() {
           return false;
        }
       
-      // 
+      //전체 검색
 	   if(${requestScope.ageName==null}) { 
 	      location.href="${pageContext.request.contextPath}/front?command=searchall&option="+option+"&word="+word;
+	   // 테마별 검색 
 	   } else {
-	      location.href="${pageContext.request.contextPath}/front?command=ageSearch&agename="+agename+"&option="+option+"&word="+word;
-	      // 테마별 검색  
-	       /* $(document).ready(function () {
-	         $.ajax({
-	            type:"get",
-	            url:"front",
-	            data:"command=ageSearch&agename=${requestScope.ageName}&option="+$("#searchText option:selected").val()+"&word="+$('#text').val(),
-	            success: function(result) {
-	               
-	            }
-	         });
-	      }); */
+	      location.href="${pageContext.request.contextPath}/front?command=ageSearch&agename="+agename+"&option="+option+"&word="+word;   
 	   }
 }
 </script>
@@ -58,7 +48,6 @@ function search() {
 <div class="sch col-sm-6 col-sm-offset-6">
 <form class="form-inline" id="selectBox">
    <select style="width:80px; height:30px;" id="searchText">
-      <%--<option value="">---</option> --%>
       <option value="b.title">제목</option>
       <option value="m.nickname">작성자</option>
    </select>
