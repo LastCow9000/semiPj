@@ -3,6 +3,7 @@
 /* Remove the jumbotron's default bottom margin */
 
 
+/**세희 수정 시작 **/
 
 /* home.jsp 부분*/
 
@@ -196,4 +197,6 @@ footer {
 	text-align: left;
 	padding: 10px;
 }
+
+/**세희 수정 끝 **/
 

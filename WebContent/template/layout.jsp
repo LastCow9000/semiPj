@@ -15,11 +15,17 @@
 <%-- css 경로 설정 --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css"/>
 <script type="text/javascript">
+$(document).ready(function(){
+	$("#selectBox").submit(function () {
+		search();
+		return false;
+	});	
+});
 
 function search() {
       var agename = "${requestScope.ageName}"
       var option = $("#searchText option:selected").val();
-      var word = $('#text').val().trim();
+      var word = $('#searchFormText').val().trim();
       
       // 검색 빈칸일 때 전송 X
       if(word==="") {
@@ -29,7 +35,7 @@ function search() {
       
       //전체 검색
 	   if(${requestScope.ageName==null}) { 
-	      location.href="${pageContext.request.contextPath}/front?command=searchall&option="+option+"&word="+word;
+		   location.href="${pageContext.request.contextPath}/front?command=searchall&option="+option+"&word="+word;
 	   // 테마별 검색 
 	   } else {
 	      location.href="${pageContext.request.contextPath}/front?command=ageSearch&agename="+agename+"&option="+option+"&word="+word;   
@@ -45,17 +51,18 @@ function search() {
 <body bgcolor="red">
 
 <%-- 검색기능 메인화면에서는 감추고 테마별 게시판은 등장 --%>
+<c:if test="${requestScope.ageName != '공지사항'}">
 <div class="sch col-sm-6 col-sm-offset-6">
-<form class="form-inline" id="selectBox">
+<form class="form-inline" id="selectBox" >
    <select style="width:80px; height:30px;" id="searchText">
       <option value="b.title">제목</option>
       <option value="m.nickname">작성자</option>
    </select>
-    <input type="text" class="form-control" size="20" id="text">
-    <button type="button" class="btn btn-danger" onclick="search()">Search</button>
+    <input type="text" class="form-control" size="20" id="searchFormText">
+    <button type="submit" class="btn btn-danger" >Search</button>
   </form>
 </div>
-
+</c:if>
 <%-- 메인화면 --%>
 <div class="container">    
   <div class="row">

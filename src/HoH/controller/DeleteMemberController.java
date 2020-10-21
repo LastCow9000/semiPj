@@ -20,7 +20,6 @@ public class DeleteMemberController implements Controller {
 		// 폼에서 password가져오기
 		String password = request.getParameter("password");
 		boolean result=MemberDAO.getInstance().DeleteMember(sessionid,password);
-		System.out.println(result);
 		if(result==true) {
 			session.invalidate();
 			return "/member/deletemember-ok.jsp";
