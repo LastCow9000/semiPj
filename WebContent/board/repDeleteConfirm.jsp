@@ -5,50 +5,46 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>title</title>
+<title>del-rp-popup</title>
 <%-- bootstrap 에서 가져온 링크들  --%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	var repNo=opener.document.getElementById("btn_del").value;
-	alert(repNo);
-	
-	var repPassword=opener.document.getElementById("repPassword");
-	function closePopup(){
+function closePopup(){
 		self.close();
 	}
 	$(document).ready(function() {
 		$("#delete").click(function(){
 			if(confirm("정말 삭제하시겠습니까?")){
-				if(repPassword.value==$("#password").val()){
+				if(${param.repPassword}==$("#password").val()){
 							$.ajax({
 								type:"get",
 								url:"${pageContext.request.contextPath}/front",
-								data:"command=replydelete&repNo="+repNo,
+								data:"command=replydelete&repNo=${param.repNo}",
 								success: function(result){
 									if(result=="ok"){
+										opener.document.location.reload();
 										closePopup();
+										//리스트다시보기 구현예정
 									}
 								}
 							});
 						}else{
 							alert("비밀번호를 다시 확인해주세요");
 						}
-					}		
+					}else{
+						return;
+					}
 		});//click
 	});//ready
 </script>
 </head>
 <body onunload="closePopup()">
-<%--<form action="${pageContext.request.contextPath}/front" method="post" id="replydeleteForm"> --%>
-<input type="hidden" id="repNo" name="repNo" value="0">
-<input type="hidden" name="command" value="replydelete">
 <br><p>삭제하시려면 비밀번호를 입력하세요</p>
 <input type="password" id="password" class="form-control" required="required"><br>
 <input type="button" id="delete" value="확인" class="btn btn-danger">
-<%--</form> --%>
 </body>
 </html>
 

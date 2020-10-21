@@ -2,8 +2,14 @@
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+        // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('530341c9989a3cca0a363ca323fe31d0');
 
-
+        // SDK 초기화 여부를 판단합니다.
+        console.log(Kakao.isInitialized());
+    </script>
 <%-- 핳게시물 --%>
 <%-- 고조선 시대 --%>
 <div class="container">

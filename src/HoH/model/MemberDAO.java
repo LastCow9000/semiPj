@@ -38,7 +38,7 @@ public class MemberDAO {
 	      PreparedStatement pstmt=null;
 	      ResultSet rs=null;
 	      try{
-	         String sql = "SELECT id, password, ageName, nickName "
+	         String sql = "SELECT id, password, ageName, nickName, point, rank "
 	               + "FROM member "
 	               + "WHERE id=? AND password=?";
 	         con = dataSource.getConnection();
@@ -52,6 +52,8 @@ public class MemberDAO {
 	            memberVO.setPassword(rs.getString(2));
 	            memberVO.setAgeName(rs.getString(3));
 	            memberVO.setNickName(rs.getString(4));
+	            memberVO.setPoint(rs.getInt(5));
+	            memberVO.setRank(rs.getString(6));
 	         }
 	      }finally{
 	         closeAll(rs, pstmt,con);
@@ -203,6 +205,7 @@ public class MemberDAO {
 	      }
 	      return list;
 	   }
+
 	
 	public void follwerAdd(String id,String nickname) throws SQLException {
 		   Connection con=null;
@@ -300,6 +303,43 @@ public class MemberDAO {
 		}
 		
 		return flag;
+	}
+	
+	//등급조회
+	public String getRank(String id) throws SQLException {
+		String rank=null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT rank FROM member WHERE id=?";
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs =pstmt.executeQuery();
+			if (rs.next()) {
+				rank=rs.getString(1);
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return rank;
+	}
+	
+	//등급업
+	public void rankUp(String rank ,String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "UPDATE member SET rank=? WHERE id=?";
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, rank);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		}finally {
+			closeAll(pstmt, con);
+		}
 	}
 }//class
 

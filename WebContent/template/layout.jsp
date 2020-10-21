@@ -19,23 +19,31 @@
 function search() {
       var agename = "${requestScope.ageName}"
       var option = $("#searchText option:selected").val();
-      var word = $('#text').val();
-   if(${requestScope.ageName==null}) { 
-      location.href="${pageContext.request.contextPath}/front?command=searchall&option="+option+"&word="+word;
-   } else {
-      location.href="${pageContext.request.contextPath}/front?command=ageSearch&agename="+agename+"&option="+option+"&word="+word;
-      // 테마별 검색  
-       /* $(document).ready(function () {
-         $.ajax({
-            type:"get",
-            url:"front",
-            data:"command=ageSearch&agename=${requestScope.ageName}&option="+$("#searchText option:selected").val()+"&word="+$('#text').val(),
-            success: function(result) {
-               
-            }
-         });
-      }); */
-   }
+      var word = $('#text').val().trim();
+      
+      // 검색 빈칸일 때 전송 X
+      if(word==="") {
+          alert("검색할 단어를 입력하세요");
+          return false;
+       }
+      
+      // 
+	   if(${requestScope.ageName==null}) { 
+	      location.href="${pageContext.request.contextPath}/front?command=searchall&option="+option+"&word="+word;
+	   } else {
+	      location.href="${pageContext.request.contextPath}/front?command=ageSearch&agename="+agename+"&option="+option+"&word="+word;
+	      // 테마별 검색  
+	       /* $(document).ready(function () {
+	         $.ajax({
+	            type:"get",
+	            url:"front",
+	            data:"command=ageSearch&agename=${requestScope.ageName}&option="+$("#searchText option:selected").val()+"&word="+$('#text').val(),
+	            success: function(result) {
+	               
+	            }
+	         });
+	      }); */
+	   }
 }
 </script>
 
@@ -44,13 +52,13 @@ function search() {
 <%-- header 상단 메뉴바 --%>
 <c:import url="/template/header.jsp"></c:import>
 
-<body>
+<body bgcolor="red">
 
 <%-- 검색기능 메인화면에서는 감추고 테마별 게시판은 등장 --%>
 <div class="sch col-sm-6 col-sm-offset-6">
 <form class="form-inline" id="selectBox">
    <select style="width:80px; height:30px;" id="searchText">
-      <option value="">---</option>
+      <%--<option value="">---</option> --%>
       <option value="b.title">제목</option>
       <option value="m.nickname">작성자</option>
    </select>

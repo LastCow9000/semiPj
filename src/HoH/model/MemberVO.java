@@ -6,8 +6,18 @@ public class MemberVO {
 	private String nickName;
 	private String ageName;
 	private int point;
+	private String rank;
 	public MemberVO() {
 		super();
+	}
+	public MemberVO(String id, String password, String nickName, String ageName, int point, String rank) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.nickName = nickName;
+		this.ageName = ageName;
+		this.point = point;
+		this.rank = rank;
 	}
 	public String getId() {
 		return id;
@@ -39,27 +49,15 @@ public class MemberVO {
 	public void setPoint(int point) {
 		this.point = point;
 	}
-	public MemberVO(String id, String password, String nickName, String ageName, int point) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.nickName = nickName;
-		this.ageName = ageName;
-		this.point = point;
+	public String getRank() {
+		return rank;
 	}
-	
-	//로그인기능 사용시 혹시 몰라서 넣었습니다.
-	public MemberVO(String id, String password) {
-		super();
-		this.id = id;
-		this.password = password;
+	public void setRank(String rank) {
+		this.rank = rank;
 	}
-	
 	@Override
 	public String toString() {
-		return "[id=" + id + ", password=" + password + ", nickName=" + nickName + ", ageName=" + ageName
-				+ ", point=" + point + "]";
+		return "MemberVO [id=" + id + ", password=" + password + ", nickName=" + nickName + ", ageName=" + ageName
+				+ ", point=" + point + ", rank=" + rank + "]";
 	}
-	
-	
 }
