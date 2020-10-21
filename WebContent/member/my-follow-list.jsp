@@ -4,6 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-9">
+		
 			<div class="panel panel-primary">
 				<div class="panel-heading">${sessionScope.memberVO.nickName}님의 팔로우 목록</div>
 					<table class="table hoh">
@@ -18,7 +19,6 @@
 								<th>작성 날짜</th>
 							</tr>
 						</thead>
-						
 						<tbody>
 						<c:forEach items="${requestScope.myFollowPostVOList}" var="list" varStatus="status">
 						<tr>
@@ -35,6 +35,32 @@
 						</tbody>
 					</table>
 			</div>
+			<%-- 페이징 처리 --%>
+			<%-- 
+			<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
+			<div class="pagingArea">
+				<div class="pagination">
+					<c:if test="${pb.previousPageGroup}">
+						<a
+							href="front?command=myFollowList&id=${sessionScope.memberVO.id}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
+					</c:if>
+					<c:forEach var="i" begin="${pb.startOfPageGroup}"
+						end="${pb.endOfPageGroup}">
+						<c:choose>
+							<c:when test="${pb.nowPage!=i}">
+								<a href="front?command=myFollowList&pageNo=${i}">${i}</a>
+									</c:when>
+							<c:otherwise>
+								<a href="#" class="active">${i}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${pb.nextPageGroup}">
+						<a
+							href="front?command=myFollowList&id=${sessionScope.memberVO.id}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
+					</c:if>
+				</div>
+			</div> --%>
 		</div>
 	</div>
 </div>

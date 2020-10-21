@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import HoH.model.FollowDAO;
+import HoH.model.ListVO;
 import HoH.model.MemberVO;
+import HoH.model.PagingBean;
 import HoH.model.PostVO;
 
 public class MyFollowListController implements Controller {
@@ -28,7 +30,16 @@ public class MyFollowListController implements Controller {
 				ArrayList<PostVO> followPostVOList = new ArrayList<PostVO>();
 				followPostVOList = FollowDAO.getInstance().getMyFollowPostList(id);
 				
-				
+				/*
+				 * //페이징 int totalFollowPostCount =
+				 * FollowDAO.getInstance().getTotalFollowCount(id); String pageNo =
+				 * request.getParameter("pageNo"); PagingBean pagingBean = null;
+				 * ArrayList<PostVO> flist = new ArrayList<PostVO>(); if(pageNo==null) {
+				 * pagingBean = new PagingBean(totalFollowPostCount); } else { pagingBean = new
+				 * PagingBean(totalFollowPostCount,Integer.parseInt(pageNo)); } ListVO lvo=new
+				 * ListVO(flist, pagingBean); request.setAttribute("listvo", lvo);
+				 * request.setAttribute("totalFollowPostCount", totalFollowPostCount);
+				 */
 				request.setAttribute("myFollowPostVOList", followPostVOList);
 				
 				//url 보내주기

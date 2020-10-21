@@ -50,21 +50,6 @@
 								<td>${list.regDate}</td>
 							</tr>
 						</c:forEach>
-
-						<%-- <c:forEach var="list" items="${requestScope.listvo.list}">
-
-								<tr>
-									<td>${list.rnum}</td>
-									<td><a 
-												href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${list.rnum}">${list.title}</a></td>
-									<td>${list.memberVO.nickName}</td>
-									<td>${list.likeCount}</td>
-									<td>${list.viewCount}</td>
-									<td>${list.regDate}</td>
-								</tr>
-					
-
-							</c:forEach> --%>
 					</tbody>
 				</table>
 			</div>

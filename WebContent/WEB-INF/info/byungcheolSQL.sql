@@ -172,7 +172,7 @@ alter table scrap_post RENAME COLUMN regdate to scraped_regdate;
 
 
 
-select m.id, m.nickname, b.title,b.regDate,b.content,  b.post_no, 
+select ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM, m.id, m.nickname, b.title,b.regDate,b.content,  b.post_no, 
 			 b.view_count, b.like_count, m.ageName,b.post_no 
 	    from member m, board b where m.id = b.id and m.nickname in 
 	    (select f.nickname from member m, follow f 
@@ -184,4 +184,15 @@ where m.id=b.id and
 
 select b.post_no
 
-select * from dual;
+SELECT  B.RNUM ,B.POST_NO, B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,AGEDATE, B.rep_count 
+FROM ( 
+		SELECT ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM ,b.post_no,B.TITLE,M.NICKNAME,B.LIKE_COUNT,B.VIEW_COUNT,TO_CHAR(REGDATE, 'YYYY-MM-DD') ,
+			FROM BOARD B, MEMBER M 
+			WHERE B.ID=M.ID AND M.AGENAME=?
+			) B , MEMBER M
+			WHERE B.NICKNAME=M.NICKNAME and rnum between 1 and 8 
+			
+SELECT COUNT(*) from member m, board b where m.id = b.id and m.nickname in 
+	    (select f.nickname from member m, follow f 
+	         where m.id=f.id and m.id='donguk')
+	    order by b.post_no desc;

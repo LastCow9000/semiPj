@@ -161,6 +161,21 @@ public ArrayList<PostVO> getMyFollowPostList(String id)
       
       return list;
    }//getMyScrapPostList 
+	/*
+	 * //페이징용 팔로잉 게시글 총 갯수 public int getTotalFollowCount(String id) throws
+	 * SQLException { int totalCount = 0; Connection con = null; PreparedStatement
+	 * pstmt = null; ResultSet rs = null; try { con = getConnection(); StringBuilder
+	 * sql = new StringBuilder(); sql.
+	 * append("SELECT COUNT(*) from member m, board b where m.id = b.id and m.nickname in "
+	 * ); sql.append("(select f.nickname from member m, follow f ");
+	 * sql.append("where m.id=f.id and m.id=?) ");
+	 * sql.append("order by b.post_no desc ");
+	 * 
+	 * pstmt = con.prepareStatement(sql.toString()); pstmt.setString(1, id); rs =
+	 * pstmt.executeQuery(); if (rs.next()) { totalCount = rs.getInt(1); } } finally
+	 * { closeAll(rs, pstmt, con); } return totalCount; }
+	 */
+
 }
 
 
