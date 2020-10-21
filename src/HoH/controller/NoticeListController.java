@@ -26,7 +26,7 @@ public class NoticeListController implements Controller {
 		}
 		list = BoardDAO.getInstance().getAllNoticeList(pagingBean);
 		ListVO lvo=new ListVO(list, pagingBean);
-		
+		lvo.setList(list);
 		
 		request.setAttribute("listvo", lvo);
 		request.setAttribute("ageName", ageName);
