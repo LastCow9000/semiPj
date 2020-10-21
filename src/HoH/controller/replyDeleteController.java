@@ -10,7 +10,6 @@ public class replyDeleteController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String repNo=request.getParameter("repNo");
-		System.out.println(repNo);
 		boolean flag=BoardDAO.getInstance().deleteReply(repNo);
 		String result = "fail";
 		if (flag == true) 

@@ -12,6 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+
 	 function updateRep(rNo, content){
 		 var htmls = "";
 			htmls += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
@@ -33,16 +34,15 @@
 		} 
 	 
 			$(document).ready(function() {
-				$(".save").click(function(){
-					alert($(this).val());
-			if($("#password").val()==$(".repPassword").val()){
+				$(document).on("click",".save",function(){
+			if( $("#password").val()==$(".repPassword"+$(this).val()).val() ){//비밀번호 비교
 					$.ajax({
 						type:"get",
 						url:"${pageContext.request.contextPath}/front",
-						data:"command=replyupdate&content="+ $("#editContent").val() +"&repNo="+ rNo + "&password=" + $("#password").val(),
+						data:"command=replyupdate&content="+ $("#editContent").val() +"&repNo="+ $(this).val() + "&password=" + $("#password").val(),
 						success:function(result){
 							if(result=="ok"){
-								location.href="${pageContext.request.contextPath}/front?command=detailpost&postNo="+$("#postNo").val();
+								document.location.reload()
 							}
 						}//success
 					});//ajax
@@ -51,13 +51,6 @@
 					}//else
 				});//click
 			});//ready
-			
-	/* 	// 댓글(게시글) 다시 보기위한 새로고침
-		function showReplyList(){
-			$(document).ready(function() {
-				location.href="${pageContext.request.contextPath}/front?command=detailpost&postNo="+$("#postNo").val();
-			});
-		} */
 			
 		//댓글삭제
 		$(document).ready(function() {
@@ -69,6 +62,7 @@
 				window.open("${pageContext.request.contextPath}/board/repDeleteConfirm.jsp?repNo="+$(this).val()+"&repPassword="+repPassword, "delconfirmpopup", options);
 			});
 		});
+			
 	</script>
 	</head>
 	<body>

@@ -20,8 +20,9 @@
 			<div class="row">
 				<div class="col-sm-9">
 					<div class="panel panel-primary">
+						<form action="${pageContext.request.contextPath}/front" method="post">
 						<table class="table hoh">
-
+							
 							<tr align="left">
 								<td colspan="3">글번호 ${requestScope.rnum}</td>
 							</tr>
@@ -46,9 +47,17 @@
 									<textarea rows="5" cols="115" name="content">${requestScope.postVO.content}</textarea>
 								</td>
 							</tr>
-
+							
+							<tr align="center">
+							<td colspan="3" class="btnArea">
+								<input type="hidden" name="command" value="updatepost">
+								<input type="hidden" name="postNo" value="${requestScope.postVO.postNo}">
+								<button type="submit" class="btn">수정 완료</button>
+							</td>
+							</tr>
+						
 						</table>
-
+						</form>
 					</div>
 				</div>
 			</div>
