@@ -498,21 +498,6 @@ public class BoardDAO {
 		}
 	}
 
-	// 좋아요를 누를경우 게시물 작성자에게 포인트 전달 메서드
-	public void memberUpdatePlusPoint(String postId) throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = getConnection();
-			String sql = "update member set point = point+10  where id=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, postId);
-			pstmt.executeUpdate();
-		} finally {
-			closeAll(pstmt, con);
-		}
-	}
-
 	// 좋아요 테이블에서 삭제하기
 	public void likeMinus(String loginId, String postNo) throws SQLException {
 		Connection con = null;
@@ -529,6 +514,8 @@ public class BoardDAO {
 		}
 	}
 
+
+
 	// board 테이블에 좋아요-1 메서드
 	public void boardLikeMinusUpdate(String postNo) throws SQLException {
 		Connection con = null;
@@ -538,21 +525,6 @@ public class BoardDAO {
 			String sql = "update board set like_count = like_count-1  where post_no=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, postNo);
-			pstmt.executeUpdate();
-		} finally {
-			closeAll(pstmt, con);
-		}
-	}
-
-	// 좋아요를 취소할 경우 게시물 작성자에게 포인트 빼는메서드
-	public void memberUpdateMinusPoint(String postId) throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = getConnection();
-			String sql = "update member set point = point-10  where id=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, postId);
 			pstmt.executeUpdate();
 		} finally {
 			closeAll(pstmt, con);

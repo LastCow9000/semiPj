@@ -38,11 +38,7 @@ public class FollowDAO {
          con.close();
    }
    
-   /**
-    * 기능 : 시대 별 게시글 상세보기 기능 
-    * postDetailByNo(String postNo) : PostVO
-    * @throws SQLException
-    */
+  
    public void follwerAdd(String id,String nickname) throws SQLException {
 	   Connection con=null;
 	      PreparedStatement pstmt=null;
@@ -105,7 +101,8 @@ public ArrayList<String> follwingList(String id) throws SQLException {
 	return list;
 }
 
-public void followDelete(String nickname) throws SQLException {
+public String followDelete(String nickname) throws SQLException {
+	String flag="fail";
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	try {
@@ -113,10 +110,13 @@ public void followDelete(String nickname) throws SQLException {
 		con = dataSource.getConnection();
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, nickname);
-		pstmt.executeUpdate();
+		int check=pstmt.executeUpdate();
+		if(check>0)
+			flag="ok";
 	}finally {
 		closeAll(pstmt, con);
 	}
+	return flag;
 }
 
 public ArrayList<PostVO> getMyFollowPostList(String id) 

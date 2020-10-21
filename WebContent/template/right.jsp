@@ -32,11 +32,16 @@
    <c:otherwise>
    <p align="center">
       ${sessionScope.memberVO.ageName } <br>
-      
-      <c:choose>
+    	<%-- 로그인폼 이미지 --%>  
+ 	     <c:choose>
+      		<c:when test="${sessionScope.memberVO.id=='adminmts'}">
+        		<img src="${path}/image/unnamed.gif">
+ 			</c:when>
+      		<c:otherwise>
+      		<c:choose>
          <c:when test="${rank=='iron'}">
-            <img class="rank" src="${path}/image/iron.png">
-         </c:when>
+         	<img class="rank" src="${path}/image/iron.png">
+        </c:when>
          <c:when test="${rank=='bronze'}">
             <img class="rank" src="${path}/image/bronze.png">
          </c:when>
@@ -55,10 +60,12 @@
          <c:when test="${rank=='challenger'}">
             <img class="rank" src="${path}/image/challenger.png">
          </c:when>
+         </c:choose>
+         </c:otherwise>
       </c:choose>
       
-      ${sessionScope.memberVO.nickName }님 <br>
-      로그인 중
+      ${sessionScope.memberVO.nickName }님  <br>
+       보유 포인트:<b>${point}</b> <br>
    </p>
    <div class="container">
    <p>

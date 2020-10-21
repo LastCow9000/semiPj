@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import HoH.model.BoardDAO;
+import HoH.model.MemberDAO;
+import HoH.model.MemberVO;
 
 public class LikeCancelController implements Controller {
 
@@ -15,7 +17,7 @@ public class LikeCancelController implements Controller {
 		String result="좋아요 취소";
 		BoardDAO.getInstance().likeMinus(loginId, postNo);
 		BoardDAO.getInstance().boardLikeMinusUpdate(postNo);
-		BoardDAO.getInstance().memberUpdateMinusPoint(postId);
+		MemberDAO.getInstance().UpdateMinusPoint(postId, MemberVO.likePoint);
 		request.setAttribute("responsebody", result);
 		return "AjaxView";
 	}

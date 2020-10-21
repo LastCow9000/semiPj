@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import HoH.model.BoardDAO;
+import HoH.model.MemberDAO;
 import HoH.model.MemberVO;
 import HoH.model.PostVO;
 
@@ -23,6 +24,8 @@ public class WritePostController implements Controller {
 			postVO.setTitle(title);
 			postVO.setContent(content);
 			postVO.setMemberVO(memberVO);
+			String id = memberVO.getId();
+			MemberDAO.getInstance().UpdatePlusPoint(id, MemberVO.postPoint);
 			if(memberVO.getId().contentEquals("adminmts")) {
 				postNo = BoardDAO.getInstance().wirteNoticePost(postVO);
 				url = "redirect:front?command=noticeDetailpost&postNo=" + postNo; //값이 다시 넘어감을 방지하기 위한 redirect

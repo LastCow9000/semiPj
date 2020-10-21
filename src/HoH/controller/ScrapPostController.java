@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import HoH.model.BoardDAO;
+import HoH.model.MemberDAO;
 import HoH.model.MemberVO;
 import HoH.model.ScrapDAO;
 
@@ -29,11 +31,12 @@ public class ScrapPostController implements Controller {
 
 		// 결과값 
 		String result = "fail";
-		
+		String id=ScrapDAO.getInstance().ScrapPostDetailByNo(ScrapPostNo).getMemberVO().getId();
 		// flag
-		if (flag) 
+		if (flag) {
 			result = "ok";
-		
+			MemberDAO.getInstance().UpdatePlusPoint(id, MemberVO.scrapPoint);
+		}
 		request.setAttribute("responsebody", result);
 		
 		return "AjaxView";

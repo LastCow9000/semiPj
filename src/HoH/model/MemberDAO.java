@@ -341,6 +341,59 @@ public class MemberDAO {
 			closeAll(pstmt, con);
 		}
 	}
+	
+	//포인트 올리는 메서드
+	public void UpdatePlusPoint(String postId, int point) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = dataSource.getConnection();
+			String sql = "update member set point = point+?  where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, point);
+			pstmt.setString(2, postId);
+			pstmt.executeUpdate();
+		} finally {
+			closeAll(pstmt, con);
+		}
+	}
+	
+	//포인트 내리는 메서드
+	public void UpdateMinusPoint(String postId, int point) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = dataSource.getConnection();
+			String sql = "update member set point = point-?  where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, point);
+			pstmt.setString(2, postId);
+			pstmt.executeUpdate();
+		} finally {
+			closeAll(pstmt, con);
+		}
+	}
+	
+	//nickname으로 id를 받아오는 메서드
+	public String findIdbyNickName(String nickName) throws SQLException {
+		String id=null;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="SELECT id FROM member WHERE nickname=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, nickName);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+				id=rs.getString(1);
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return id;
+	}
+	
 }//class
 
 

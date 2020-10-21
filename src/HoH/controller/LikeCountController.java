@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import HoH.model.BoardDAO;
+import HoH.model.MemberDAO;
+import HoH.model.MemberVO;
 
 public class LikeCountController implements Controller {
 
@@ -19,7 +21,7 @@ public class LikeCountController implements Controller {
 		} else if(likeCheck==0) {
 			BoardDAO.getInstance().likePlus(loginId, postNo);
 			BoardDAO.getInstance().boardLikePlusUpdate(postNo);
-			BoardDAO.getInstance().memberUpdatePlusPoint(postId);
+			MemberDAO.getInstance().UpdatePlusPoint(postId, MemberVO.likePoint);
 			result="좋아요를 눌렀습니다.";
 		}
 		request.setAttribute("responsebody", result);

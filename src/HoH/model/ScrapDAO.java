@@ -38,11 +38,7 @@ public class ScrapDAO {
          con.close();
    }
    
-   /**
-    * 기능 : 시대 별 게시글 상세보기 기능 
-    * postDetailByNo(String postNo) : PostVO
-    * @throws SQLException
-    */
+   //스크랩 포스트 상세보기
    public PostVO ScrapPostDetailByNo(String postNo) throws SQLException {
       Connection con = null;
       PreparedStatement pstmt = null;
@@ -80,7 +76,7 @@ public class ScrapDAO {
 
       return postVO;
 
-   }// postDetailByNo method
+   }
    
  //스크랩 게시물 중복확인 : isCheckScrapPost
  	// 스크랩 게시물이 중복이면 : true / 중복아니면 : false
@@ -138,29 +134,35 @@ public class ScrapDAO {
  	 * 마이 스크랩 리스트에 들어갈 postNo 뽑아오기
  	 * getMyScrapPostList(id) : ArrayList<String>
  	 */
- 	public ArrayList<String> getMyScrapPostList(String id) 
+ 	public ArrayList<PostVO> getMyScrapPostList(String id, PagingBean pagingBean) 
  			throws SQLException {
- 	      ArrayList<String> postNoList = new ArrayList<String>();
+ 	      ArrayList<PostVO> list = new ArrayList<PostVO>();
  	      Connection con = null;
  	      PreparedStatement pstmt = null;
  	      ResultSet rs = null;
  	      try {
  	         con = getConnection();
- 	         String sql = "SELECT post_no, scraped_regdate "
- 	         		+ "FROM scrap_post WHERE id=? "
- 	         		+ "ORDER BY scraped_regdate desc";
+ 	         String sql="SELECT rnum, post_no, scraped_regdate " + 
+ 	         		"FROM (SELECT row_number() over (ORDER BY scraped_regdate DESC) AS rnum, post_no, scraped_regdate, id FROM SCRAP_POST WHERE id=?) " + 
+ 	         		"WHERE rnum BETWEEN ? AND ? " + 
+ 	         		"ORDER BY scraped_regdate desc";
  	         pstmt = con.prepareStatement(sql.toString());
  	         pstmt.setString(1, id);
+ 	         pstmt.setInt(2, pagingBean.getStartRowNumber());
+ 	         pstmt.setInt(3, pagingBean.getEndRowNumber());
  	         rs = pstmt.executeQuery();
  	         while(rs.next()) {
- 	            postNoList.add(rs.getString(1));
+ 	        	 PostVO postVO=new PostVO();
+ 	        	 postVO.setPostNo(rs.getString(1));
+ 	        	 postVO.setRnum(rs.getString(2));
+ 	            list.add(postVO);
  	         }
 
  	      } finally {
  	         closeAll(rs, pstmt, con);
  	      }
  	      
- 	      return postNoList;
+ 	      return list;
  	      
  	   }//getMyScrapPostList 
  	
@@ -192,5 +194,25 @@ public class ScrapDAO {
 	  
 	  return flag;
 	  }//deleteScrapPostByPostNo
+	  
+	  //페이징용 총스크랩 갯수 가져오기
+	  public int getTotalScrapPostCount() throws SQLException {
+		  int count=0;
+		  Connection con = null; 
+		  PreparedStatement pstmt = null;
+		  ResultSet rs=null;
+		  try { 
+			  con = getConnection(); 
+			  String sql = "SELECT COUNT(*) FROM scrap_post";
+			  pstmt = con.prepareStatement(sql); 
+			  rs = pstmt.executeQuery();
+			  if(rs.next())
+				  count=rs.getInt(1);
+		   } finally { 
+			  closeAll(rs, pstmt, con); 
+			  } 
+		  
+		  return count;
+		  }
    
 }

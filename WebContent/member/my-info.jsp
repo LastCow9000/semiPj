@@ -37,13 +37,13 @@
 					url : "front",
 					data : "command=follwerDel&nickname=" + nickname,
 					success : function(result) {
-						//alert("팔로우 삭제완료!");
-						 location.href = "${pageContext.request.contextPath}/front?command=getdetailmember";
+						if(result=="ok"){
+							//alert("팔로잉 삭제 성공!")
+							 location.href = "${pageContext.request.contextPath}/front?command=getdetailmember";
+						}//if
 					}
-				})
-
+				});
 			});//each
-			alert("팔로잉 삭제완료!")
 			}
 		});//click
 	});//ready

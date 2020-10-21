@@ -256,3 +256,8 @@ select* from member;
 SELECT *
 FROM   member
 WHERE  id='donguk'
+
+SELECT rnum, post_no, scraped_regdate
+FROM (SELECT row_number() over (ORDER BY scraped_regdate DESC) AS rnum, post_no, scraped_regdate, id FROM SCRAP_POST WHERE id='donguk')
+WHERE rnum BETWEEN 1 AND 10
+ORDER BY scraped_regdate desc;

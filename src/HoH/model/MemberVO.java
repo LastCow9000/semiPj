@@ -1,6 +1,10 @@
 package HoH.model;
 
 public class MemberVO {
+	public static final int likePoint=20;
+	public static final int scrapPoint=30;
+	public static final int followPoint=40;
+	public static final int postPoint=60;
 	private String id;
 	private String password;
 	private String nickName;
