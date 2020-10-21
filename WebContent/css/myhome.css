@@ -107,6 +107,9 @@ th {
 	font-family: "돋음";
 	text-align: center;
 }
+.table>caption+thead>tr:first-child>td{
+	text-aline: center;
+}
 
 
 /* Add a gray background color and some padding to the footer */
