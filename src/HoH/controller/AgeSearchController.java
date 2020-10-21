@@ -20,9 +20,7 @@ public class AgeSearchController implements Controller {
 		String option = request.getParameter("option");
 		String word = request.getParameter("word");
 		sql.append(word);
-		System.out.println(ageName+option+sql.toString());
 		int ageTotalPostCount = BoardDAO.getInstance().totalAgePostCount(ageName, option, sql.toString());
-		System.out.println(ageTotalPostCount);
 		String pageNo = request.getParameter("pageNo");
 		PagingBean pagingBean = null;
 		ArrayList<PostVO> list = new ArrayList<PostVO>();

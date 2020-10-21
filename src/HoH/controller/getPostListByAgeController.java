@@ -77,7 +77,6 @@ public class getPostListByAgeController implements Controller {
 		
 		noticeList = BoardDAO.getInstance().getNoticeList();
 		request.setAttribute("noticeList", noticeList);
-		System.out.println(noticeList);
 		request.setAttribute("listvo", lvo);
 		request.setAttribute("ageName", ageName);
 		request.setAttribute("totalPostCount", totalPostCount);

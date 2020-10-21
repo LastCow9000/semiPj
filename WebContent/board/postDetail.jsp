@@ -165,14 +165,11 @@ if(${requestScope.likeCheck==1}) {
 
 </head>
 <body>
-   <div class="container">
-         <div class="row">
-            <div class="col-sm-9">
-               <div class="panel panel-primary">
-                  <table class="table hoh">
-                     <%-- 버튼 부분: 본인의 아이디와 일치할 경우 '수정' '삭제' 버튼 보임 --%>
-
-                     <c:if test="${requestScope.postVO.memberVO.id == sessionScope.memberVO.id  || sessionScope.memberVO.id == 'adminmts'}">
+	<div class="container">
+			<div class="row">
+				<div class="col-sm-9">
+					<%-- 버튼 부분: 본인의 아이디와 일치할 경우 '수정' '삭제' 버튼 보임 --%>
+					                     <c:if test="${requestScope.postVO.memberVO.id == sessionScope.memberVO.id  || sessionScope.memberVO.id == 'adminmts'}">
                         <tr align="right">
                            <td colspan="3" class="btnArea">
                               <form name="deleteForm" action="${pageContext.request.contextPath}/front" method="post">
@@ -193,63 +190,61 @@ if(${requestScope.likeCheck==1}) {
                         </tr>
                      </c:if>
 
+					<div class="panel panel-primary">
+						<div class="panel-heading">${requestScope.postVO.memberVO.ageName}</div>
+						<table class="table hoh">
+						<tr>
+							<td colspan="2"><strong>${requestScope.postVO.title}</strong></td>
+							<td colspan="1" align="right"><span class="glyphicon glyphicon-time"></span> 작성일 : ${requestScope.postVO.regDate }</td>
+						</tr>
 
-                     <tr align="left">
-                        <td colspan="3">글번호 ${requestScope.rnum}</td>
-                     </tr>
+						<tr>
+							<td colspan="1" align="left">닉네임 <strong>${requestScope.postVO.memberVO.nickName}</strong></td>
+							<td colspan="2" align="right">
+							<span class="glyphicon glyphicon-user"></span>
+							<strong>${requestScope.postVO.viewCount}</strong>  | 
+							<span class="glyphicon glyphicon-thumbs-up"></span>
+							<strong>${requestScope.postVO.likeCount }</strong>
+							</td>
 
-                     <tr>
-                        <td colspan="1">제목 ${requestScope.postVO.title}</td>
-                        <td colspan="1" align="right"><span class="glyphicon glyphicon-time"></span>작성일 ${requestScope.postVO.regDate }</td>
-                     </tr>
+						</tr>
 
-                     <tr>
-                        <td colspan="1" align="left">작성자 ${requestScope.postVO.memberVO.nickName }</td>
-                        <td colspan="1" align="right">조회수 ${requestScope.postVO.viewCount }</td>
-                        <td colspan="1" align="right">좋아요수 ${requestScope.postVO.likeCount }</td>
+						<tr>
+							<td colspan="3"><pre> ${requestScope.postVO.content}</pre></td>
+						</tr>
 
-                     </tr>
+						<%-- 좋아요 / 스크랩 버튼 부분 --%>
+						<tr align="center">
+						
+							<td colspan="3" class="btnArea">
+									<%-- 스크랩 기능
+								<form id="scrapForm" action="${pageContext.request.contextPath}/front" method="POST">
+									<input type="hidden" name="command" value="scrapPost">
+									<input type="hidden" name="postNo" value="${requestScope.postVO.postNo}">
+								</form>  --%>
+								
+								
+								
+								<%-- 스크랩 버튼 --%>
+								<button type="button" id="scrap_btn" class="btn btn-default btn-sm">
+									<span class="glyphicon glyphicon-bookmark"></span> 스크랩 
+								</button>
+								<%-- 좋아요 버튼 --%>
+								<button type="button" class="btn btn-default btn-sm" onclick="like()" id="likeBtn"> <span class="fa fa-heart-o" style="color:red" id="heartBlank"></span><span id="heart"></span>좋아요</button>
+                          		 <span id="likeView"></span>
+                          		 <button type="button" class="btn btn-default btn-sm" id="followAdd" ><span class="glyphicon glyphicon-plus"></span> 팔로우 </button>
+                        	</td>
+						</tr>
 
-                     <tr>
-                        <td colspan="3">본문 내용</td>
-                     </tr>
+						<tr>
+							<td colspan="3"><c:import url="/board/reply.jsp"/></td>
+						</tr>
 
-                     <tr>
-                        <td colspan="3"><pre> ${requestScope.postVO.content}</pre></td>
-                     </tr>
+					</table>
 
-                     <%-- 좋아요 / 스크랩 버튼 부분 --%>
-                     <tr align="center">
-                     
-                        <td colspan="3" class="btnArea">
-                              <%-- 스크랩 기능
-                           <form id="scrapForm" action="${pageContext.request.contextPath}/front" method="POST">
-                              <input type="hidden" name="command" value="scrapPost">
-                              <input type="hidden" name="postNo" value="${requestScope.postVO.postNo}">
-                           </form>  --%>
-                           
-                           
-                           
-                           <%-- 스크랩 버튼 --%>
-                           <button type="button" id="scrap_btn" class="btn btn-default btn-sm">
-                              <span class="glyphicon glyphicon-bookmark"></span> 스크랩 
-                           </button>
-                           <%-- 좋아요 버튼 --%>
-                           <button type="button" class="btn btn-default btn-sm" onclick="like()" id="likeBtn"> <span class="fa fa-heart-o" style="color:red" id="heartBlank"></span><span id="heart"></span>좋아요</button>
-                           <span id="likeView"></span>
-                           <button type="button" class="btn btn-default btn-sm" id="followAdd" ><span class="glyphicon glyphicon-plus"></span> 팔로우 </button>
-                        </td>
-                     </tr>
-
-                     <tr>
-                        <td colspan="3"><c:import url="/board/reply.jsp"/></td>
-                     </tr>
-
-                  </table>
-
-               </div>
-            </div>
-         </div>
-      </div>
-   </body>
+				</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

@@ -18,7 +18,7 @@ public class UpdateMemberController implements Controller {
 		String ageName = request.getParameter("ageName");
 		int point = Integer.parseInt(request.getParameter("point"));
 		
-		MemberVO memberVO = new MemberVO(id, password, nickname, ageName, point);
+		MemberVO memberVO = new MemberVO(id, password, nickname, ageName, point, null);
 		MemberDAO.getInstance().update(memberVO);
 		
 		HttpSession session = request.getSession(false);

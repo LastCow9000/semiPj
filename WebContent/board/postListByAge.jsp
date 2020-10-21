@@ -1,26 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-
-<body>
 
 	<div class="container">
-		<div class="container">
 			<div class="row">
-				<div class="col-sm-10">
+				<div class="col-sm-9">
 					<div class="panel panel-primary">
 						<div class="panel-heading">${requestScope.ageName}게시물~!</div>
 						<table class="table hoh">
@@ -41,7 +25,7 @@
 				<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
 				<tr bgcolor='red'>
 					<td>${requestScope.noticeList[0].postNo}</td>
-					<td>${requestScope.noticeList[0].title}</td>
+					<td><a href="${pageContext.request.contextPath}/front?command=noticeDetailpost&postNo=${requestScope.noticeList[0].postNo}">${requestScope.noticeList[0].title}</a></td>
 					<td>${requestScope.noticeList[0].memberVO.nickName}</td>
 					<td>${requestScope.noticeList[0].likeCount}</td>
 					<td>${requestScope.noticeList[0].viewCount}</td>
@@ -61,25 +45,10 @@
 										<td>${list.regDate}</td>
 							</tr>
 							</c:forEach>
-					
-								<%-- <c:forEach var="list" items="${requestScope.listvo.list}">
-
-									<tr>
-										<td>${list.rnum}</td>
-										<td><a 
-													href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${list.rnum}">${list.title}</a></td>
-										<td>${list.memberVO.nickName}</td>
-										<td>${list.likeCount}</td>
-										<td>${list.viewCount}</td>
-										<td>${list.regDate}</td>
-									</tr>
-						
-
-								</c:forEach> --%>
 							</tbody>
 						</table>
 					</div>
-					<c:if test="${sessionScope.memberVO.ageName == requestScope.ageName}">
+					<c:if test="${sessionScope.memberVO.ageName == requestScope.ageName && sessionScope.memberVO != null}">
 					<div align="right">
 						<button type="submit" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/front?command=writepostform'">글쓰기</button>
 					</div>
@@ -89,7 +58,8 @@
 						<button type="submit" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/front?command=writeNotice'">공지사항 작성</button>
 						</div>
 					</c:if>
-					   <%-- 페이징 처리 --%>
+					
+			   <%-- 페이징 처리 --%>
                <c:set var="pb" value="${requestScope.listvo.pagingBean}" />
                <div class="pagingArea">
                   <div class="pagination">
@@ -119,15 +89,15 @@
                            <c:choose>
                               <c:when test="${requestScope.flag&&requestScope.ageName!=null}">
                               	
-                                 <a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}동</a>
+                                 <a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
                                  
                               </c:when>
                               <c:when test="${requestScope.flag }">
-                              <a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}세</a>
+                              <a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${i}">${i}</a>
                               </c:when>
                               <c:otherwise>
                              
-                              <a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}일</a>
+                              <a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${i}">${i}</a>
                               
                               </c:otherwise>
                            </c:choose>
@@ -141,19 +111,19 @@
                     <c:when test="${requestScope.flag&&requestScope.ageName!=null}">
                          <%-- 오른쪽 페이지 이동 --%>
                      <c:if test="${pb.nextPageGroup}">
-                        <a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.endOfPageGroup+1}">&raquo;동</a>
+                        <a href="front?command=ageSearch&agename=${requestScope.ageName}&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
                      </c:if>
                     </c:when>
                      <c:when test="${requestScope.flag }">
                           <%-- 오른쪽 페이지 이동 --%>
                      <c:if test="${pb.nextPageGroup}">
-                        <a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.endOfPageGroup+1}">&raquo;세</a>
+                        <a href="front?command=searchall&option=${requestScope.option}&word=${requestScope.word}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
                      </c:if>
                      </c:when>
                      <c:otherwise>
                        <%-- 오른쪽 페이지 이동 --%>
                      <c:if test="${pb.nextPageGroup}">
-                        <a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.endOfPageGroup+1}">&raquo;일</a>
+                        <a href="front?command=agelist&agename=${requestScope.ageName}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
                      </c:if>
                      		</c:otherwise>
                      		</c:choose>
@@ -163,6 +133,5 @@
             </div>
          </div>
       </div>
-   </div>
 </body>
 </html>

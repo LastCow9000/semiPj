@@ -1,15 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+        // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('530341c9989a3cca0a363ca323fe31d0');
 
-
+        // SDK 초기화 여부를 판단합니다.
+        console.log(Kakao.isInitialized());
+    </script>
 <%-- 핳게시물 --%>
 <%-- 고조선 시대 --%>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-5">
 			<div class="panel panel-primary">
-				<div class="panel-heading">고조선 시대 Hot 게시물~!</div>
+				<div class="panel-heading">고조선 시대 핳 게시물</div>
 				<form id="gojosun">
 					<table class="table hoh">
 						<thead>
@@ -24,7 +31,9 @@
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
 									<td>${status.count}</td>
-									<td width=300px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="badge">${list.replyCount}</span></a></td>
+									<!-- 제목 -->
+									<c:set var="title" value="${list.title }"/>
+									<td width=300px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${fn:substring(title,0,8)}... <span class="badge">${list.replyCount}</span></a></td>
 									<%-- 23자리까지 --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
@@ -36,7 +45,7 @@
 		</div>
 		<div class="col-sm-5">
 			<div class="panel panel-danger">
-				<div class="panel-heading">삼국 시대 Hot 게시물~!</div>
+				<div class="panel-heading">삼국 시대 핳 게시물</div>
 				<form id="threeKingdom">
 					<table class="table hoh">
 						<thead>
@@ -50,11 +59,16 @@
 							<c:forEach items="${requestScope.threeKingdomList}" var="list"
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
+									<!-- 순위 -->
 									<td>${status.count}</td>
-									<td width=200px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="badge">${list.replyCount}</span></a></td>
-									<%--23자리까지 --%>
+									<!-- 제목 -->
+									<c:set var="title" value="${list.title }"/>
+									<td width=200px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${fn:substring(title,0,8)}...<span class="badge">${list.replyCount}</span></a></td>
+									<%--작성자(닉네임) --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
+								
+								
 							</c:forEach>
 						</tbody>
 					</table>
@@ -71,7 +85,7 @@
 	<div class="row">
 		<div class="col-sm-5">
 			<div class="panel panel-primary">
-				<div class="panel-heading">고려 시대 Hot 게시물~!</div>
+				<div class="panel-heading">고려 시대 핳 게시물</div>
 				<div class="panel-body">
 					<form id="goryeo">
 						<table class="table hoh">
@@ -87,7 +101,9 @@
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
 									<td>${status.count}</td>
-									<td width=200px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="badge">${list.replyCount}</span></a></td>
+										<!-- 제목 -->
+									<c:set var="title" value="${list.title }"/>
+									<td width=200px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${fn:substring(title,0,8)}... <span class="badge">${list.replyCount}</span></a></td>
 									<%--23자리까지 --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
@@ -100,7 +116,7 @@
 		</div>
 		<div class="col-sm-5">
 			<div class="panel panel-primary">
-				<div class="panel-heading">조선 시대 Hot 게시물~!</div>
+				<div class="panel-heading">조선 시대 핳 게시물</div>
 				<div class="panel-body">
 					<form id="josun-list.jsp">
 						<table class="table hoh">
@@ -116,7 +132,9 @@
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
 									<td>${status.count}</td>
-									<td width=300px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="badge">${list.replyCount}</span></a></td>
+										<!-- 제목 -->
+									<c:set var="title" value="${list.title }"/>
+									<td width=300px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${fn:substring(title,0,8)} <span class="badge">${list.replyCount}</span></a></td>
 									<%--23자리까지--%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
