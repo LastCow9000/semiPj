@@ -209,7 +209,6 @@
 							<span class="glyphicon glyphicon-thumbs-up"></span>
 							<strong>${requestScope.postVO.likeCount }</strong>
 							</td>
-
 						</tr>
 
 						<tr>

@@ -69,7 +69,6 @@ CREATE TABLE notice_board(
 )
 alter table notice_board add(like_count number default 0);
 
-<<<<<<< HEAD
 insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
 insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
 insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
@@ -99,9 +98,10 @@ insert into notice_board(post_no,id,title,content,regdate) values(notice_board_s
 insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
 insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
 insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
-=======
-insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'donguk','1','안녕하세요',sysdate);
->>>>>>> branch 'master' of https://github.com/LastCow9000/semiPj.git
+
+SELECT id, password
+FROM   member
+WHERE  nickname='쏭쏭이';
 
 insert into notice_board(post_no,id,title,content,regdate) values(notice_board_seq.nextval,'adminmts','1','안녕하세요',sysdate);
 
