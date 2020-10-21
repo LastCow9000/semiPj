@@ -13,14 +13,16 @@
    <!--  로그인 오른쪽에 고정되는 화면 -->
    <c:choose>
    <c:when test="${sessionScope.memberVO==null }">
+   <h2>Login</h2>
    <form action="${path}/front" method="POST">
    <p>
       <input type="hidden" name="command" value="login">
-      <input type="text" name="id" placeholder="ID" required="required"> 
-      <input type="password" name="Password" placeholder="Password" required="required"> 
-      <input type="submit" value="로그인">
+      <input type="text" class="idform" name="id" placeholder="ID" required="required"> 
+      <input type="password" class="passform" name="Password" placeholder="Password" required="required"> 
+      <input type="submit" class="btn_login" value="로그인" >
    </p>   
    </form>
+   
    <p>
       <a href="${path}/front?command=registerForm">회원가입</a>
    </p>   
@@ -167,14 +169,14 @@
             <div class="panel-heading">핳랭킹 </div>
          <table class="table hoh">
             <thead>
-               <tr>
+               <tr align="center">
                   <th>닉네임</th>
                   <th>포인트</th>
                </tr>
                <c:forEach items="${requestScope.rankList}" var="list"
                   varStatus="status" begin="0" end="4" step="1">
                   <tr>
-                      <th><span class="badge badge-danger-light">${status.index+1 }</span>${list.nickName}</th>
+                     <th><span class="badge badge-danger-light">${status.index+1 }</span>${list.nickName}</th>
                      <th>${list.point}</th>
                   </tr>
                </c:forEach>
