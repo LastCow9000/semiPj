@@ -94,7 +94,7 @@
 
 
 /* table th center 정리*/
-th {
+th td {
 	text-align: center;
 }
 
