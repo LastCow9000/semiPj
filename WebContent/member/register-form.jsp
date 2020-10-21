@@ -20,6 +20,16 @@
 		}
 	}
 	
+	//(시대)체크박스 null일 때 submit이 안되도록 강제하는 함수
+	function validateCheckboxes() {
+	   if (document.querySelector('.check:checked')) {
+	        return true;
+	   } else {
+	        alert('시대를 선택해주세요!');
+	        return false;
+	   }
+	};
+		
 	$(document).ready(function() {
 		
 		var checkId="";
@@ -143,7 +153,9 @@
 	<div class="row">
 	    <div class="col-sm-6">
 	    
-<form action="${pageContext.request.contextPath}/front" method="Post" id="registerForm">
+<form action="${pageContext.request.contextPath}/front" method="Post" id="registerForm"
+		onsubmit="return validateCheckboxes()">
+		
 	<input type="hidden" name="command" value="register">
 	
 	<table class="table hoh">
@@ -175,10 +187,10 @@
 		<tr align="center">
 			<td>시대</td>
 			<td colspan="2" align="left">
-				<input type="checkbox" name="checkbox1" value="고조선시대" onclick="oneCheckbox(this)">고조선시대
-				<input type="checkbox" name="checkbox1" value="삼국시대" onclick="oneCheckbox(this)">삼국시대
-				<input type="checkbox" name="checkbox1" value="고려시대" onclick="oneCheckbox(this)">고려시대
-				<input type="checkbox" name="checkbox1" value="조선시대" onclick="oneCheckbox(this)">조선시대<br>
+				<input type="checkbox" name="checkbox1" class="check" value="고조선시대" onclick="oneCheckbox(this)">고조선시대
+				<input type="checkbox" name="checkbox1" class="check"  value="삼국시대" onclick="oneCheckbox(this)">삼국시대
+				<input type="checkbox" name="checkbox1" class="check"  value="고려시대" onclick="oneCheckbox(this)">고려시대
+				<input type="checkbox" name="checkbox1" class="check"  value="조선시대" onclick="oneCheckbox(this)">조선시대<br>
 			</td>
 			<td><span id="nickCheckResult"></span></td>
 		</tr>

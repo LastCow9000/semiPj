@@ -12,8 +12,8 @@ CREATE TABLE member(
    ageName varchar2(100) NOT NULL,
    point number default 0
 )
-
-
+DELETE member WHERE id='test';
+select * from member where id='testyewool';
 CREATE SEQUENCE board_seq nocache;
 
 CREATE TABLE board(
