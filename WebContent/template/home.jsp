@@ -30,7 +30,7 @@
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
 									<td>${status.count}</td>
-									<td width=300px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="badge">${list.replyCount}</span></a></td>
+									<td width=300px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="label label-danger">${list.replyCount}</span></a></td>
 									<%-- 23자리까지 --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
@@ -57,7 +57,7 @@
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
 									<td>${status.count}</td>
-									<td width=200px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="badge">${list.replyCount}</span></a></td>
+									<td width=200px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="label label-danger">${list.replyCount}</span></a></td>
 									<%--23자리까지 --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
@@ -93,7 +93,7 @@
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
 									<td>${status.count}</td>
-									<td width=200px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="badge">${list.replyCount}</span></a></td>
+									<td width=200px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="label label-danger">${list.replyCount}</span></a></td>
 									<%--23자리까지 --%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>
@@ -122,7 +122,7 @@
 								varStatus="status" begin="0" end="4" step="1">
 								<tr>
 									<td>${status.count}</td>
-									<td width=300px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="badge">${list.replyCount}</span></a></td>
+									<td width=300px><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title} <span class="label label-danger">${list.replyCount}</span></a></td>
 									<%--23자리까지--%>
 									<td>${list.memberVO.nickName}</td>
 								</tr>

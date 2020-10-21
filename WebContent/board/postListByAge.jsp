@@ -42,7 +42,7 @@
 								</td>
 								<td><a
 									href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}&rnum=${requestScope.totalPostCount-((pb.nowPage-1)*8+status.index)}">
-										${list.title} <span class="badge">${list.replyCount}</span>
+										${list.title} <span class="label label-info">${list.replyCount}</span>
 								</a></td>
 								<td>${list.memberVO.nickName}</td>
 								<td>${list.likeCount}</td>
