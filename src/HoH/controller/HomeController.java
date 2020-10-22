@@ -34,6 +34,7 @@ public class HomeController implements Controller {
             josunList.add(list.get(i));
 
       }
+      
       //랭킹 받아오기
       ArrayList<MemberVO> rankList = MemberDAO.getInstance().ranking();
       request.setAttribute("gojosunList", gojosunList); // 각 시대별 리스트 설정

@@ -58,6 +58,37 @@
          });
       });
          
+      /* 길이 체크 공간 */
+
+      $(document).ready(function() {
+         
+         var checkTitle="";
+
+         // 제목 길이 체크
+         $("#replyContent").keyup(function() {
+            checkTitle = "";
+            var titleValue= $(this).val().trim();
+            //제목 길이 20자 넘어가면 빨갛게
+            if(titleValue.length > 100){
+               $("#titleCheckResult").html(titleValue.length).css("color","red");
+               return;
+            //제목 길이 평소에는 grey로
+            } else {
+               $("#titleCheckResult").html(titleValue.length).css("color","grey");
+               checkTitle = titleValue;
+            }
+         });//keyup
+          
+         /* 길이 넘었을 때 submit 안 되도록 막기 */
+         $("#writePostForm").submit(function() {
+            if(checkTitle == ""){
+               alert("길이는 100자 이내로 작성해주세요.");
+               return false;
+            }
+         });//sumit
+         
+      });//ready
+         
    </script>
    </head>
    <body>
@@ -69,11 +100,14 @@
                <h3>
                   <small><strong><font color="#3d84a8">댓글</font></strong></small>
                </h3>
-               <form name="replyForm" action="${pageContext.request.contextPath}/front" method="post">
+               <form name="replyForm" action="${pageContext.request.contextPath}/front" method="post" id="writePostForm">
                   <div class="form-group">
                      <input type="text" name="nick" placeholder="작성자명" required="required">
                      <input type="password" name="password" placeholder="비밀번호" required="required">
-                     <textarea name="replyContent" id="replyContent" class="form-control" rows="3" required></textarea>
+                     <textarea name="replyContent" id="replyContent" class="form-control"  
+                     	cols="3" style="overflow:auto" wrap="hard" required="required"></textarea>
+                     <span id="titleCheckResult"></span>/100
+                      
                   </div>
                   <input type="hidden" name="command" value="replywrite"> 
                   <input type="hidden" name="postNo" id="postNo" value="${requestScope.postVO.postNo}">
@@ -119,7 +153,6 @@
       </div>
    </body>
    </html>
-
 
 
 

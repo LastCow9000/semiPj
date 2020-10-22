@@ -234,3 +234,13 @@ create table follow(
    constraint fk_follow primary key(id,nickname)
 )
 
+---update point
+update member set point = point+60  where id='test';
+
+select id, point
+from member
+where id ='test';
+
+
+select *
+from member

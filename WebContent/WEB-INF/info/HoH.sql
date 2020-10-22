@@ -37,7 +37,18 @@ CREATE TABLE reply (
    password varchar2(30) not null,
    constraint fk_boardno foreign key(post_no) references board(post_no) on delete cascade
 );
-
+ALTER TABLE reply MODIFY(rep_content clob not null);
+delete from reply 
+select * from reply
+ALTER TABLE reply ADD (TMP_CONTENTS CLOB); 
+UPDATE reply SET TMP_CONTENTS = rep_content 
+UPDATE reply SET rep_content = NULL
+ALTER TABLE reply DROP COLUMN rep_content;
+ALTER TABLE reply RENAME COLUMN TMP_CONTENTS TO rep_content
+-- 새 CLOB 컬럼을 추가합니다. ALTER TABLE table_name ADD (TMP_CONTENTS CLOB); 
+-- 데이터를 복사합니다. UPDATE table_name SET TMP_CONTENTS = CONTENTS; UPDATE table_name SET CONTENTS = NULL; COMMIT; 
+-- 기존 컬럼을 삭제합니다. ALTER TABLE table_name DROP COLUMN CONTENTS; 
+-- 새로 추가한 임시 컬럼의 이름을 변경합니다. ALTER TABLE table_name RENAME COLUMN TMP_CONTENTS TO CONTENTS;
 
 
 CREATE TABLE scrap_post (

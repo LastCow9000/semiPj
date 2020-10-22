@@ -56,7 +56,7 @@
 					if (result == "ok"){
 						$("#idCheckResult").html("사용가능한 아이디입니다.").css(
 								"color", "blue");
-						checkId = idValue; //왜쓰지?
+						checkId = idValue; 
 					} else { // 아이디가 사용불가하면 = 중복이면
 						$("#idCheckResult").html("중복된 아이디입니다.").css(
 								"color", "red");

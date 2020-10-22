@@ -9,7 +9,6 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css"/>
-
    <!--  로그인 오른쪽에 고정되는 화면 -->
    <c:choose>
    <c:when test="${sessionScope.memberVO==null }">
@@ -32,17 +31,18 @@
    
    </c:when>
    <c:otherwise>
+   <div class="container2">
    <p align="center">
-      ${sessionScope.memberVO.ageName } <br>
-    	<%-- 로그인폼 이미지 --%>  
- 	     <c:choose>
-      		<c:when test="${sessionScope.memberVO.id=='adminmts'}">
-        		<img src="${path}/image/unnamed.gif">
- 			</c:when>
-      		<c:otherwise>
-      		<c:choose>
+      <strong>${sessionScope.memberVO.ageName }</strong><br>
+       <%-- 로그인폼 이미지 --%>  
+         <c:choose>
+            <c:when test="${sessionScope.memberVO.id=='adminmts'}">
+              <img src="${path}/image/admin_img.1if" width="200px" height="200px">
+          </c:when>
+            <c:otherwise>
+            <c:choose>
          <c:when test="${rank=='iron'}">
-         	<img class="rank" src="${path}/image/iron.png">
+            <img class="rank" src="${path}/image/iron.png">
         </c:when>
          <c:when test="${rank=='bronze'}">
             <img class="rank" src="${path}/image/bronze.png">
@@ -65,11 +65,12 @@
          </c:choose>
          </c:otherwise>
       </c:choose>
-      
+      <br>
       ${sessionScope.memberVO.nickName }님  <br>
        보유 포인트:<b>${point}</b> <br>
    </p>
-   <div class="container">
+  
+   
    <p>
       <a href="${path}/front?command=logout">로그아웃</a>
    </p>
@@ -87,16 +88,16 @@
    </p>
    
    <p>
-   
+     </div>
    <%-- 등급 progress bar --%>
    <c:choose>
    <c:when test="${rank=='iron'}">
         <div class="progress" id="iron">
           <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="${point}" aria-valuemin="0" aria-valuemax="100" style="width:${sessionScope.percent}%">
                ${sessionScope.percent}%
-          </div>
          </div>
-      </c:when>
+        </div>
+   </c:when>
    <c:when test="${rank=='bronze'}">
       <c:set var="percent" value="(${point}/100 * 100)"/>
         <div class="progress" id="bronze">
@@ -147,7 +148,7 @@
       </c:when>
     </c:choose>
        
-    </div>
+  
    </c:otherwise>
    </c:choose>
    <br>
@@ -175,10 +176,10 @@
       <div class="row">
       <div class="col-sm-3">
          <div class="panel panel-primary">
-            <div class="panel-heading">핳랭킹 </div>
+            <div class="panel-heading hoh-ranking">핳랭킹 </div>
          <table class="table hoh">
             <thead>
-               <tr align="center">
+               <tr>
                   <th>닉네임</th>
                   <th>포인트</th>
                </tr>

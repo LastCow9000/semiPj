@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
 import HoH.model.BoardDAO;
 import HoH.model.ListVO;
 import HoH.model.PagingBean;
@@ -16,7 +14,7 @@ public class getListByNickController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		/*
+		/*		미완
 		 * String nickName=request.getParameter("nickName"); String pageNo =
 		 * request.getParameter("pageNo"); //int totalPostCount =
 		 * BoardDAO.getInstance().getTotalPostCount(nickName); PagingBean pagingBean =

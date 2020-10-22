@@ -50,6 +50,7 @@ public class AgeSearchController implements Controller {
 		
 		ArrayList<PostVO> noticeList = BoardDAO.getInstance().getNoticeList();
 		request.setAttribute("noticeList", noticeList);
+		request.setAttribute("noticeNumber", BoardDAO.getInstance().totalNoticeCount());
 		request.setAttribute("listvo", lvo);
 		request.setAttribute("ageName", ageName);
 		request.setAttribute("totalPostCount", ageTotalPostCount);

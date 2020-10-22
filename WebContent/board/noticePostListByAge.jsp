@@ -1,20 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-
 <body>
    <div class="container">
       <div class="row">
@@ -38,7 +24,7 @@
                         varStatus="status">
                         <tr>
                            <td align="center">${requestScope.totalPostCount-((pb.nowPage-1)*pb.postCountPerPage+status.index)}</td>
-                           <td colspan="2" align="left"><a
+                           <td colspan="2"><a
                               href="${pageContext.request.contextPath}/front?command=noticeDetailpost&postNo=${list.postNo}">${list.title}</a></td>
                            <td align="center">${list.memberVO.nickName}</td>
                            <td align="center">${list.likeCount}</td>
@@ -46,7 +32,6 @@
                            <td align="center">${list.regDate}</td>
                         </tr>
                      </c:forEach>
-
                   </tbody>
                </table>
             </div>
@@ -93,5 +78,3 @@
          </div>
       </div>
    </div>
-</body>
-</html>

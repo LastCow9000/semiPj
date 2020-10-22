@@ -23,13 +23,13 @@
    
 <script>
 
-	if(${requestScope.likeCheck==1}) {
-	   $(document).ready(function() { 
-	      $("#heartBlank").hide();
-	      $("#heart").html("<i class='fa fa-heart' style='color:red'></i>")
-	   });
-	}
-	   
+   if(${requestScope.likeCheck==1}) {
+      $(document).ready(function() { 
+         $("#heartBlank").hide();
+         $("#heart").html("<i class='fa fa-heart' style='color:red'></i>")
+      });
+   }
+      
    $(document).ready(function() {
    
    
@@ -71,6 +71,7 @@
          <div class="row">
             <div class="col-sm-10">
                <div class="panel panel-primary">
+             		<div class="panel-heading">공지사항</div>
                   <table class="table hoh">
                      <%-- 버튼 부분: 본인의 아이디와 일치할 경우 '수정' '삭제' 버튼 보임 --%>
                      <c:if test="${requestScope.postVO.memberVO.id == sessionScope.memberVO.id  || sessionScope.memberVO.id == 'adminmts'}">
@@ -94,24 +95,24 @@
                         </tr>
                      </c:if>
                    
-					<tr>
-						<td colspan="2"><strong>${requestScope.postVO.title}</strong></td>
-						<td colspan="1" align="right"><span class="glyphicon glyphicon-time"></span> 작성일 : ${requestScope.postVO.regDate }</td>
-					</tr>
-						
-					<tr>
-						<td colspan="1" align="left">작성자 <strong>${requestScope.postVO.memberVO.nickName}</strong></td>
-						<td colspan="2" align="right">
-						<span class="glyphicon glyphicon-user"></span>
-						<strong>${requestScope.postVO.viewCount}</strong>
-						</td>
-					</tr>
-					
+               <tr>
+                  <td colspan="2"><strong>${requestScope.postVO.title}</strong></td>
+                  <td colspan="1" align="right"><span class="glyphicon glyphicon-time"></span> 작성일 : ${requestScope.postVO.regDate }</td>
+               </tr>
+                  
+               <tr>
+                  <td colspan="1" align="left">작성자 <strong>${requestScope.postVO.memberVO.nickName}</strong></td>
+                  <td colspan="2" align="right">
+                  <span class="glyphicon glyphicon-user"></span>
+                  <strong>${requestScope.postVO.viewCount}</strong>
+                  </td>
+               </tr>
+               
                      <tr>
-						<td colspan="3"><pre> ${requestScope.postVO.content}</pre></td>
-					</tr>
+                  <td colspan="3"><pre> ${requestScope.postVO.content}</pre></td>
+               </tr>
 
-						
+                  
                   </table>
 
                </div>

@@ -29,7 +29,12 @@ public class MyScrapListController implements Controller {
         MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
         String id = memberVO.getId();
         
+        //BoardDAO에 있는 getMyScrapPostList를 통해 postNo목록 가져오기
+      ArrayList<String> postNoList 
+         = ScrapDAO.getInstance().getMyScrapPostList(id);
+      
       //scrap된 post들의 모음을 만든다.
+      ArrayList<PostVO> scrapedPostVOList = new ArrayList<PostVO>();
       ArrayList<PostVO> flist = new ArrayList<PostVO>();
       int totalFollowPostCount = ScrapDAO.getInstance().getTotalScrapCount(id);
       String pageNo = request.getParameter("pageNo");
@@ -48,14 +53,23 @@ public class MyScrapListController implements Controller {
 			BoardDAO.getInstance().updateReplyCount(replyCount, postNo);
 			flist = ScrapDAO.getInstance().getMyScrapPostingList(id, pagingBean);
 		}
+
+      //각각의 postNo로 PostVO객체를 만들어온다.
+      for (int i = 0; i < postNoList.size(); i++) {
+         scrapedPostVOList.add(ScrapDAO.getInstance().ScrapPostDetailByNo(postNoList.get(i)));
+         
+      }
+      
       lvo.setList(flist);
       request.setAttribute("listvo", lvo);
       //여기까지 페이징
       
+      
+      
+      request.setAttribute("scrapedPostVOList", scrapedPostVOList);
       //url 보내주기
       request.setAttribute("url", "/member/my-scrap-list.jsp");
       
       return "/template/layout.jsp";
    }
-
 }
