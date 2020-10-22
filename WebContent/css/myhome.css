@@ -13,7 +13,7 @@
 
 
 /* table th center 정리*/
-th {
+th td{
    text-align: center;
 }
 
@@ -223,4 +223,16 @@ hr.devideHr {
 }
 
 /**** 예울 수정 끝 ****/
+
+/*****세희 수정다시시작*****/
+.container2 {
+	width: 250px;
+	height: 370px;
+	    text-align-last: center;
+}
+
+}
+
+
+
 

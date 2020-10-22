@@ -51,12 +51,10 @@ if (pageNo == null) {
 			scrapedPostVOList.add(ScrapDAO.getInstance().ScrapPostDetailByNo(postNoList.get(i)));
 			
 		}
-		
 
 		
 		ListVO lvo = new ListVO(flist, pagingBean);
 		lvo.setList(flist);
-		System.out.println(lvo);
 		request.setAttribute("listvo", lvo);
 		//여기까지 페이징
 		

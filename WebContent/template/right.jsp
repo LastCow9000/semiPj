@@ -9,7 +9,6 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css"/>
-
    <!--  로그인 오른쪽에 고정되는 화면 -->
    <c:choose>
    <c:when test="${sessionScope.memberVO==null }">
@@ -32,6 +31,7 @@
    
    </c:when>
    <c:otherwise>
+   <div class="container2">
    <p align="center">
       ${sessionScope.memberVO.ageName } <br>
     	<%-- 로그인폼 이미지 --%>  
@@ -65,11 +65,12 @@
          </c:choose>
          </c:otherwise>
       </c:choose>
-      
+      <br>
       ${sessionScope.memberVO.nickName }님  <br>
        보유 포인트:<b>${point}</b> <br>
    </p>
-   <div class="container">
+  
+   
    <p>
       <a href="${path}/front?command=logout">로그아웃</a>
    </p>
@@ -87,7 +88,7 @@
    </p>
    
    <p>
-   
+     </div>
    <%-- 등급 progress bar --%>
    <c:choose>
    <c:when test="${rank=='iron'}">
@@ -147,7 +148,7 @@
       </c:when>
     </c:choose>
        
-    </div>
+  
    </c:otherwise>
    </c:choose>
    <br>
