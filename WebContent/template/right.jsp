@@ -86,9 +86,9 @@
    <p>
          <a href="${path}/front?command=myFollowList">마이 팔로우</a>
    </p>
+         </div>
    
-   <p>
-     </div>
+     
    <%-- 등급 progress bar --%>
    <c:choose>
    <c:when test="${rank=='iron'}">
@@ -148,6 +148,7 @@
       </c:when>
     </c:choose>
        
+ 
   
    </c:otherwise>
    </c:choose>
