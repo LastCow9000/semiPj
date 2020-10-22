@@ -51,7 +51,6 @@ if (pageNo == null) {
 			scrapedPostVOList.add(ScrapDAO.getInstance().ScrapPostDetailByNo(postNoList.get(i)));
 			
 		}
-		
 
 		
 		ListVO lvo = new ListVO(flist, pagingBean);

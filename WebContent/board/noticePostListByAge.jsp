@@ -38,7 +38,7 @@
                         varStatus="status">
                         <tr>
                            <td align="center">${requestScope.totalPostCount-((pb.nowPage-1)*pb.postCountPerPage+status.index)}</td>
-                           <td colspan="2" align="left"><a
+                           <td colspan="2" align="center"><a
                               href="${pageContext.request.contextPath}/front?command=noticeDetailpost&postNo=${list.postNo}">${list.title}</a></td>
                            <td align="center">${list.memberVO.nickName}</td>
                            <td align="center">${list.likeCount}</td>

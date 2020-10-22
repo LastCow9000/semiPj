@@ -13,12 +13,12 @@
 
 
 /* table th center 정리*/
-th {
+th td{
    text-align: center;
 }
 
 .panel-body{
-	padding: 0px;
+   padding: 0px;
 }
 
 /*게시글 상단바부분 CSS */
@@ -80,30 +80,35 @@ th {
  /* right css적용 부분*/
 
 .idform{
-	height: 30px;
+   height: 30px;
     padding: 6px 12px;
-	line-height: 1.42857143;
+   line-height: 1.42857143;
     color: #555;
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
-    border-radius: 4px;									
+    border-radius: 4px;                           
 }
 
 .passform{
-	height: 30px;
+   height: 30px;
     padding: 6px 12px;
-	line-height: 1.42857143;
+   line-height: 1.42857143;
     color: #555;
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
-    border-radius: 4px;									
+    border-radius: 4px;                           
 }
 
-.table>thead>tr>th {
-	text-align: left;
-	padding: 10px;
+table>thead>tr>th {
+   text-align: center;
+   padding: 10px;
+}
+
+.ranking-list {
+   text-align: left;
+   padding: 10px;
 }
 
 /**세희 수정 끝 **/
@@ -116,19 +121,19 @@ th {
 /* FOOTER */
 
 .footer{
-	background-color : #9ba4b4;
+   background-color : #9ba4b4;
 }
 
 .footer p{
-	padding-top:10px;
-	color : white;
-	text-align: center;
-	font-style: italic;
-	font-size: 15px;
+   padding-top:10px;
+   color : white;
+   text-align: center;
+   font-style: italic;
+   font-size: 15px;
 }
 
 .footer p>.corp{
-	font-size: 10px;
+   font-size: 10px;
 }
 
 
@@ -136,8 +141,8 @@ th {
 
 /* 내비게이션 바 두께*/
 .navbar {
-	height: 80px;
-	background-color: #14274e;
+   height: 80px;
+   background-color: #14274e;
 }
 
 /* 네비게이션 메뉴 가운데 정렬*/
@@ -145,11 +150,11 @@ th {
     position: absolute;
     left: 35%;
     transform: translatex(-30%);
-}	
+}   
 
 /* header 로고를 위해 그 공간 padding 없애기 */
 .navbar-header>.navbar-brand{
-	padding-top: 0px;
+   padding-top: 0px;
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px; 
@@ -157,37 +162,37 @@ th {
 
 /* header 로고 image 크기 */
 .logo{
-	padding-top: 10px;
-	padding-left: 30px;
-	padding-bottom: 0px;
-	width: 150px;
-	height: 60px;
+   padding-top: 10px;
+   padding-left: 30px;
+   padding-bottom: 0px;
+   width: 150px;
+   height: 60px;
 }
 
 
 /* header munu a tag */
 
 .nav-item a{
-	margin-top: 10px;
-	width: 180px;
-	height: 100%;
-	color : white;
-	text-align: center;
-	font-family: 궁서;
-	font-size: 35px;
-	font-weight: bold ;
-	cursor: "pointer";
+   margin-top: 10px;
+   width: 180px;
+   height: 100%;
+   color : white;
+   text-align: center;
+   font-family: 궁서;
+   font-size: 35px;
+   font-weight: bold ;
+   cursor: "pointer";
 }
 
 .navbar .navbar-nav > li > a:hover,
 .navbar .navbar-nav > li > a:focus,
 .navbar .navbar-nav > li > a:active  {
-	background-color: #394867; 
+   background-color: #394867; 
     color: #f1f6f9;
 }
 
 .navbar .navbar-nav > li > a:hover:not(.active) {
-	background-color: #394867;
+   background-color: #394867;
 }
 
 
@@ -202,25 +207,41 @@ th {
 
 /* postDetail에서 쓰는 btn */
 .postbtn td{
-	text-align: right;
+   text-align: right;
 }
 
 
 /* 댓글 hr */
 hr.reply {
-	color : #394867;
+   color : #394867;
 }
 
 hr.devideHr {
-	border-top: 3px double #394867;
+   border-top: 3px double #394867;
 }
 
 
 /* 글쓰기 제목 너비 */
 #writePost input[type=text]{
-	width: 90%;
-	float : center;
+   width: 90%;
+   float : center;
 }
 
 /**** 예울 수정 끝 ****/
 
+/*****세희 수정다시시작*****/
+.container2 {
+   width: 250px;
+   height: 370px;
+       text-align-last: center;
+}
+
+
+
+
+
+
+/* pre 태그 내에 자동 줄바꿈을 해주는 css*/
+pre {
+   white-space: pre-wrap;
+}
