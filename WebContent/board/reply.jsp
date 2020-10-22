@@ -109,7 +109,8 @@
                   <div class="form-group">
                      <input type="text" name="nick" placeholder="작성자명" required="required">
                      <input type="password" name="password" placeholder="비밀번호" required="required">
-                     <textarea name="replyContent" id="replyContent" class="form-control" rows="3" required></textarea>
+                     <textarea name="replyContent" id="replyContent" class="form-control"  
+                     	cols="3" style="overflow:auto" wrap="hard" required="required"></textarea>
                      <span id="titleCheckResult"></span>/100
                       
                   </div>

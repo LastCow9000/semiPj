@@ -33,11 +33,11 @@
    <c:otherwise>
    <div class="container2">
    <p align="center">
-      ${sessionScope.memberVO.ageName } <br>
+      <strong>${sessionScope.memberVO.ageName }</strong><br>
        <%-- 로그인폼 이미지 --%>  
          <c:choose>
             <c:when test="${sessionScope.memberVO.id=='adminmts'}">
-              <img src="${path}/image/admin_img.gif" width="200px" height="200px">
+              <img src="${path}/image/admin_img.1if" width="200px" height="200px">
           </c:when>
             <c:otherwise>
             <c:choose>
