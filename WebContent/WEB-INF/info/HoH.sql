@@ -261,3 +261,11 @@ SELECT rnum, post_no, scraped_regdate
 FROM (SELECT row_number() over (ORDER BY scraped_regdate DESC) AS rnum, post_no, scraped_regdate, id FROM SCRAP_POST WHERE id='donguk')
 WHERE rnum BETWEEN 1 AND 10
 ORDER BY scraped_regdate desc;
+
+select * from reply
+
+SELECT b.title, m.nickName, m.ageName, b.post_no,  b.rep_count, B.LIKE_COUNT, B.VIEW_COUNT, b.regdate 
+FROM (SELECT ROW_NUMBER() OVER(ORDER BY regdate desc) AS RNUM, b.title, b.id ,m.nickName, m.ageName, b.post_no,  b.rep_count, B.LIKE_COUNT, B.VIEW_COUNT, b.regdate FROM board b, member m WHERE b.id=m.id AND m.nickName='3333') b, member m 
+WHERE b.id=m.id AND RNUM between 1 and 5
+
+

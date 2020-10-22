@@ -341,8 +341,9 @@ public class BoardDAO {
 			String sql = "DELETE FROM reply WHERE rep_no=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, repNo);
-			pstmt.executeUpdate();
-			flag = true;
+			int result=pstmt.executeUpdate();
+			if(result>0)
+				flag = true;
 		} finally {
 			closeAll(pstmt, con);
 		}
@@ -350,23 +351,43 @@ public class BoardDAO {
 	}
 
 	// 댓글 수정하기
-	public boolean updateReply(String repNo, String content, String password) throws SQLException {
+	public boolean updateReply(String repNo, String content) throws SQLException {
 		boolean flag = false;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = dataSource.getConnection();
-			String sql = "UPDATE reply SET rep_content=?  WHERE rep_no=? and password=?";
+			String sql = "UPDATE reply SET rep_content=?  WHERE rep_no=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, content);
 			pstmt.setString(2, repNo);
-			pstmt.setString(3, password);
-			pstmt.executeUpdate();
-			flag = true;
+			int result=pstmt.executeUpdate();
+			if(result>0)
+				flag = true;
 		} finally {
 			closeAll(pstmt, con);
 		}
 		return flag;
+	}
+	
+	//댓글 비번 가져오기
+	public String getReplyPass(String repNo) throws SQLException {
+		String password = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = dataSource.getConnection();
+			String sql = "SELECT password FROM reply WHERE rep_no=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, repNo);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+				password=rs.getString(1);
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return password;
 	}
 
 	// 작성자,제목별 전체 검색 세희
@@ -837,6 +858,43 @@ public class BoardDAO {
 			} finally {
 				closeAll(pstmt, con);
 			}
+		}
+		
+		//닉네임으로 게시물리스트 받아오기    --    미구현
+		public ArrayList<PostVO> getPostListByNickName(String nickname, PagingBean pb) throws SQLException{
+			ArrayList<PostVO> list=new ArrayList<PostVO>();
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				
+				con = dataSource.getConnection();
+				String sql = "SELECT b.title, m.nickName, m.ageName, b.post_no,  b.rep_count, B.LIKE_COUNT, B.VIEW_COUNT, b.regdate " + 
+						"FROM (SELECT ROW_NUMBER() OVER(ORDER BY regdate desc) AS RNUM, b.title, b.id ,m.nickName, m.ageName, b.post_no,  b.rep_count, B.LIKE_COUNT, B.VIEW_COUNT, b.regdate FROM board b, member m WHERE b.id=m.id AND m.nickName='?') b, member m" + 
+						"WHERE b.id=m.id AND RNUM between ? and ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, nickname);
+				pstmt.setInt(2, pb.getStartRowNumber());
+				pstmt.setInt(3, pb.getEndRowNumber());
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					PostVO pvo = new PostVO();
+					MemberVO mvo = new MemberVO();
+					pvo.setTitle(rs.getString(1));
+					mvo.setNickName(rs.getString(2));
+					mvo.setAgeName(rs.getString(3));
+					pvo.setPostNo(rs.getString(4));
+					pvo.setReplyCount(rs.getInt(5));
+					pvo.setLikeCount(rs.getInt(6));
+					pvo.setViewCount(rs.getInt(7));
+					pvo.setRegDate(rs.getString(8));
+					pvo.setMemberVO(mvo);
+					list.add(pvo);
+				}
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return list;
 		}
 		
 }// class

@@ -10,11 +10,17 @@ public class replyDeleteController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String repNo=request.getParameter("repNo");
-		boolean flag=BoardDAO.getInstance().deleteReply(repNo);
+		String inputPassword=request.getParameter("password");
+		String originalPassword=BoardDAO.getInstance().getReplyPass(repNo);
 		String result = "fail";
-		if (flag == true) 
-			result = "ok";
+		if(inputPassword.equals(originalPassword)) {
+			boolean flag=BoardDAO.getInstance().deleteReply(repNo);
+			if (flag == true) 
+				result = "ok";
+			request.setAttribute("responsebody", result);
+		}
 		request.setAttribute("responsebody", result);
 		return "AjaxView";
 	}
+
 }

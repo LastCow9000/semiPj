@@ -45,10 +45,12 @@ public class HandlerMapping {
 			controller=new NickCheckResultController();
 		else if(command.contentEquals("replywrite")) 
 			controller=new replyWriteController();
-		else if(command.contentEquals("replydelete")) 
-			controller=new replyDeleteController();
 		else if(command.contentEquals("replyupdate")) 
 			controller=new replyUpdateController();
+		else if(command.contentEquals("replydelete")) 
+			controller=new replyDeleteController();
+		else if(command.contentEquals("replydeletepopup")) 
+			controller=new replyDeletePopupController();
 		//form에서 받아온 value
 		else if(command.contentEquals("findpasswordform")) 
 			controller=new FindPasswordFormController();
@@ -94,6 +96,8 @@ public class HandlerMapping {
 			controller=new UpdateNoticeformController();
 		else if(command.contentEquals("updateNoticePost")) 
 			controller=new UpdateNoticePostController();
+		else if(command.contentEquals("getlistbynick")) 
+			controller=new getListByNickController();
 		return controller;
 	}
 }

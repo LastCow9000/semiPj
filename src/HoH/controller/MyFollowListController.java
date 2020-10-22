@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import HoH.model.BoardDAO;
 import HoH.model.FollowDAO;
 import HoH.model.ListVO;
 import HoH.model.MemberDAO;
@@ -42,8 +43,15 @@ public class MyFollowListController implements Controller {
 		} else {
 			pagingBean = new PagingBean(totalFollowPostCount, Integer.parseInt(pageNo));
 		}	
-		flist = FollowDAO.getInstance().getMyFollowPostingList(id, pagingBean);
 		ListVO lvo = new ListVO(flist, pagingBean);
+		flist = FollowDAO.getInstance().getMyFollowPostingList(id, pagingBean);
+		for (int i = 0; i < flist.size(); i++) {
+			String postNo=flist.get(i).getPostNo();
+			int replyCount=BoardDAO.getInstance().getReplyListCount(postNo);
+			BoardDAO.getInstance().updateReplyCount(replyCount, postNo);
+			flist = FollowDAO.getInstance().getMyFollowPostingList(id, pagingBean);
+		}
+		lvo.setList(flist);
 		request.setAttribute("listvo", lvo);
 		//여기까지 페이징
 		

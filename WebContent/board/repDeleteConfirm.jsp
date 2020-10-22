@@ -18,25 +18,23 @@ function closePopup(){
 	$(document).ready(function() {
 		$("#delete").click(function(){
 			if(confirm("정말 삭제하시겠습니까?")){
-				if(${param.repPassword}==$("#password").val()){
 							$.ajax({
 								type:"get",
 								url:"${pageContext.request.contextPath}/front",
-								data:"command=replydelete&repNo=${param.repNo}",
+								data:"command=replydelete&repNo=${requestScope.repNo}&password="+$("#password").val(),
 								success: function(result){
 									if(result=="ok"){
 										opener.document.location.reload();
 										closePopup();
-										//리스트다시보기 구현예정
+									}else{
+										alert("비밀번호를 확인해주세요!");
+										return;
 									}
-								}
-							});
-						}else{
-							alert("비밀번호를 다시 확인해주세요");
-						}
-					}else{
-						return;
-					}
+								}//success
+							});//ajax
+			}else{
+				return;
+			}//else
 		});//click
 	});//ready
 </script>

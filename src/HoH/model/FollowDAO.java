@@ -200,8 +200,8 @@ public String followDelete(String nickname) throws SQLException {
 		try {
 			con = getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("select b.rnum, b.id, b.nickname,b.title,b.regDate,b.content,b.view_count, b.like_count, b.ageName,b.post_no ");
-			sql.append("from(select ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM, m.id, m.nickname, b.title,b.regDate,b.content, ");
+			sql.append("select b.rnum, b.id, b.nickname,b.title,b.regDate,b.content,b.view_count, b.like_count, b.ageName,b.post_no, b.rep_count ");
+			sql.append("from(select ROW_NUMBER() OVER(ORDER BY POST_NO desc) AS RNUM, m.id, m.nickname, b.title,b.regDate,b.content, b.rep_count,");
 			sql.append("b.view_count, b.like_count, m.ageName,b.post_no from member m, board b where m.id = b.id and m.nickname ");
 			sql.append("in (select f.nickname from member m, follow f where m.id=f.id and m.id=?) ");
 			sql.append("order by b.post_no desc) b where b.rnum between ? and ? ");
@@ -223,6 +223,7 @@ public String followDelete(String nickname) throws SQLException {
 				postVO.setViewCount(rs.getInt("view_count"));
 				postVO.setLikeCount(rs.getInt("like_count"));
 				postVO.setPostNo(rs.getString("post_no"));
+				postVO.setReplyCount(rs.getInt("rep_count"));
 				postVO.setMemberVO(memberVO);
 				list.add(postVO);
 			}

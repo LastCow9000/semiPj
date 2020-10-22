@@ -51,7 +51,7 @@ public class ScrapDAO {
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT m.id, m.nickname, b.title,b.regDate,b.content, ");
+			sql.append("SELECT m.id, m.nickname, b.title,b.regDate,b.content, b.");
 			sql.append("b.view_count, b.like_count, m.ageName, s.scraped_regdate ");
 			sql.append("FROM member m, board b, scrap_post s ");
 			sql.append("WHERE m.id = b.id AND s.post_no = b.post_no AND b.post_no=? ");
@@ -221,9 +221,9 @@ public class ScrapDAO {
 			con = getConnection();
 			StringBuilder sql = new StringBuilder();
 			sql.append(
-					"select b.rnum, b.post_no, b.scraped_regdate,b.agename, b.title,b.LIKE_COUNT,b.VIEW_COUNT,b.nickname,b.id,b.content ");
+					"select b.rnum, b.post_no, b.scraped_regdate,b.agename, b.title,b.LIKE_COUNT,b.VIEW_COUNT,b.nickname,b.id,b.content, b.rep_count ");
 			sql.append("from ( select ROW_NUMBER() OVER(ORDER BY sp.scraped_regdate desc) AS RNUM, m.id, ");
-			sql.append("b.post_no, sp.scraped_regdate,m.agename, b.title,b.LIKE_COUNT,b.VIEW_COUNT,m.nickname,b.content ");
+			sql.append("b.post_no, sp.scraped_regdate,m.agename, b.title,b.LIKE_COUNT,b.VIEW_COUNT,m.nickname,b.content, b.rep_count ");
 			sql.append("from  scrap_post sp, member m, board b WHERE m.id=? and m.id=sp.id and sp.post_no = b.post_no) b ");
 			sql.append("where b.rnum between ? and ? ");
 			pstmt = con.prepareStatement(sql.toString());
@@ -245,6 +245,7 @@ public class ScrapDAO {
 				postVO.setScrapedDate(rs.getString("scraped_regdate"));//3
 				postVO.setRnum(rs.getString("rnum"));//1
 				postVO.setPostNo(rs.getString("post_no"));//2
+				postVO.setReplyCount(rs.getInt("rep_count"));
 				postVO.setMemberVO(memberVO);
 				list.add(postVO);
 			}

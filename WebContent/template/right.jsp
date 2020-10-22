@@ -185,7 +185,8 @@
                <c:forEach items="${requestScope.rankList}" var="list"
                   varStatus="status" begin="0" end="4" step="1">
                   <tr>
-                     <th><span class="badge badge-danger-light">${status.index+1 }</span>${list.nickName}</th>
+                     <th><span class="badge badge-danger-light">${status.index+1 }</span><a href="#">${list.nickName}</a></th>
+                     <%-- # 대신${path}/front?command=getlistbynick&nickName=${list.nickName} --%>
                      <th>${list.point}</th>
                   </tr>
                </c:forEach>

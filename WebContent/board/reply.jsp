@@ -35,7 +35,6 @@
     
          $(document).ready(function() {
             $(document).on("click",".save",function(){
-	         if( $("#password").val()==$(".repPassword"+$(this).val()).val() ){//비밀번호 비교
 	               $.ajax({
 	                  type:"get",
 	                  url:"${pageContext.request.contextPath}/front",
@@ -43,12 +42,11 @@
 	                  success:function(result){
 	                     if(result=="ok"){
 	                        document.location.reload()
+	                     }else{
+	                    	 alert("비밀번호를 확인해주세요!");
 	                     }
 	                  }//success
 	               });//ajax
-	               }else{
-	                  alert("비밀번호를 확인하세요!");
-	               }//else
             });//click
          });//ready
          
@@ -56,10 +54,7 @@
       $(document).ready(function() {
          var options='width=450, height=200, top=185, left=250'; //팝업창 옵션
          $("#replyListForm").on("click", ".deleteBtn", function(){
-            //alert($(this).val());
-            //alert($(".repPassword"+$(this).val()).val());
-            var repPassword=$(".repPassword"+$(this).val()).val();
-            window.open("${pageContext.request.contextPath}/board/repDeleteConfirm.jsp?repNo="+$(this).val()+"&repPassword="+repPassword, "delconfirmpopup", options);
+            window.open("${pageContext.request.contextPath}/front?command=replydeletepopup&repNo="+$(this).val(), "delconfirmpopup", options);
          });
       });
          
@@ -107,7 +102,6 @@
                            </strong>
                            
                            <input type="hidden" name="repNo" value="${repList.comNo}">
-                           <input type="hidden" class="repPassword${repList.comNo}" name="repPassword" value="${repList.password}">
                            <p id="repContent${repList.comNo}">${repList.content}</p>
                            <c:if test="${sessionScope.memberVO!=null}">
                            <button class="btn btn-info btn-xs updateBtn" onclick="updateRep('${repList.comNo}','${repList.content}')">수정</button>

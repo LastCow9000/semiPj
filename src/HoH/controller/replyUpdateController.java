@@ -11,14 +11,16 @@ public class replyUpdateController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String repNo=request.getParameter("repNo");
 		String content=request.getParameter("content");
-		String password=request.getParameter("password");
-		boolean flag=BoardDAO.getInstance().updateReply(repNo, content, password);
+		String inputPassword=request.getParameter("password");
+		String originalPassword=BoardDAO.getInstance().getReplyPass(repNo);
 		String result="fail";
-		if(flag==true) {
-			result="ok";
+		if(inputPassword.equals(originalPassword)) {
+			boolean flag=BoardDAO.getInstance().updateReply(repNo, content);
+			if(flag==true) 
+				result="ok";
+			request.setAttribute("responsebody", result);
 		}
 		request.setAttribute("responsebody", result);
 		return "AjaxView";
 	}
-
 }
