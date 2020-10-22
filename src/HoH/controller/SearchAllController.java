@@ -15,6 +15,7 @@ public class SearchAllController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean flag=false;
+		String ageName = "전체 검색";
 		String option=request.getParameter("option");
 		String word = request.getParameter("word");
 		int totalPostCount=BoardDAO.getInstance().getListCountByWriter(option, word);
@@ -35,6 +36,8 @@ public class SearchAllController implements Controller {
 			flag=true;
 			ArrayList<PostVO> noticeList = BoardDAO.getInstance().getNoticeList();
 			request.setAttribute("noticeList", noticeList);
+		request.setAttribute("ageName", ageName);
+		request.setAttribute("noticeNumber", BoardDAO.getInstance().totalNoticeCount());
 		request.setAttribute("listvo", lvo);
 		request.setAttribute("totalPostCount", totalPostCount);
 		request.setAttribute("url", "/board/postListByAge.jsp");
