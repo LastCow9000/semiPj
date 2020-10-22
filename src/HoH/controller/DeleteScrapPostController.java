@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import HoH.model.MemberDAO;
 import HoH.model.MemberVO;
 import HoH.model.ScrapDAO;
+import oracle.net.aso.s;
 
 public class DeleteScrapPostController implements Controller {
 
@@ -35,6 +36,8 @@ public class DeleteScrapPostController implements Controller {
 		if (flag) {
 			result = "ok";
 			MemberDAO.getInstance().UpdateMinusPoint(id, MemberVO.scrapPoint);
+			memberVO =MemberDAO.getInstance().getPoint(id);
+			session.setAttribute("memberVO", memberVO);
 		}
 		request.setAttribute("responsebody", result);
 		

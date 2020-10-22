@@ -11,6 +11,13 @@
    margin-bottom: 25px;
 }
 
+
+
+/* table th center 정리*/
+th td{
+   text-align: center;
+}
+
 .panel-body{
 	padding: 0px;
 }
@@ -95,9 +102,14 @@
     border-radius: 4px;									
 }
 
-.table>thead>tr>th {
-	text-align: center;
-	padding: 10px;
+table>thead>tr>th {
+   text-align: center;
+   padding: 10px;
+}
+
+.ranking-list {
+   text-align: left;
+   padding: 10px;
 }
 
 /**세희 수정 끝 **/
@@ -218,3 +230,19 @@ hr.devideHr {
 
 /**** 예울 수정 끝 ****/
 
+/*****세희 수정다시시작*****/
+.container2 {
+   width: 250px;
+   height: 370px;
+       text-align-last: center;
+}
+
+
+
+
+
+
+/* pre 태그 내에 자동 줄바꿈을 해주는 css*/
+pre {
+   white-space: pre-wrap;
+}

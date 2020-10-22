@@ -119,7 +119,8 @@
                            data:"command=follwerAdd&nickname=${requestScope.postVO.memberVO.nickName}&id=${sessionScope.memberVO.id}",            
                            success:function(result){
                               alert("팔로우 추가완료!");
-                           
+                              location.href = "${pageContext.request.contextPath}/front?command=detailpost&postNo=${requestScope.postVO.postNo}";
+
                         }
                      })//ajax
                      
@@ -231,7 +232,7 @@
 						</tr>
 
 						<tr>
-							<td colspan="3"><c:import url="/board/reply.jsp"/></td>
+							<td><c:import url="/board/reply.jsp"/></td>
 						</tr>
 
 					</table>

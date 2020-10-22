@@ -6,7 +6,14 @@
 		<div class="row">
 			<div class="col-sm-10">
 				<div class="panel panel-primary">
-					<div class="panel-heading">${requestScope.ageName} 게시물~!</div>
+	            <c:choose>
+	            <c:when test="${requestScope.flag }">
+	               <div class="panel-heading">${requestScope.ageName} 검색 게시물~!</div>
+	               </c:when>
+	               <c:otherwise>
+	               <div class="panel-heading">${requestScope.ageName} 게시물~!</div>
+	               </c:otherwise>
+	              </c:choose>
 					<table class="table hoh">
 						<thead>
 							<tr>
@@ -23,8 +30,8 @@
 
 						<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
 						<tr bgcolor='orange'>
-							<td align="center">${requestScope.noticeList[0].postNo}</td>
-							<td colspan="2" align="left"><a href="${pageContext.request.contextPath}/front?command=noticeDetailpost&postNo=${requestScope.noticeList[0].postNo}">${requestScope.noticeList[0].title}</a></td>
+							<td align="center">${requestScope.noticeNumber}</td>
+							<td colspan="2"><a href="${pageContext.request.contextPath}/front?command=noticeDetailpost&postNo=${requestScope.noticeList[0].postNo}">${requestScope.noticeList[0].title}</a></td>
 							<td align="center">${requestScope.noticeList[0].memberVO.nickName}</td>
 							<td align="center">${requestScope.noticeList[0].likeCount}</td>
 							<td align="center">${requestScope.noticeList[0].viewCount}</td>

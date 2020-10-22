@@ -71,6 +71,7 @@
          <div class="row">
             <div class="col-sm-10">
                <div class="panel panel-primary">
+             		<div class="panel-heading">공지사항</div>
                   <table class="table hoh">
                      <%-- 버튼 부분: 본인의 아이디와 일치할 경우 '수정' '삭제' 버튼 보임 --%>
                      <c:if test="${requestScope.postVO.memberVO.id == sessionScope.memberVO.id  || sessionScope.memberVO.id == 'adminmts'}">
