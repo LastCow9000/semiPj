@@ -2,6 +2,7 @@ package HoH.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import HoH.model.BoardDAO;
 import HoH.model.MemberDAO;
@@ -11,6 +12,7 @@ public class LikeCancelController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession(false);
 		String loginId = request.getParameter("loginId");
 		String postNo = request.getParameter("postNo");
 		String postId = request.getParameter("postId");
@@ -18,6 +20,9 @@ public class LikeCancelController implements Controller {
 		BoardDAO.getInstance().likeMinus(loginId, postNo);
 		BoardDAO.getInstance().boardLikeMinusUpdate(postNo);
 		MemberDAO.getInstance().UpdateMinusPoint(postId, MemberVO.likePoint);
+		MemberVO memberVO =MemberDAO.getInstance().getPoint(loginId);
+		session.setAttribute("memberVO", memberVO);
+		
 		request.setAttribute("responsebody", result);
 		return "AjaxView";
 	}

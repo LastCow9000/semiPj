@@ -27,6 +27,7 @@ public class LoginController implements Controller {
 		MemberVO memberVO = MemberDAO.getInstance().login(id, password);
 
 		if (memberVO != null) {
+			
 			int point = memberVO.getPoint();
 		
 			if(point<=iPoint) {
@@ -81,7 +82,7 @@ public class LoginController implements Controller {
 			HttpSession session = request.getSession();
 			session.setAttribute("memberVO", memberVO);
 			session.setAttribute("percent", percent);
-			System.out.println(percent);
+			
 			return "redirect:front?command=home";
 		} else {
 			return "/member/login-fail.jsp";

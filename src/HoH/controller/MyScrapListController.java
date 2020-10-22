@@ -56,7 +56,6 @@ if (pageNo == null) {
 		
 		ListVO lvo = new ListVO(flist, pagingBean);
 		lvo.setList(flist);
-		System.out.println(lvo);
 		request.setAttribute("listvo", lvo);
 		//여기까지 페이징
 		

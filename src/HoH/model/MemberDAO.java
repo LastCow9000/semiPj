@@ -177,7 +177,7 @@ public class MemberDAO {
 		return vo;
 	}
 	
-	//역대 핳게시글
+	//역대 사람랭킹
 	public ArrayList<MemberVO> ranking() throws SQLException{
 	      ArrayList<MemberVO> list = new ArrayList<MemberVO>();
 	     
@@ -207,81 +207,6 @@ public class MemberDAO {
 	   }
 
 	
-	public void follwerAdd(String id,String nickname) throws SQLException {
-		   Connection con=null;
-		      PreparedStatement pstmt=null;
-		      try {
-		         con=dataSource.getConnection();
-		         String sql="insert into follow(id,nickname) values(?,?)";
-		         pstmt=con.prepareStatement(sql);
-		         pstmt.setString(1, id);
-		         pstmt.setString(2, nickname);
-		         pstmt.executeUpdate();
-		      }finally {
-		         closeAll(pstmt, con);
-		      }
-	   }
-	
-	public boolean follwerCheck(String id,String nickname) throws SQLException {
-		boolean flag = false;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			String sql = "SELECT COUNT(*) FROM follow WHERE id=? and nickName=?";
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, nickname);
-			rs =pstmt.executeQuery();
-
-			if (rs.next() && rs.getInt(1) > 0) {
-				flag = true;
-			}
-		}finally {
-			closeAll(rs, pstmt, con);
-		}
-		
-		return flag;
-	}
-	
-	public ArrayList<String> follwingList(String id) throws SQLException {
-		ArrayList<String> list = new ArrayList<String>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			String sql = "SELECT nickname FROM follow WHERE id=?";
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs =pstmt.executeQuery();
-
-			while (rs.next()) {
-				list.add(rs.getString(1));
-			}
-		}finally {
-			closeAll(rs, pstmt, con);
-		}
-		
-		return list;
-	}
-	
-	public void followDelete(String nickname) throws SQLException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			String sql = "delete follow WHERE nickname=?";
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, nickname);
-			pstmt.executeUpdate();
-		}finally {
-			closeAll(pstmt, con);
-		}
-	}
 	
  	// return : true - 잘 작동 / return :false - 잘 작동 X
 	public boolean DeleteMember(String sessionid, String password) throws SQLException {
@@ -369,6 +294,7 @@ public class MemberDAO {
 			pstmt.setInt(1, point);
 			pstmt.setString(2, postId);
 			pstmt.executeUpdate();
+			
 		} finally {
 			closeAll(pstmt, con);
 		}
@@ -393,7 +319,32 @@ public class MemberDAO {
 		}
 		return id;
 	}
-	
+	public MemberVO getPoint(String id) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		MemberVO memberVO = null;
+		try {
+			con=dataSource.getConnection();
+			String sql="SELECT point,id, password,agename,nickname,rank FROM member WHERE id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				memberVO = new MemberVO();
+				memberVO.setId(rs.getString("id"));
+				memberVO.setAgeName(rs.getString("agename"));
+				memberVO.setNickName(rs.getString("nickname"));
+				memberVO.setPassword(rs.getString("password"));
+				memberVO.setPoint(rs.getInt("point"));
+				memberVO.setRank(rs.getString("rank"));
+			}
+				
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return memberVO;
+	}
 }//class
 
 

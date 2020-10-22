@@ -66,6 +66,7 @@
          </c:otherwise>
       </c:choose>
       
+
       ${sessionScope.memberVO.nickName }님  <br>
        보유 포인트:<b>${point}</b> <br>
    </p>
