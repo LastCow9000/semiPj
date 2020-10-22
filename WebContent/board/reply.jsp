@@ -74,11 +74,13 @@
                <h3>
                   <small><strong><font color="#3d84a8">댓글</font></strong></small>
                </h3>
-               <form name="replyForm" action="${pageContext.request.contextPath}/front" method="post">
+               <form name="replyForm" action="${pageContext.request.contextPath}/front" method="post" id="writePostForm">
                   <div class="form-group">
                      <input type="text" name="nick" placeholder="작성자명" required="required">
                      <input type="password" name="password" placeholder="비밀번호" required="required">
                      <textarea name="replyContent" id="replyContent" class="form-control" cols="3" style="overflow:auto" wrap="hard" required></textarea>
+                     <span id="titleCheckResult"></span>/100
+                      
                   </div>
                   <input type="hidden" name="command" value="replywrite"> 
                   <input type="hidden" name="postNo" id="postNo" value="${requestScope.postVO.postNo}">

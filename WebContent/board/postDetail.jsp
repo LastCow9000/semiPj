@@ -231,7 +231,7 @@
 						</tr>
 
 						<tr>
-							<td colspan="3"><c:import url="/board/reply.jsp"/></td>
+							<td><c:import url="/board/reply.jsp"/></td>
 						</tr>
 
 					</table>

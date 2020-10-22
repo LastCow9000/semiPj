@@ -102,7 +102,7 @@ th td{
 }
 
 .table>thead>tr>th {
-	text-align: left;
+	text-align: center;
 	padding: 10px;
 }
 
@@ -236,3 +236,7 @@ hr.devideHr {
 
 
 
+/* pre 태그 내에 자동 줄바꿈을 해주는 css*/
+pre {
+	white-space: pre-wrap;
+}
