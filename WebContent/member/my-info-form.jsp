@@ -83,7 +83,7 @@
 
 <div class="container">
   <div class="row">
-	    <div class="col-sm-6">
+		<div class="col-sm-offset-2 col-sm-6">
 	
 	<form action="front" method="post" id="registerForm">
 	<input type="hidden" name="command" value="updatemember">
@@ -118,7 +118,7 @@
 
 		<tr>
 			<td colspan="3" align="center">
-				<input type="submit" value="회원정보 수정 완료">
+				<input type="submit" value="회원정보 수정 완료" class="btn-success">
 			</td>
 		</tr>
 		

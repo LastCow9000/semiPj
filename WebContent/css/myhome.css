@@ -11,12 +11,6 @@
    margin-bottom: 25px;
 }
 
-
-/* table th center 정리*/
-th {
-   text-align: center;
-}
-
 .panel-body{
 	padding: 0px;
 }
@@ -102,7 +96,7 @@ th {
 }
 
 .table>thead>tr>th {
-	text-align: left;
+	text-align: center;
 	padding: 10px;
 }
 
@@ -217,8 +211,8 @@ hr.devideHr {
 
 
 /* 글쓰기 제목 너비 */
-#writePost input[type=text]{
-	width: 90%;
+#writePostForm input[type=text]{
+	width: 80%;
 	float : center;
 }
 

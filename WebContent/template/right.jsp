@@ -34,15 +34,15 @@
    <c:otherwise>
    <p align="center">
       ${sessionScope.memberVO.ageName } <br>
-    	<%-- 로그인폼 이미지 --%>  
- 	     <c:choose>
-      		<c:when test="${sessionScope.memberVO.id=='adminmts'}">
-        		<img src="${path}/image/unnamed.gif">
- 			</c:when>
-      		<c:otherwise>
-      		<c:choose>
+       <%-- 로그인폼 이미지 --%>  
+         <c:choose>
+            <c:when test="${sessionScope.memberVO.id=='adminmts'}">
+              <img src="${path}/image/admin_img.gif" width="200px" height="200px">
+          </c:when>
+            <c:otherwise>
+            <c:choose>
          <c:when test="${rank=='iron'}">
-         	<img class="rank" src="${path}/image/iron.png">
+            <img class="rank" src="${path}/image/iron.png">
         </c:when>
          <c:when test="${rank=='bronze'}">
             <img class="rank" src="${path}/image/bronze.png">
@@ -94,9 +94,9 @@
         <div class="progress" id="iron">
           <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="${point}" aria-valuemin="0" aria-valuemax="100" style="width:${sessionScope.percent}%">
                ${sessionScope.percent}%
-          </div>
          </div>
-      </c:when>
+        </div>
+   </c:when>
    <c:when test="${rank=='bronze'}">
       <c:set var="percent" value="(${point}/100 * 100)"/>
         <div class="progress" id="bronze">

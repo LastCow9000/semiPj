@@ -353,6 +353,7 @@ public class MemberDAO {
 			pstmt.setInt(1, point);
 			pstmt.setString(2, postId);
 			pstmt.executeUpdate();
+
 		} finally {
 			closeAll(pstmt, con);
 		}

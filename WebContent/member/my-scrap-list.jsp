@@ -83,7 +83,9 @@
 						<c:forEach items="${requestScope.listvo.list}" var="list" varStatus="status">
 						<tr>
 							<td>${list.memberVO.ageName}</td>
-							<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title}</a></td>
+							<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">
+							${list.title} <span class="label label-info">${list.replyCount}</span>
+							</a></td>
 							<td>${list.memberVO.nickName}</td>
 							<td>${list.likeCount}</td>
 							<td>${list.viewCount}</td>

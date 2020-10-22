@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import HoH.model.BoardDAO;
 import HoH.model.FollowDAO;
 import HoH.model.ListVO;
 import HoH.model.MemberDAO;
@@ -43,6 +44,7 @@ public class MyFollowListController implements Controller {
 			pagingBean = new PagingBean(totalFollowPostCount, Integer.parseInt(pageNo));
 		}	
 		flist = FollowDAO.getInstance().getMyFollowPostingList(id, pagingBean);
+		
 		ListVO lvo = new ListVO(flist, pagingBean);
 		request.setAttribute("listvo", lvo);
 		//여기까지 페이징

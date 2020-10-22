@@ -16,11 +16,7 @@ public class DeletePostController implements Controller {
 		String nickName =request.getParameter("nickName"); // 작성자의 아이디 받아옴
 		HttpSession session=request.getSession(false);
 		String url="/front?command=home"; //로그인 풀렸을 경우 홈으로 이동
-		if(session!=null && session.getAttribute("memberVO")!=null) {
-			BoardDAO.getInstance().deleteNoticePost(request.getParameter("no"));
-			String ageName = "공지사항";
-			url="/front?command=noticeList&agename="+ageName; 
-		} else if(session!=null && session.getAttribute("memberVO")!=null) { //로그인 체크
+		if(session!=null && session.getAttribute("memberVO")!=null) { //로그인 체크
 			BoardDAO.getInstance().deletePost(request.getParameter("no")); //postDetail.jsp에서 postNo를 받아와 매개변수로 설정하고 삭제메서드 호출
 			MemberVO memberVO=(MemberVO) session.getAttribute("memberVO");
 			String id=memberVO.getId();

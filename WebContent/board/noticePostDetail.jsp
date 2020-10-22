@@ -23,13 +23,13 @@
    
 <script>
 
-	if(${requestScope.likeCheck==1}) {
-	   $(document).ready(function() { 
-	      $("#heartBlank").hide();
-	      $("#heart").html("<i class='fa fa-heart' style='color:red'></i>")
-	   });
-	}
-	   
+   if(${requestScope.likeCheck==1}) {
+      $(document).ready(function() { 
+         $("#heartBlank").hide();
+         $("#heart").html("<i class='fa fa-heart' style='color:red'></i>")
+      });
+   }
+      
    $(document).ready(function() {
    
    
@@ -94,24 +94,24 @@
                         </tr>
                      </c:if>
                    
-					<tr>
-						<td colspan="2"><strong>${requestScope.postVO.title}</strong></td>
-						<td colspan="1" align="right"><span class="glyphicon glyphicon-time"></span> 작성일 : ${requestScope.postVO.regDate }</td>
-					</tr>
-						
-					<tr>
-						<td colspan="1" align="left">작성자 <strong>${requestScope.postVO.memberVO.nickName}</strong></td>
-						<td colspan="2" align="right">
-						<span class="glyphicon glyphicon-user"></span>
-						<strong>${requestScope.postVO.viewCount}</strong>
-						</td>
-					</tr>
-					
+               <tr>
+                  <td colspan="2"><strong>${requestScope.postVO.title}</strong></td>
+                  <td colspan="1" align="right"><span class="glyphicon glyphicon-time"></span> 작성일 : ${requestScope.postVO.regDate }</td>
+               </tr>
+                  
+               <tr>
+                  <td colspan="1" align="left">작성자 <strong>${requestScope.postVO.memberVO.nickName}</strong></td>
+                  <td colspan="2" align="right">
+                  <span class="glyphicon glyphicon-user"></span>
+                  <strong>${requestScope.postVO.viewCount}</strong>
+                  </td>
+               </tr>
+               
                      <tr>
-						<td colspan="3"><pre> ${requestScope.postVO.content}</pre></td>
-					</tr>
+                  <td colspan="3"><pre> ${requestScope.postVO.content}</pre></td>
+               </tr>
 
-						
+                  
                   </table>
 
                </div>

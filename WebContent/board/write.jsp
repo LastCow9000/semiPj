@@ -7,25 +7,44 @@
 /* 길이 체크 공간 */
 
 $(document).ready(function() {
+	
+	var checkTitle="";
+
 	// 제목 길이 체크
 	$("#writeTitle").keyup(function() {
+		checkTitle = "";
 		var titleValue= $(this).val().trim();
-		if(titleValue.length<1 || titleValue.length>20){
-			alert("제목 길이는 20자 이하로 작성해주세요.");
+		//제목 길이 20자 넘어가면 빨갛게
+		if(titleValue.length > 20){
+			$("#titleCheckResult").html(titleValue.length).css("color","red");
 			return;
+		//제목 길이 평소에는 grey로
+		} else {
+			$("#titleCheckResult").html(titleValue.length).css("color","grey");
+			checkTitle = titleValue;
 		}
 	});//keyup
+	 
+	/* 길이 넘었을 때 submit 안 되도록 막기 */
+	$("#writePostForm").submit(function() {
+		if(checkTitle == ""){
+			alert("제목 길이는 20자 이내로 작성해주세요.");
+			return false;
+		}
+	});//sumit
+	
 });//ready
 
-
 </script>
+
 <div class="container">
 	<div class="row">
 		<div class="col-sm-10">
 			<div class="panel panel-primary">
 			
+			<!-- header 부분 -->
 			<c:choose>
-				<c:when test="${sessionScope.memberVO.id=='adminmts' }">
+				<c:when test="${sessionScope.memberVO.id=='adminmts'}">
 					<div class="panel-heading">공지사항 작성하기</div>
 				</c:when>
 				<c:otherwise>
@@ -34,21 +53,22 @@ $(document).ready(function() {
 			</c:choose>
 			
 			
-			<form action="${pageContext.request.contextPath}/front" id="writePost"
-				method="post">
+			<form action="${pageContext.request.contextPath}/front" id="writePostForm"
+				method="post" onsubmit="return validateWritePost()">
 				<input type="hidden" name="command" value="writepost">
 				<table class="table hoh">
 
                    <tr>
-                      <td colspan="3">제목 : <input id="writeTitle" type="text" name="title" placeholder="제목을 입력하세요"></td>
+                      <td colspan="3">제목 : <input id="writeTitle" type="text" name="title" placeholder="제목을 입력하세요">
+                      &nbsp;<span id="titleCheckResult"></span>/20</td>
                    </tr>
 
 
                    <tr>
                       <td colspan="3">
-				<textarea rows="10" cols="120" placeholder="본문 내용을 입력하세요"
-					name="content"></textarea>                       
-				 </td>
+						<textarea rows="10" cols="120" placeholder="본문 내용을 입력하세요"
+							name="content"></textarea>                       
+				 	  </td>
                    </tr>
 
                    <tr align="center">
