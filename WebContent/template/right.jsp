@@ -37,7 +37,7 @@
        <%-- 로그인폼 이미지 --%>  
          <c:choose>
             <c:when test="${sessionScope.memberVO.id=='adminmts'}">
-              <img src="${path}/image/admin_img.1if" width="200px" height="200px">
+              <img src="${path}/image/admin_img.gif" width="190px" height="190px">
           </c:when>
             <c:otherwise>
             <c:choose>
@@ -187,7 +187,7 @@
                <c:forEach items="${requestScope.rankList}" var="list"
                   varStatus="status" begin="0" end="4" step="1">
                   <tr>
-                     <th><span class="badge badge-danger-light">${status.index+1 }</span><a href="#">${list.nickName}</a></th>
+                     <th class="ranking-list"><span class="badge badge-danger-light">${status.index+1 } </span><a href="#"> ${list.nickName}</a></th>
                      <%-- # 대신${path}/front?command=getlistbynick&nickName=${list.nickName} --%>
                      <th>${list.point}</th>
                   </tr>

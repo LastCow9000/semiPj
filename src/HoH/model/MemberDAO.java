@@ -320,31 +320,24 @@ public class MemberDAO {
 		}
 		return id;
 	}
-	public MemberVO getPoint(String id) throws SQLException {
+	public int getPoint(String id) throws SQLException {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		MemberVO memberVO = null;
+		int point=0;
 		try {
 			con=dataSource.getConnection();
-			String sql="SELECT point,id, password,agename,nickname,rank FROM member WHERE id=?";
+			String sql="SELECT point FROM member WHERE id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				memberVO = new MemberVO();
-				memberVO.setId(rs.getString("id"));
-				memberVO.setAgeName(rs.getString("agename"));
-				memberVO.setNickName(rs.getString("nickname"));
-				memberVO.setPassword(rs.getString("password"));
-				memberVO.setPoint(rs.getInt("point"));
-				memberVO.setRank(rs.getString("rank"));
+				point=rs.getInt("point");
 			}
-				
-		}finally {
+						}finally {
 			closeAll(rs, pstmt, con);
 		}
-		return memberVO;
+		return point;
 	}
 }//class
 

@@ -47,11 +47,11 @@ public class ScrapDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		PostVO postVO = null;
+		PostVO postVO=null;
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT m.id, m.nickname, b.title,b.regDate,b.content, b.");
+			sql.append("SELECT m.id, m.nickname, b.title,b.regDate,b.content,");
 			sql.append("b.view_count, b.like_count, m.ageName, s.scraped_regdate ");
 			sql.append("FROM member m, board b, scrap_post s ");
 			sql.append("WHERE m.id = b.id AND s.post_no = b.post_no AND b.post_no=? ");
@@ -235,6 +235,7 @@ public class ScrapDAO {
 				MemberVO memberVO = new MemberVO();
 				memberVO.setId(rs.getString("id"));//9
 				memberVO.setNickName(rs.getString("nickname"));//8
+				System.out.println("scarpdao239줄"+ rs.getString("nickname"));
 				memberVO.setAgeName(rs.getString("agename"));//4
 				
 				postVO = new PostVO();

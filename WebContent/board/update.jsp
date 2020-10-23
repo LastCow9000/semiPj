@@ -8,40 +8,38 @@
 
 $(document).ready(function() {
 	
-	var checkTitle="";
-
-	// 1. 제목 부분 클릭하면 기존 제목 길이 나옴
+	var titleValue=$("#writeTitle").val().trim();
+		
+	// 1. 제목 부분 클릭하면 기존 제목 길이 나옴	
 	$("#writeTitle").click(function() {
-		var titleValue= $(this).val().trim();
+		var orgTitleVal = $(this).val().trim();
 		//제목 길이 20자 넘어가면 빨갛게
-		if(titleValue.length > 20){
-			$("#titleCheckResult").html(titleValue.length).css("color","red");
+		if(orgTitleVal.length > 20){
+			$("#titleCheckResult").html(orgTitleVal.length).css("color","red");
 		//제목 길이 평소에는 grey로
 		} else {
-			$("#titleCheckResult").html(titleValue.length).css("color","black");
+			$("#titleCheckResult").html(orgTitleVal.length).css("color","black");
 		}
 	});//click
 	
 	
 	// 2. 제목 길이 체크
 	$("#writeTitle").keyup(function() {
-		checkTitle = "";
-		var titleValue= $(this).val().trim();
+		var submitTitle = $(this).val().trim();
 		//제목 길이 20자 넘어가면 빨갛게
 		if(titleValue.length > 20){
 			$("#titleCheckResult").html(titleValue.length).css("color","red");
-			return;
 		//제목 길이 평소에는 grey로
 		} else {
 			$("#titleCheckResult").html(titleValue.length).css("color","grey");
-			checkTitle = titleValue;
 		}
+		titleValue = submitTitle;
 	});//keyup
 	 
 	
 	/* 길이 넘었을 때 submit 안 되도록 막기 */
 	$("#updatePostForm").submit(function() {
-		if(checkTitle == ""){
+		if(titleValue.length>20){
 			alert("제목 길이는 20자 이내로 작성해주세요.");
 			return false;
 		}

@@ -20,8 +20,9 @@ public class follwerDeleteController implements Controller {
 		if(result =="ok") {
 			String id=MemberDAO.getInstance().findIdbyNickName(nickName);
 			MemberDAO.getInstance().UpdateMinusPoint(id, MemberVO.followPoint);
-			MemberVO memberVO =MemberDAO.getInstance().getPoint(id);
-			session.setAttribute("memberVO", memberVO);
+			int point = MemberDAO.getInstance().getPoint(id);
+			MemberVO vo=(MemberVO)session.getAttribute("memberVO");
+			vo.setPoint(point);			
 			request.setAttribute("responsebody", result);
 		}
 		return "AjaxView";

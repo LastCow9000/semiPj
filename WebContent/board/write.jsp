@@ -67,7 +67,7 @@ $(document).ready(function() {
                    <tr>
                       <td colspan="3">
 						<textarea rows="10" cols="120" placeholder="본문 내용을 입력하세요"
-							name="content"></textarea>                       
+							name="content" required="required"></textarea>                       
 				 	  </td>
                    </tr>
 

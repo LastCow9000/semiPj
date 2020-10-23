@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+ 
 <div class="container">
 		<div class="row">
 			<div class="col-sm-10">
 				<div class="panel panel-primary">
 	            <c:choose>
 	            <c:when test="${requestScope.flag }">
-	               <div class="panel-heading">${requestScope.ageName} 검색 게시물~!</div>
+	               <div class="panel-heading">${requestScope.ageName}검색 게시물~!</div>
 	               </c:when>
 	               <c:otherwise>
 	               <div class="panel-heading">${requestScope.ageName} 게시물~!</div>

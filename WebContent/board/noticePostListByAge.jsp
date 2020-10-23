@@ -13,7 +13,6 @@
                         <th align="center">번호</th>
                         <th colspan="2" align="center">제목</th>
                         <th align="center">작성자</th>
-                        <th align="center">좋아요</th>
                         <th align="center">조회수</th>
                         <th align="center">게시일</th>
                      </tr>
@@ -27,7 +26,6 @@
                            <td colspan="2"><a
                               href="${pageContext.request.contextPath}/front?command=noticeDetailpost&postNo=${list.postNo}">${list.title}</a></td>
                            <td align="center">${list.memberVO.nickName}</td>
-                           <td align="center">${list.likeCount}</td>
                            <td align="center">${list.viewCount}</td>
                            <td align="center">${list.regDate}</td>
                         </tr>

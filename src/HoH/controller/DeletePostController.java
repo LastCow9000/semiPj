@@ -22,8 +22,9 @@ public class DeletePostController implements Controller {
 			String id=memberVO.getId();
 			MemberDAO.getInstance().UpdateMinusPoint(id, MemberVO.postPoint);
 			
-			memberVO =MemberDAO.getInstance().getPoint(id);
-			session.setAttribute("memberVO", memberVO);
+			int point =MemberDAO.getInstance().getPoint(id);
+			MemberVO vo=(MemberVO) session.getAttribute("memberVO");
+			vo.setPoint(point);
 			String ageName= BoardDAO.getInstance().getAgeNameByNickname(nickName); //시대명을 받아옴
 			url="/front?command=agelist&agename="+ageName; //시대명으로 시대게시판을 받아옴
 		}

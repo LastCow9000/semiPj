@@ -35,8 +35,9 @@ public class DeleteScrapPostController implements Controller {
 		if (flag) {
 			result = "ok";
 			MemberDAO.getInstance().UpdateMinusPoint(id, MemberVO.scrapPoint);
-			memberVO =MemberDAO.getInstance().getPoint(id);
-			session.setAttribute("memberVO", memberVO);
+			int point = MemberDAO.getInstance().getPoint(id);
+			MemberVO vo=(MemberVO)session.getAttribute("memberVO");
+			vo.setPoint(point);
 		}
 		request.setAttribute("responsebody", result);
 		

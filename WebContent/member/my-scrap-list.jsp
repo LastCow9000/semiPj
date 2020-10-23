@@ -3,7 +3,6 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script type="text/javascript">
-
 	$(document).ready(function() {
 		
 		//전체 선택 및 삭제
@@ -60,7 +59,7 @@
 		
 	});//ready
 </script>
- 
+
 <div class="container">
 	<div class="row">
 		<div class="col-sm-9">
@@ -78,13 +77,12 @@
 								<th><input type="checkbox" id="checkall"></th>
 							</tr>
 						</thead>
-						
+
 						<tbody>
-						<c:forEach items="${requestScope.listvo.list}" var="list" varStatus="status">
+						<c:forEach items="${requestScope.scrapedPostVOList}" var="list" varStatus="status">
 						<tr>
 							<td>${list.memberVO.ageName}</td>
-							<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title}
-							<span class="label label-info">${list.replyCount}</span></a></td>
+							<td><a href="${pageContext.request.contextPath}/front?command=detailpost&postNo=${list.postNo}">${list.title}</a></td>
 							<td>${list.memberVO.nickName}</td>
 							<td>${list.likeCount}</td>
 							<td>${list.viewCount}</td>
@@ -97,48 +95,16 @@
 							</td>
 						</tr>
 						</c:forEach>
-						
+
 						<tr>
 							<td colspan="7" align="right">
 								<button type="button" id="delete_btn" class="btn btn-danger btn-sm">
 								선택 삭제</button>
 							</td>
 						</tr>
-	
+
 						</tbody>
 					</table>
-			</div>
-			<%-- 페이징 처리 --%>
-			<c:set var="pb" value="${requestScope.listvo.pagingBean}" />
-			<div class="pagingArea">
-				<div class="pagination">
-	
-							<%-- 왼쪽 페이지 이동 --%>
-							<c:if test="${pb.previousPageGroup}">
-								<a
-									href="front?command=myScrapList&id=${sessionScope.memberVO.id}&pageNo=${pb.startOfPageGroup-1}">&laquo;</a>
-							</c:if>
-					
-					<c:forEach var="i" begin="${pb.startOfPageGroup}"
-						end="${pb.endOfPageGroup}">
-						<c:choose>
-							<c:when test="${pb.nowPage!=i}">
-										<a
-											href="front?command=myScrapList&id=${sessionScope.memberVO.id}&pageNo=${i}">${i}</a>
-							</c:when>
-							<c:otherwise>
-								<a href="#" class="active">${i}</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					
-							<%-- 오른쪽 페이지 이동 --%>
-							<c:if test="${pb.nextPageGroup}">
-								<a
-									href="front?command=myScrapList&id=${sessionScope.memberVO.id}&pageNo=${pb.endOfPageGroup+1}">&raquo;</a>
-							</c:if>
-					
-				</div>
 			</div>
 		</div>
 	</div>

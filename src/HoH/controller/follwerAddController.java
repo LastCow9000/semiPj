@@ -21,11 +21,12 @@ public class follwerAddController implements Controller {
 		MemberDAO.getInstance().UpdatePlusPoint(id, MemberVO.followPoint);
 		
 		HttpSession session = request.getSession();
-		MemberVO memberVO = MemberDAO.getInstance().getPoint(myId);
-		
+		int point = MemberDAO.getInstance().getPoint(id);
+		MemberVO vo=(MemberVO)session.getAttribute("memberVO");
+		vo.setPoint(point);			
+				
 		String result= "fail";
 		request.setAttribute("responsebody", result);
-		session.setAttribute("memberVO", memberVO);
 		return "AjaxView";
 	}
 

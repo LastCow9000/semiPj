@@ -35,9 +35,9 @@ public class ScrapPostController implements Controller {
 		if (flag) {
 			result = "ok";
 			MemberDAO.getInstance().UpdatePlusPoint(id, MemberVO.scrapPoint);
-			//포인트 받아오기
-			memberVO =MemberDAO.getInstance().getPoint(id);
-			session.setAttribute("memberVO", memberVO);
+			int point = MemberDAO.getInstance().getPoint(id);
+			MemberVO vo=(MemberVO)session.getAttribute("memberVO");
+			vo.setPoint(point);			
 		}
 		
 		request.setAttribute("responsebody", result);

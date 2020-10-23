@@ -24,8 +24,9 @@ public class LikeCountController implements Controller {
 			BoardDAO.getInstance().likePlus(loginId, postNo);
 			BoardDAO.getInstance().boardLikePlusUpdate(postNo);
 			MemberDAO.getInstance().UpdatePlusPoint(postId, MemberVO.likePoint);
-			MemberVO memberVO= MemberDAO.getInstance().getPoint(postId);
-			session.setAttribute("memberVO", memberVO);
+			int point= MemberDAO.getInstance().getPoint(postId);
+			MemberVO vo=(MemberVO) session.getAttribute("memberVO");
+			vo.setPoint(point);
 			result="좋아요를 눌렀습니다.";
 		}
 		request.setAttribute("responsebody", result);

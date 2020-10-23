@@ -20,9 +20,9 @@ public class LikeCancelController implements Controller {
 		BoardDAO.getInstance().likeMinus(loginId, postNo);
 		BoardDAO.getInstance().boardLikeMinusUpdate(postNo);
 		MemberDAO.getInstance().UpdateMinusPoint(postId, MemberVO.likePoint);
-		MemberVO memberVO =MemberDAO.getInstance().getPoint(loginId);
-		session.setAttribute("memberVO", memberVO);
-		
+		int point =MemberDAO.getInstance().getPoint(loginId);
+		MemberVO vo =(MemberVO) session.getAttribute("memberVO");
+		vo.setPoint(point);
 		request.setAttribute("responsebody", result);
 		return "AjaxView";
 	}

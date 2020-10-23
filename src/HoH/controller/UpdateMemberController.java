@@ -18,10 +18,11 @@ public class UpdateMemberController implements Controller {
 		String ageName = request.getParameter("ageName");
 		int point = Integer.parseInt(request.getParameter("point"));
 		
-		MemberVO memberVO = new MemberVO(id, password, nickname, ageName, point, null);
+		HttpSession session=request.getSession(false);
+		MemberVO vo=(MemberVO)session.getAttribute("memberVO");
+		MemberVO memberVO = new MemberVO(id, password, nickname, ageName, point, vo.getRank());
 		MemberDAO.getInstance().update(memberVO);
 		
-		HttpSession session = request.getSession(false);
 		
 		//로그인 상태가 아니면
 		if(session == null || session.getAttribute("memberVO") == null) {

@@ -29,10 +29,11 @@ public class WritePostController implements Controller {
 			postVO.setMemberVO(memberVO);
 			String id = memberVO.getId();
 			
-			
+			//포인트 적립 및 실시간 반영
 			MemberDAO.getInstance().UpdatePlusPoint(id, MemberVO.postPoint);
-			//포인트 받아오기
-			memberVO = MemberDAO.getInstance().getPoint(id);
+			int point = MemberDAO.getInstance().getPoint(id);
+			MemberVO vo=(MemberVO)session.getAttribute("memberVO");
+			vo.setPoint(point);			
 			
 			if(memberVO.getId().contentEquals("adminmts")) {
 				postNo = BoardDAO.getInstance().wirteNoticePost(postVO);
@@ -42,8 +43,6 @@ public class WritePostController implements Controller {
 				url = "redirect:front?command=detailpost&postNo=" + postNo; //값이 다시 넘어감을 방지하기 위한 redirect
 			}
 			//반환받은 postNo를 이용하여 게시물상세정보 페이지로 이동
-			//세션다시보내주기
-			session.setAttribute("memberVO", memberVO);
 		}
 		return url;
 	}
