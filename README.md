@@ -7,6 +7,6 @@
 ----------------------------------------------
 
 
-시연영상
+시연영상 (img click)
 
 [![Video Label](http://img.youtube.com/vi/8KOwsk2fzyA/0.jpg)](https://youtu.be/8KOwsk2fzyA) 
